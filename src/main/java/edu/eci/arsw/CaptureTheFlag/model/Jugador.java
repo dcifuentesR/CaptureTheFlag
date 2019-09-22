@@ -9,13 +9,8 @@ public class Jugador {
     private Integer vida;
     private Poder poder;
 
-    public Jugador(Mira mira, String nombre, Integer x, Integer y, Integer vida, Poder poder) {
-        this.mira = mira;
+    public Jugador( String nombre) {
         this.nombre = nombre;
-        this.x = x;
-        this.y = y;
-        this.vida = vida;
-        this.poder = poder;
     }
 
     

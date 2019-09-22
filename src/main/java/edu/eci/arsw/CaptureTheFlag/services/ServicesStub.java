@@ -6,21 +6,34 @@
 package edu.eci.arsw.CaptureTheFlag.services;
 
 import edu.eci.arsw.CaptureTheFlag.model.Jugador;
+import edu.eci.arsw.CaptureTheFlag.model.Mira;
 import edu.eci.arsw.CaptureTheFlag.model.Poder;
 import edu.eci.arsw.CaptureTheFlag.model.Sala;
 import edu.eci.arsw.CaptureTheFlag.persistence.LobbyNotFoundException;
+import edu.eci.arsw.CaptureTheFlag.persistence.PlayerAlreadyExist;
 import edu.eci.arsw.CaptureTheFlag.persistence.PlayerNotFoundException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import org.springframework.stereotype.Service;
 
 /**
  *
  * @author USUARIO
  */
+@Service
 public class ServicesStub implements CaptureTheFlagServices {
 
     HashMap<String, Jugador> jugadores = new HashMap<>();
     HashMap<String, Sala> salas = new HashMap<>();
+
+    public ServicesStub() {
+        jugadores.put("diego",new Jugador("diego"));
+        jugadores.put("andres",new Jugador("andres"));
+    }
+    
+    
+    
     
     
     @Override
@@ -44,9 +57,9 @@ public class ServicesStub implements CaptureTheFlagServices {
     }
 
     @Override
-    public void nuevoJugador(Jugador jugador) throws PlayerNotFoundException{
+    public void nuevoJugador(Jugador jugador) throws PlayerAlreadyExist{
         if (jugadores.get(jugador.getNombre()) != null){
-            throw new PlayerNotFoundException();
+            throw new PlayerAlreadyExist();
         }
         jugadores.put(jugador.getNombre(),jugador);
     }
@@ -63,6 +76,14 @@ public class ServicesStub implements CaptureTheFlagServices {
     public void agregarJugadorSala(Jugador jugador, String sala) throws LobbyNotFoundException {
         Sala s = getSala(sala);
         s.getJugadores().put(sala, jugador);
+    }
+
+    @Override
+    public ArrayList<Jugador> getJugadores() {
+        ArrayList<Jugador> j = new ArrayList<>();
+        j.addAll(jugadores.values());
+        return j;
+
     }
 
     

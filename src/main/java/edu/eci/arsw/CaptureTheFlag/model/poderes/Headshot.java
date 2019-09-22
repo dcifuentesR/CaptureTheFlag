@@ -14,7 +14,7 @@ import edu.eci.arsw.CaptureTheFlag.model.Poder;
 public class Headshot extends Poder{
     
      public Headshot() {
-        setDaño(100); 
+        setDamage(100); 
     }
      
      

@@ -7,6 +7,8 @@ package edu.eci.arsw.CaptureTheFlag.services;
 
 import edu.eci.arsw.CaptureTheFlag.model.Jugador;
 import edu.eci.arsw.CaptureTheFlag.model.Poder;
+import edu.eci.arsw.CaptureTheFlag.model.Sala;
+import edu.eci.arsw.CaptureTheFlag.persistence.LobbyNotFoundException;
 import edu.eci.arsw.CaptureTheFlag.persistence.PlayerNotFoundException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -18,7 +20,9 @@ import java.util.HashMap;
 public class ServicesStub implements CaptureTheFlagServices {
 
     HashMap<String, Jugador> jugadores = new HashMap<>();
-
+    HashMap<String, Sala> salas = new HashMap<>();
+    
+    
     @Override
     public Jugador getJugador(String nombre) throws PlayerNotFoundException {
         if (jugadores.get(nombre) == null) {
@@ -47,4 +51,22 @@ public class ServicesStub implements CaptureTheFlagServices {
         jugadores.put(jugador.getNombre(),jugador);
     }
 
+    @Override
+    public Sala getSala(String nombre) throws LobbyNotFoundException {
+        if (salas.get(nombre) == null) {
+            throw new LobbyNotFoundException();
+        }
+        return salas.get(nombre);
+    }
+
+    @Override
+    public void agregarJugadorSala(Jugador jugador, String sala) throws LobbyNotFoundException {
+        Sala s = getSala(sala);
+        s.getJugadores().put(sala, jugador);
+    }
+
+    
+    
 }
+
+

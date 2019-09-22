@@ -7,6 +7,5 @@ public class Mapa {
 	
 	private List<Item>	items;
 	
-	private Jugador[] jugadores;
 
 }

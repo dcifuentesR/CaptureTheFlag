@@ -14,6 +14,6 @@ import edu.eci.arsw.CaptureTheFlag.model.Poder;
 public class Gancho  extends Poder{
     
      public Gancho() {
-        setDaño(40); 
+        setDamage(40); 
     }
 }

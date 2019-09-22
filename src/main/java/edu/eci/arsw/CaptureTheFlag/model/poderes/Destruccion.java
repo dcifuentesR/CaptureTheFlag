@@ -13,6 +13,6 @@ import edu.eci.arsw.CaptureTheFlag.model.Poder;
  */
 public class Destruccion  extends Poder{
      public Destruccion() {
-        setDaño(0); 
+        setDamage(0); 
     }
 }

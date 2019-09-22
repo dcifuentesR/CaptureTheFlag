@@ -3,19 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package edu.eci.arsw.CaptureTheFlag.model.poderes;
-
-import edu.eci.arsw.CaptureTheFlag.model.Poder;
+package edu.eci.arsw.CaptureTheFlag.persistence;
 
 /**
  *
  * @author USUARIO
  */
-public class Congelar  extends Poder{
-    
-    
-     public Congelar() {
-        setDamage(30); 
-        setDuracion(2);
+public class LobbyNotFoundException extends Exception{
+
+    public LobbyNotFoundException() {
+        super("Ya existe una sala con este nombre");
     }
+    
 }

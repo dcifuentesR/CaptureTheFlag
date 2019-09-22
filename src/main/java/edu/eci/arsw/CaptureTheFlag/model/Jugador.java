@@ -1,4 +1,4 @@
-package edu.eci.arsw.model;
+package edu.eci.arsw.CaptureTheFlag.model;
 
 public class Jugador {
 	

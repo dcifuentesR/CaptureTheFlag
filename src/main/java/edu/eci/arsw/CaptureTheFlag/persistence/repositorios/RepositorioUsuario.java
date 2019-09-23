@@ -1,4 +1,4 @@
-package edu.eci.arsw.CaptureTheFlag.persistence.Repositorios;
+package edu.eci.arsw.CaptureTheFlag.persistence.repositorios;
 
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;

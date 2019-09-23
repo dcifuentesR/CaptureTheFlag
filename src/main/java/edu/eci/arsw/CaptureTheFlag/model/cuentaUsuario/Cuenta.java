@@ -12,14 +12,12 @@ public class Cuenta implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-
-
     private String correo;
     private String contrasena;
     private String nick;
-
-   
+    
     public Cuenta() {
+    	
     }
 
     public Cuenta(String correo, String contrasena, String nick) {
@@ -53,5 +51,19 @@ public class Cuenta implements Serializable {
     public void setNick(String nick) {
         this.nick = nick;
     }
+
+	/**
+	 * @return the id
+	 */
+	public Long getId() {
+		return id;
+	}
+
+	/**
+	 * @param id the id to set
+	 */
+	public void setId(Long id) {
+		this.id = id;
+	}
 
 }

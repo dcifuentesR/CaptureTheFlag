@@ -30,5 +30,7 @@ public interface CaptureTheFlagServices {
 
     void agregarCuenta(Cuenta cuenta) throws CorreoAlredyExist;
 
-    Cuenta getCuenta(String correo) throws CorreoNotFound;
+    Cuenta getCuenta(Integer id) throws CorreoNotFound;
+
+	Cuenta getCuenta(String correo) throws CorreoNotFound;
 }

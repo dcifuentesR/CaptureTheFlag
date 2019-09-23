@@ -105,4 +105,10 @@ public class ServicesStub implements CaptureTheFlagServices {
         return cuentas.get(correo);
     }
 
+	@Override
+	public Cuenta getCuenta(Integer id) throws CorreoNotFound {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

@@ -10,8 +10,10 @@ import edu.eci.arsw.CaptureTheFlag.model.Jugador;
 import edu.eci.arsw.CaptureTheFlag.model.cuentaUsuario.Cuenta;
 import edu.eci.arsw.CaptureTheFlag.persistence.CorreoAlredyExist;
 import edu.eci.arsw.CaptureTheFlag.persistence.CorreoNotFound;
+import edu.eci.arsw.CaptureTheFlag.model.Usuario;
 import edu.eci.arsw.CaptureTheFlag.persistence.PlayerAlreadyExist;
 import edu.eci.arsw.CaptureTheFlag.persistence.PlayerNotFoundException;
+import edu.eci.arsw.CaptureTheFlag.persistence.repositorios.RepositorioUsuario;
 import edu.eci.arsw.CaptureTheFlag.services.CaptureTheFlagServices;
 import java.util.ArrayList;
 import java.util.List;
@@ -34,6 +36,9 @@ public class CaptureFlagApiController {
 
     @Autowired
     CaptureTheFlagServices services;
+    
+    @Autowired
+    RepositorioUsuario repositorioUsuario;
 
     @RequestMapping(method = GET, value = "/{sala}/jugadores/")
     public ResponseEntity<?> getJugadores() {
@@ -68,6 +73,10 @@ public class CaptureFlagApiController {
         } catch (PlayerAlreadyExist ex) {
             return new ResponseEntity<>("ERROR 403",HttpStatus.FORBIDDEN);
         }
+    }
+    @RequestMapping(path = "/usuarios", method = POST)
+    public void addFoundPrime(@RequestBody Usuario usuario) {
+		repositorioUsuario.save(usuario);
     }
     
     @RequestMapping(method = GET, value = "/cuentas/{nick}")

@@ -9,6 +9,7 @@ import edu.eci.arsw.CaptureTheFlag.model.Jugador;
 import edu.eci.arsw.CaptureTheFlag.model.Mira;
 import edu.eci.arsw.CaptureTheFlag.model.Poder;
 import edu.eci.arsw.CaptureTheFlag.model.Sala;
+import edu.eci.arsw.CaptureTheFlag.model.cuentaUsuario.Cuenta;
 import edu.eci.arsw.CaptureTheFlag.persistence.LobbyNotFoundException;
 import edu.eci.arsw.CaptureTheFlag.persistence.PlayerAlreadyExist;
 import edu.eci.arsw.CaptureTheFlag.persistence.PlayerNotFoundException;
@@ -26,16 +27,13 @@ public class ServicesStub implements CaptureTheFlagServices {
 
     HashMap<String, Jugador> jugadores = new HashMap<>();
     HashMap<String, Sala> salas = new HashMap<>();
+    HashMap<String, Cuenta> Cuentas = new HashMap<>();
 
     public ServicesStub() {
-        jugadores.put("diego",new Jugador("diego"));
-        jugadores.put("andres",new Jugador("andres"));
+        jugadores.put("diego", new Jugador("diego"));
+        jugadores.put("andres", new Jugador("andres"));
     }
-    
-    
-    
-    
-    
+
     @Override
     public Jugador getJugador(String nombre) throws PlayerNotFoundException {
         if (jugadores.get(nombre) == null) {
@@ -46,22 +44,23 @@ public class ServicesStub implements CaptureTheFlagServices {
 
     @Override
     public void actualizarJugador(Jugador jugador, String nombre) throws PlayerNotFoundException {
-        getJugador(nombre);//esto es para checkar que exista el jugador
+        getJugador(nombre);// esto es para checkar que exista el jugador
         jugadores.remove(nombre);
         jugadores.put(nombre, jugador);
     }
 
     @Override
     public void Atacar(Jugador jugador1, Jugador jugador2) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException("Not supported yet."); // To change body of generated methods, choose
+                                                                       // Tools | Templates.
     }
 
     @Override
-    public void nuevoJugador(Jugador jugador) throws PlayerAlreadyExist{
-        if (jugadores.get(jugador.getNombre()) != null){
+    public void nuevoJugador(Jugador jugador) throws PlayerAlreadyExist {
+        if (jugadores.get(jugador.getNombre()) != null) {
             throw new PlayerAlreadyExist();
         }
-        jugadores.put(jugador.getNombre(),jugador);
+        jugadores.put(jugador.getNombre(), jugador);
     }
 
     @Override
@@ -86,8 +85,4 @@ public class ServicesStub implements CaptureTheFlagServices {
 
     }
 
-    
-    
 }
-
-

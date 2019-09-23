@@ -58,11 +58,12 @@ public class CaptureFlagApiController {
     }
 
     @RequestMapping(path = "/usuarios", method = POST)
-    public void addFoundPrime(@RequestBody Jugador jugador) {
+    public ResponseEntity<?> addJugador(@RequestBody Jugador jugador) {
         try {
             services.nuevoJugador(jugador);
+            return new ResponseEntity<>(HttpStatus.CREATED);
         } catch (PlayerAlreadyExist ex) {
-            //return new ResponseEntity<>("400 bad request", HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>("ERROR 403",HttpStatus.FORBIDDEN);
         }
     }
 

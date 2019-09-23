@@ -1,11 +1,10 @@
 package edu.eci.arsw.CaptureTheFlag.model;
 
 public class Poder extends Item {
-	
+
     private int damage = 20;
     private int duracion = 1;
-    
-    
+
     public int getDamage() {
         return damage;
     }
@@ -21,7 +20,4 @@ public class Poder extends Item {
     public void setDamage(int damage) {
         this.damage = damage;
     }
-    
-    
-    
 }

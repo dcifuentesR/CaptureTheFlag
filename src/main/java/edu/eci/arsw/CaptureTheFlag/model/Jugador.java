@@ -8,16 +8,15 @@ public class Jugador {
     private Integer y;
     private Integer vida;
     private Poder poder;
+    private int puntos;
 
-    public Jugador( String nombre) {
+    public Jugador(String nombre) {
         this.nombre = nombre;
     }
 
-    
-    
-    
-    
-    
+    public Jugador() {
+    }
+
     public Integer getVida() {
         return vida;
     }
@@ -67,8 +66,14 @@ public class Jugador {
     }
 
     public void atacar(Jugador jugador2) {
-        
 
+    }
 
+    public int getPuntos() {
+        return puntos;
+    }
+
+    public void setPuntos(int puntos) {
+        this.puntos = puntos;
     }
 }

@@ -7,6 +7,9 @@ package edu.eci.arsw.CaptureTheFlag.Controllers;
 
 import com.google.gson.Gson;
 import edu.eci.arsw.CaptureTheFlag.model.Jugador;
+import edu.eci.arsw.CaptureTheFlag.model.cuentaUsuario.Cuenta;
+import edu.eci.arsw.CaptureTheFlag.persistence.CorreoAlredyExist;
+import edu.eci.arsw.CaptureTheFlag.persistence.CorreoNotFound;
 import edu.eci.arsw.CaptureTheFlag.persistence.PlayerAlreadyExist;
 import edu.eci.arsw.CaptureTheFlag.persistence.PlayerNotFoundException;
 import edu.eci.arsw.CaptureTheFlag.services.CaptureTheFlagServices;
@@ -32,7 +35,7 @@ public class CaptureFlagApiController {
     @Autowired
     CaptureTheFlagServices services;
 
-    @RequestMapping(method = GET, value = "/usuarios")
+    @RequestMapping(method = GET, value = "/{sala}/jugadores/")
     public ResponseEntity<?> getJugadores() {
         try {
             //obtener datos que se enviaran a traves del API
@@ -45,8 +48,8 @@ public class CaptureFlagApiController {
         }
     }
 
-    @RequestMapping(method = GET, value = "/usuarios/{usuario}")
-    public ResponseEntity<?> getJugadores(@PathVariable(name = "usuario") String nombre) {
+    @RequestMapping(method = GET, value = "/{sala}/jugadores/{jugador}")
+    public ResponseEntity<?> getJugadores(@PathVariable(name = "jugador") String nombre) {
         try {
             //obtener datos que se enviaran a traves del API
             Jugador player = services.getJugador(nombre);
@@ -57,7 +60,7 @@ public class CaptureFlagApiController {
         }
     }
 
-    @RequestMapping(path = "/usuarios", method = POST)
+    @RequestMapping(path = "/jugadores", method = POST)
     public ResponseEntity<?> addJugador(@RequestBody Jugador jugador) {
         try {
             services.nuevoJugador(jugador);
@@ -66,5 +69,28 @@ public class CaptureFlagApiController {
             return new ResponseEntity<>("ERROR 403",HttpStatus.FORBIDDEN);
         }
     }
+    
+    @RequestMapping(method = GET, value = "/cuentas/{nick}")
+    public ResponseEntity<?> getUsuarios(@PathVariable(name = "nick") String nick) {
+        try {
+            //obtener datos que se enviaran a traves del API
+            Cuenta cuenta = services.getCuenta(nick);
+            return new ResponseEntity<>(cuenta, HttpStatus.ACCEPTED);
+
+        } catch (CorreoNotFound ex) {
+            return new ResponseEntity<>("400 bad request", HttpStatus.NOT_FOUND);
+        }
+    } 
+     
+     @RequestMapping(path = "/cuentas", method = POST)
+    public ResponseEntity<?> addUsuario(@RequestBody Cuenta cuenta) {
+        try {
+            services.agregarCuenta(cuenta);
+            return new ResponseEntity<>(HttpStatus.CREATED);
+        } catch (CorreoAlredyExist ex) {
+            return new ResponseEntity<>("ERROR 403",HttpStatus.FORBIDDEN);
+        }
+    }
+
 
 }

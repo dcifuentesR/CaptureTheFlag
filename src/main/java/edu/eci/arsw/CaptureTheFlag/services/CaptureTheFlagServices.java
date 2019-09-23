@@ -3,6 +3,8 @@ package edu.eci.arsw.CaptureTheFlag.services;
 import edu.eci.arsw.CaptureTheFlag.model.Jugador;
 import edu.eci.arsw.CaptureTheFlag.model.Sala;
 import edu.eci.arsw.CaptureTheFlag.model.cuentaUsuario.Cuenta;
+import edu.eci.arsw.CaptureTheFlag.persistence.CorreoAlredyExist;
+import edu.eci.arsw.CaptureTheFlag.persistence.CorreoNotFound;
 import edu.eci.arsw.CaptureTheFlag.persistence.LobbyNotFoundException;
 import edu.eci.arsw.CaptureTheFlag.persistence.PlayerAlreadyExist;
 import edu.eci.arsw.CaptureTheFlag.persistence.PlayerNotFoundException;

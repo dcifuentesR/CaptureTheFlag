@@ -10,6 +10,8 @@ import edu.eci.arsw.CaptureTheFlag.model.Mira;
 import edu.eci.arsw.CaptureTheFlag.model.Poder;
 import edu.eci.arsw.CaptureTheFlag.model.Sala;
 import edu.eci.arsw.CaptureTheFlag.model.cuentaUsuario.Cuenta;
+import edu.eci.arsw.CaptureTheFlag.persistence.CorreoAlredyExist;
+import edu.eci.arsw.CaptureTheFlag.persistence.CorreoNotFound;
 import edu.eci.arsw.CaptureTheFlag.persistence.LobbyNotFoundException;
 import edu.eci.arsw.CaptureTheFlag.persistence.PlayerAlreadyExist;
 import edu.eci.arsw.CaptureTheFlag.persistence.PlayerNotFoundException;
@@ -27,11 +29,12 @@ public class ServicesStub implements CaptureTheFlagServices {
 
     HashMap<String, Jugador> jugadores = new HashMap<>();
     HashMap<String, Sala> salas = new HashMap<>();
-    HashMap<String, Cuenta> Cuentas = new HashMap<>();
+    HashMap<String, Cuenta> cuentas = new HashMap<>();
 
     public ServicesStub() {
         jugadores.put("diego", new Jugador("diego"));
         jugadores.put("andres", new Jugador("andres"));
+        cuentas.put("andres", new Cuenta("andres","123","andres"));
     }
 
     @Override
@@ -52,7 +55,7 @@ public class ServicesStub implements CaptureTheFlagServices {
     @Override
     public void Atacar(Jugador jugador1, Jugador jugador2) {
         throw new UnsupportedOperationException("Not supported yet."); // To change body of generated methods, choose
-                                                                       // Tools | Templates.
+        // Tools | Templates.
     }
 
     @Override
@@ -83,6 +86,23 @@ public class ServicesStub implements CaptureTheFlagServices {
         j.addAll(jugadores.values());
         return j;
 
+    }
+
+    @Override
+    public void agregarCuenta(Cuenta cuenta) throws CorreoAlredyExist {
+        if (cuentas.get(cuenta.getCorreo()) != null) {
+            throw new CorreoAlredyExist();
+        }
+        
+        cuentas.put(cuenta.getCorreo(), cuenta);
+    }
+
+    @Override
+    public Cuenta getCuenta(String correo) throws CorreoNotFound {
+        if (cuentas.get(correo) == null) {
+            throw new CorreoNotFound();
+        }
+        return cuentas.get(correo);
     }
 
 }

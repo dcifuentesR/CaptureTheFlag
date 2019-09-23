@@ -13,6 +13,8 @@ public class Cuenta {
         this.contrasena = contrasena;
         this.nick = nick;
     }
+    
+    
 
     public String getCorreo() {
         return correo;

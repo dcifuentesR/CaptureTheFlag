@@ -1,164 +1,59 @@
-<!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8" />
     <title>Capture The Flag</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!--JQUERY-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
-    <script src="/webjars/jquery/3.1.0/jquery.min.js"></script>
-    <script src="/webjars/bootstrap/4.1.2/js/bootstrap.min.js"></script>
+    <!-- FRAMEWORK BOOTSTRAP para el estilo de la pagina-->
     <link
       rel="stylesheet"
-      href="/webjars/bootstrap/4.1.2/css/bootstrap.min.css"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    />
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+    <!-- Los iconos tipo Solid de Fontawesome-->
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css"
+    />
+    <script src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
+
+    <!-- Nuestro css-->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="css/index.css"
+      th:href="@{/css/index.css}"
     />
   </head>
-
-  <body style="background-color: black">
-    <div style="text-align: center">
-      <img class="img" src="img/captureTheFlag.png" />
-    </div>
-    <button
-      type="button"
-      class="btn btn-primary btn-lg btn-block"
-      data-toggle="modal"
-      data-target="#loginModal"
-    >
-      Login
-    </button>
-    <button
-      type="button"
-      class="btn btn-secondary btn-lg btn-block"
-      data-toggle="modal"
-      data-target="#singUpModal"
-    >
-      Sing up
-    </button>
-
-    <!-- Modal login-->
-    <div
-      class="modal fade"
-      id="loginModal"
-      tabindex="-1"
-      role="dialog"
-      aria-labelledby="exampleModalLabel"
-      aria-hidden="true"
-    >
-      <div class="modal-dialog" role="document">
+  <body>
+    <div class="modal-dialog text-center">
+      <div class="col-sm-8 main-section">
         <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="loginModalLabel">Login</h5>
-            <button
-              type="button"
-              class="close"
-              data-dismiss="modal"
-              aria-label="Close"
-            >
-              <span aria-hidden="true">&times;</span>
+          <div class="col-12 user-img">
+            <img src="img/avatar.png" />
+          </div>
+          <form class="col-12" action="/juego.html">
+            <div class="form-group" id="user-group">
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Correo o nick"
+              />
+            </div>
+            <div class="form-group" id="contrasena-group">
+              <input
+                type="password"
+                class="form-control"
+                placeholder="password"
+              />
+            </div>
+            <button type="submit" class="btn btn-primary">
+              <i class="fas fa-sign-in-alt"></i> Ingresar
             </button>
-          </div>
-          <div class="modal-body">
-            <form action="http://localhost:8080/index2.html">
-              <div class="form-group">
-                <label for="inputEmailLogin">Email address</label>
-                <input
-                  type="email"
-                  class="form-control"
-                  id="inputEmailLogin"
-                  aria-describedby="emailLogin"
-                  placeholder="Enter email"
-                />
-                <small id="emailLogin" class="form-text text-muted"
-                  >We'll never share your email with anyone else.</small
-                >
-              </div>
-              <div class="form-group">
-                <label for="inputPasswordLogin">Password</label>
-                <input
-                  type="password"
-                  class="form-control"
-                  id="inputPasswordLogin"
-                  placeholder="Password"
-                />
-              </div>
-              <div class="form-group form-check">
-                <input
-                  type="checkbox"
-                  class="form-check-input"
-                  id="CheckLogin"
-                />
-                <label class="form-check-label" for="CheckLogin"
-                  >Check me out</label
-                >
-              </div>
-              <div style="text-align: right">
-                <button type="submit" class="btn btn-primary">Submit</button>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Modal Sing up -->
-    <div
-      class="modal fade"
-      id="singUpModal"
-      tabindex="-1"
-      role="dialog"
-      aria-labelledby="exampleModalLabel"
-      aria-hidden="true"
-    >
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="singUpModalLabel">Create account</h5>
-            <button
-              type="button"
-              class="close"
-              data-dismiss="modal"
-              aria-label="Close"
-            >
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <form action="http://localhost:8080/index2.html">
-              <div class="form-group">
-                <label for="inputEmailSingUp">Email address</label>
-                <input
-                  type="email"
-                  class="form-control"
-                  id="inputEmailSingUp"
-                  aria-describedby="emailSingUp"
-                  placeholder="Enter email"
-                />
-                <small id="emailSingUp" class="form-text text-muted"
-                  >We'll never share your email with anyone else.</small
-                >
-              </div>
-              <div>
-                <label for="inputNickNameSingUp">Nick name</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="inputNickNameSingUp"
-                />
-              </div>
-              <div class="form-group">
-                <label for="inputPasswordSingUp">Password</label>
-                <input
-                  type="password"
-                  class="form-control"
-                  id="inputPasswordSingUp"
-                  placeholder="Password"
-                />
-              </div>
-              <div style="text-align: right">
-                <button type="submit" class="btn btn-primary">
-                  Submit
-                </button>
-              </div>
-            </form>
+          </form>
+          <div class="col-12 forgot">
+            <a href="#">Recordar contraseña</a>
           </div>
         </div>
       </div>

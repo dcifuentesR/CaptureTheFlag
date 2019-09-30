@@ -9,6 +9,7 @@ document.addEventListener(
 var inicio = {
   iniciarJuego: function() {
     console.log("Juego iniciado");
+    ajax.cargarArchivo("mapas/prueba.json");
     teclado.iniciar();
     dimiensiones.iniciar();
     inicio.recargarTiles();

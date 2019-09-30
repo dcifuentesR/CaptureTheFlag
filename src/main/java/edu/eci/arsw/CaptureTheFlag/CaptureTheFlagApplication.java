@@ -10,4 +10,4 @@ public class CaptureTheFlagApplication {
 		SpringApplication.run(CaptureTheFlagApplication.class, args);
 	}
 
-}
+} 	

@@ -5,17 +5,14 @@
  */
 package edu.eci.arsw.CaptureTheFlag.Controllers;
 
-import com.google.gson.Gson;
 import edu.eci.arsw.CaptureTheFlag.model.Jugador;
 import edu.eci.arsw.CaptureTheFlag.model.cuentaUsuario.Cuenta;
-import edu.eci.arsw.CaptureTheFlag.persistence.CorreoAlredyExist;
 import edu.eci.arsw.CaptureTheFlag.persistence.CorreoNotFound;
-import edu.eci.arsw.CaptureTheFlag.persistence.PlayerAlreadyExist;
 import edu.eci.arsw.CaptureTheFlag.persistence.PlayerNotFoundException;
 import edu.eci.arsw.CaptureTheFlag.persistence.Repositorios.RepositorioUsuario;
 import edu.eci.arsw.CaptureTheFlag.services.CaptureTheFlagServices;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Iterator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -38,7 +35,6 @@ public class CaptureFlagApiController {
 
     @Autowired
     RepositorioUsuario repositorioUsuario;
-    
 
     @RequestMapping(method = GET, value = "/{sala}/jugadores/")
     public ResponseEntity<?> getJugadores() {
@@ -65,39 +61,33 @@ public class CaptureFlagApiController {
         }
     }
 
-    @RequestMapping(path = "/jugadores", method = POST)
-    public ResponseEntity<?> addJugador(@RequestBody Jugador jugador) {
-        try {
-            services.nuevoJugador(jugador);
-            return new ResponseEntity<>(HttpStatus.CREATED);
-        } catch (PlayerAlreadyExist ex) {
-            return new ResponseEntity<>("ERROR 403",HttpStatus.FORBIDDEN);
-        }
-    }
-   
-    
     @RequestMapping(method = GET, value = "/cuentas/{nick}")
     public ResponseEntity<?> getUsuarios(@PathVariable(name = "nick") String nick) {
         try {
             //obtener datos que se enviaran a traves del API
-            Cuenta cuenta = services.getCuenta(nick);
-            return new ResponseEntity<>(cuenta, HttpStatus.ACCEPTED);
+            Iterable<Cuenta> iterator = repositorioUsuario.findAll();
+            Iterator<Cuenta> it = iterator.iterator();
+            while (it.hasNext()) {
+                Cuenta cuenta = it.next();
+                if (cuenta.getNick().equals(nick)) {
+                    return new ResponseEntity<>(cuenta, HttpStatus.ACCEPTED);
+                }
+            }
+            
 
-        } catch (CorreoNotFound ex) {
+        } catch (Exception ex) {
             return new ResponseEntity<>("400 bad request", HttpStatus.NOT_FOUND);
         }
-    } 
-     
-     @RequestMapping(path = "/cuentas", method = POST)
+        return null;
+    }
+
+    @RequestMapping(path = "/cuentas", method = POST)
     public ResponseEntity<?> addUsuario(@RequestBody Cuenta cuenta) {
         try {
             repositorioUsuario.save(cuenta);
             return new ResponseEntity<>(HttpStatus.CREATED);
         } catch (Exception ex) {
-            return new ResponseEntity<>("ERROR 403",HttpStatus.FORBIDDEN);
+            return new ResponseEntity<>("ERROR 403", HttpStatus.FORBIDDEN);
         }
     }
-
-  
-
 }

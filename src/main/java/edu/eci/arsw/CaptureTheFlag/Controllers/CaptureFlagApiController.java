@@ -49,20 +49,25 @@ public class CaptureFlagApiController {
         }
     }
 
-    @RequestMapping(method = GET, value = "/{sala}/jugadores/{jugador}")
-    public ResponseEntity<?> getJugadores(@PathVariable(name = "jugador") String nombre) {
+    @RequestMapping(method = GET, value = "/cuentas")
+    public ResponseEntity<?> getUsuarios() {
         try {
             //obtener datos que se enviaran a traves del API
-            Jugador player = services.getJugador(nombre);
-            return new ResponseEntity<>(player, HttpStatus.ACCEPTED);
-
-        } catch (PlayerNotFoundException ex) {
+            ArrayList<Cuenta> usuarios = new ArrayList<Cuenta>();
+            Iterable<Cuenta> iterator = repositorioUsuario.findAll();
+            Iterator<Cuenta> it = iterator.iterator();
+            while (it.hasNext()) {
+                Cuenta cuenta = it.next();
+                usuarios.add(cuenta);
+            }
+            return new ResponseEntity<>(usuarios, HttpStatus.ACCEPTED);
+        } catch (Exception ex) {
             return new ResponseEntity<>("400 bad request", HttpStatus.NOT_FOUND);
         }
     }
 
     @RequestMapping(method = GET, value = "/cuentas/{nick}")
-    public ResponseEntity<?> getUsuarios(@PathVariable(name = "nick") String nick) {
+    public ResponseEntity<?> getUsuario(@PathVariable(name = "nick") String nick) {
         try {
             //obtener datos que se enviaran a traves del API
             Iterable<Cuenta> iterator = repositorioUsuario.findAll();
@@ -81,7 +86,8 @@ public class CaptureFlagApiController {
     }
 
     @RequestMapping(path = "/cuentas", method = POST)
-    public ResponseEntity<?> addUsuario(@RequestBody Cuenta cuenta) {
+    public ResponseEntity<?> addUsuario(@RequestBody Cuenta cuenta
+    ) {
         try {
             repositorioUsuario.save(cuenta);
             return new ResponseEntity<>(HttpStatus.CREATED);

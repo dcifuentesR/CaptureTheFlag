@@ -73,7 +73,6 @@ public class CaptureFlagApiController {
                     return new ResponseEntity<>(cuenta, HttpStatus.ACCEPTED);
                 }
             }
-            
 
         } catch (Exception ex) {
             return new ResponseEntity<>("400 bad request", HttpStatus.NOT_FOUND);

@@ -1,5 +1,5 @@
 const apiUri="capturetheflag-arsw.herokuapp.com/";
-apliClient= (function(){
+apiClient= (function(){
     return {
 
         saveCuenta: function(cuenta){
@@ -11,14 +11,14 @@ apliClient= (function(){
             });
         },
 
-        checkPassword: function(nick,password, callback){
+        checkPassword: function(nick,callback){
             jQuery.ajax({
-                url: apiUrl + "cuentas/" + nick ,
+                url: "cuentas/" + nick ,
                 success: function(result) {
                   callback(result);
                 },
                 async: true
             });
         }
-    }
-})
+    };
+})();

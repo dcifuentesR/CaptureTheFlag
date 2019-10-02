@@ -6,11 +6,11 @@ document.addEventListener(
   false
 );
 
-var inicio = {
+var inicio = (function(){		
+		return{
   iniciarJuego: function() {
     console.log("Juego iniciado");
     ajax.cargarArchivo("mapas/prueba.json");
-    teclado.iniciar();
     dimiensiones.iniciar();
     inicio.recargarTiles();
     bublePrincipal.iterar();
@@ -28,4 +28,5 @@ var inicio = {
       }
     }
   }
-};
+		}
+})();

@@ -2,11 +2,18 @@ package edu.eci.arsw.CaptureTheFlag.model;
 
 public class Jugador {
 
-    private Mira mira;
-    private String nombre;
+	private String nombre;
+	
+	private boolean cayendose;
+	private boolean saltando;
+	
+    private Integer velX;
+    private Integer velY;
     private Integer x;
     private Integer y;
     private Integer vida;
+    
+    private Mira mira;
     private Poder poder;
     private int puntos;
 
@@ -15,6 +22,17 @@ public class Jugador {
     }
 
     public Jugador() {
+    }
+    
+    public void mover() {
+    	x+=velX;
+    	x+=velY;
+    	
+    	
+    }
+    
+    public void atacar(Jugador jugador2) {
+
     }
 
     public Integer getVida() {
@@ -63,10 +81,6 @@ public class Jugador {
 
     public void setPoder(Poder poder) {
         this.poder = poder;
-    }
-
-    public void atacar(Jugador jugador2) {
-
     }
 
     public int getPuntos() {

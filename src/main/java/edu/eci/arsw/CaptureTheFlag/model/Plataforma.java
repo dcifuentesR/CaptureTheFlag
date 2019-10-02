@@ -2,7 +2,6 @@ package edu.eci.arsw.CaptureTheFlag.model;
 
 import javax.persistence.Entity;
 
-@Entity
 public class Plataforma {
 	
     private int x; 

@@ -70,19 +70,12 @@ public class CaptureFlagApiController {
     public ResponseEntity<?> getUsuario(@PathVariable(name = "nick") String nick) {
         try {
             //obtener datos que se enviaran a traves del API
-            Iterable<Cuenta> iterator = repositorioUsuario.findAll();
-            Iterator<Cuenta> it = iterator.iterator();
-            while (it.hasNext()) {
-                Cuenta cuenta = it.next();
-                if (cuenta.getNick().equals(nick)) {
-                    return new ResponseEntity<>(cuenta, HttpStatus.ACCEPTED);
-                }
-            }
+            Cuenta cuenta = repositorioUsuario.findUser(nick);
+            return new ResponseEntity<>(cuenta, HttpStatus.ACCEPTED);
 
         } catch (Exception ex) {
             return new ResponseEntity<>("400 bad request", HttpStatus.NOT_FOUND);
         }
-        return null;
     }
 
     @RequestMapping(path = "/cuentas", method = POST)

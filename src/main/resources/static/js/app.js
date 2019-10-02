@@ -6,16 +6,16 @@ var appModule = (function(){
     }
 
     var addAcount = function(){
-        var correo = $('#nick').val();
+        var correo = $('#email').val();
         var nick = $('#nick').val();
-        var password = $('#nick').val();        
+        var password = $('#password').val();   
+        var cuenta = {"correo":correo,"contrasena":password,"nick":nick};
+        apiClient.saveCuenta(JSON.stringify(cuenta));
     }
 
     var _check = function(cuenta){
         var password = $('#password').val();
-        console.log(password + " cuenta"+ cuenta)
         if (cuenta.contrasena === password){
-            console.log(password + " "+ cuenta[0]);
             location.href = "/juego.html"
         }
         else {

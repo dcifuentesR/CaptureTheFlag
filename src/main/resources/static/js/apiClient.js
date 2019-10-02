@@ -3,9 +3,10 @@ apiClient= (function(){
     return {
 
         saveCuenta: function(cuenta){
+            console.log(cuenta);
             $.ajax({
-                url: "cuentas/" + cuenta ,
-                type: "POST",
+                url: "cuentas/",
+                type: "post",
                 data: cuenta,
                 contentType: "application/json"
             });

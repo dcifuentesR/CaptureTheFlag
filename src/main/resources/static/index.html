@@ -35,12 +35,13 @@
           <div class="col-12 user-img">
             <img src="img/avatar.png" />
           </div>
-          <form class="col-12" action="/juego.html">
+          <form class="col-12" >
             <div class="form-group" id="user-group">
               <input
                 type="text"
                 class="form-control"
                 placeholder="Correo o nick"
+                id="nick"
               />
             </div>
             <div class="form-group" id="contrasena-group">
@@ -48,6 +49,7 @@
                 type="password"
                 class="form-control"
                 placeholder="password"
+                id="password"
               />
             </div>
             <button type="button" class="btn btn-primary" onclick="appModule.checkPassword()">

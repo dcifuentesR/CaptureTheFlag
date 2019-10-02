@@ -6,7 +6,7 @@ apiClient= (function(){
             $.ajax({
                 url: "cuentas/" + cuenta ,
                 type: "POST",
-                data: newBp,
+                data: cuenta,
                 contentType: "application/json"
             });
         },
@@ -15,6 +15,7 @@ apiClient= (function(){
             jQuery.ajax({
                 url: "cuentas/" + nick ,
                 success: function(result) {
+                    console.log(result);
                   callback(result);
                 },
                 async: true

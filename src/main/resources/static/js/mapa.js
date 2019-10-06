@@ -6,32 +6,32 @@ class Mapa{
 		this.friccion=0.9;
 		this.gravedad=3;
 		
-		this.jugador = new Mapa.Jugador(0,0,20);
+		this.jugador = new Mapa.Jugador(50,50,20);
 	}
 	manejarColisiones(jugador){
 		if(jugador.x<0){
 			jugador.x =0;
 			jugador.velX=0;
-		}else if(jugador.x+jugador.ancho > juego.ancho){
-			jugador.x =juego.ancho - jugador.ancho;
+		}else if(jugador.x+jugador.ancho > this.ancho){
+			jugador.x =this.ancho - jugador.ancho;
 			jugador.velX = 0;
 		}
 		if(jugador.y < 0){
 			jugador.y=0;
 			jugador.velY=0;
-		}else if(jugador.y +jugador.alto > juego.alto){
-			jugador.y = juego.alto - jugador.alto;
+		}else if(jugador.y +jugador.alto > this.alto){
+			jugador.y = this.alto - jugador.alto;
 			jugador.velY=0;
 		}
 	}
 	
 	refrescar(){
 		this.jugador.velY += this.gravedad;
-		this.jugador.refrescar();
-		
 		this.jugador.velX *= this.friccion;
 		this.jugador.velY *= this.friccion;
 		this.manejarColisiones(this.jugador);
+
+		this.jugador.refrescar();
 	}
 	
 }

@@ -10,21 +10,21 @@ class Controlador {
 			
 			switch(tecla){
 			case "keyD": this.der.getEntrada(presionada); break;
-			case "keyA": this.izq.getEntrada(presionada);
-			
+			case "keyA": this.izq.getEntrada(presionada); break;
+			case "keyW": this.arriba.getEntrada(presionada);
 			}
 		}
 	}
 	
 }	
 	
-Controlador.EntradaTeclado = class {
+class EntradaTeclado {
 		constructor(){
-			this.estaPresionada=false;
+			this.activa = this.estaPresionada = false;
 		}
 		
 		getEntrada(presionada){
-			if(this.estaPresionada !=presionada)
+			if(this.estaPresionada !=presionada) this.activa = presionada;
 				this.estaPresionada=presionada;
 		}
 	}

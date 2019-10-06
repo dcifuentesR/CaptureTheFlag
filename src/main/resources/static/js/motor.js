@@ -1,7 +1,7 @@
 /**
  * 
  */
-class Engine{
+class Motor{
 	
 	constructor(timeStep,update,render){
 		this.accumulatedTime = 0;
@@ -35,8 +35,8 @@ class Engine{
 			
 			this.animationFrameRequest = window.requestAnimationFrame(this.handleRun);
 			
-			this.handleRun = (timeStep) => {this.run(timeStep);};
 		}
+		this.handleRun = (timeStep) => {this.run(timeStep);};
 		
 	}
 	

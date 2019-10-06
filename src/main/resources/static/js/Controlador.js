@@ -1,10 +1,24 @@
-var Controlador = function(){
+class Controlador {
 	
-	this.izq = new EntradaTeclado();
-	this.der =new EntradaTeclado();
-	this.arriba=new EntradaTeclado();
+	constructor(){
+		this.izq = new EntradaTeclado();
+		this.der =new EntradaTeclado();
+		this.arriba=new EntradaTeclado();
+		
+		this.estadoTecla = function(tipo,tecla) {
+			var presionada = (tipo == "keydown") ? true :false;
+			
+			switch(tecla){
+			case "keyD": this.der.getEntrada(presionada); break;
+			case "keyA": this.izq.getEntrada(presionada);
+			
+			}
+		}
+	}
 	
-	class EntradaTeclado{
+}	
+	
+Controlador.EntradaTeclado = class {
 		constructor(){
 			this.estaPresionada=false;
 		}
@@ -15,16 +29,4 @@ var Controlador = function(){
 		}
 	}
 	
-	return{
-		estadoTecla:function(tipo,tecla){
-			var presionada = (tipo == "keydown") ? true :false;
-			
-			switch(tecla){
-			case "keyD": this.der.getEntrada(presionada); break;
-			case "keyA": this.izq.getEntrada(presionada);
-			
-			}
-		},
-	}
 	
-}

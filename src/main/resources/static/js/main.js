@@ -1,5 +1,6 @@
 window.addEventListener("load",function(event){
 	
+	
 	var estadoTecla=function(event){
 		controlador.estadoTecla(event.type,event.key);
 	}
@@ -23,6 +24,8 @@ window.addEventListener("load",function(event){
 	var mapa = new Mapa();
 	var motor = new Motor(1000/30,renderizar,refrescar);
 	
+	vista.buffer.canvas.ancho = mapa.ancho;
+	vista.buffer.canvas.height = mapa.alto;
 	window.addEventListener("keydown",estadoTecla);
 	window.addEventListener("keyup",estadoTecla);
 	

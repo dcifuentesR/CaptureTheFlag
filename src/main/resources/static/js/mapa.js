@@ -20,6 +20,7 @@ class Mapa{
 			jugador.y=0;
 			jugador.velY=0;
 		}else if(jugador.y +jugador.alto > this.alto){
+			jugador.saltando = false;
 			jugador.y = this.alto - jugador.alto;
 			jugador.velY=0;
 		}
@@ -27,9 +28,10 @@ class Mapa{
 	
 	refrescar(){
 		this.jugador.velY += this.gravedad;
+
+		this.manejarColisiones(this.jugador);
 		this.jugador.velX *= this.friccion;
 		this.jugador.velY *= this.friccion;
-		this.manejarColisiones(this.jugador);
 
 		this.jugador.refrescar();
 	}
@@ -43,7 +45,7 @@ Mapa.Jugador = class {
 		this.alto=16;
 		 this.velX=0;
 		 this.velY=0;
-		 this.saltando = true;
+		 this.saltando = false;
 		 
 		 this.x=x;
 		 this.y=y;
@@ -60,7 +62,7 @@ Mapa.Jugador = class {
 	
 	saltar(){
 		if(!this.saltando){
-			this.saltando=true;
+			this.saltando = true;
 			this.velY -= 20;
 		}
 	}

@@ -7,11 +7,10 @@ class Controlador {
 		
 		this.estadoTecla = function(tipo,tecla) {
 			var presionada = (tipo == "keydown") ? true :false;
-			
 			switch(tecla){
-			case "keyD": this.der.getEntrada(presionada); break;
-			case "keyA": this.izq.getEntrada(presionada); break;
-			case "keyW": this.arriba.getEntrada(presionada);
+			case "d": this.der.getEntrada(presionada); break;
+			case "a": this.izq.getEntrada(presionada); break;
+			case "w": this.arriba.getEntrada(presionada);
 			}
 		}
 	}

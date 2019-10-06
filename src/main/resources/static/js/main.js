@@ -12,9 +12,9 @@ window.addEventListener("load",function(event){
 	}
 	
 	var refrescar = function(){
-		if(controlador.izq.activa){ mapa.Jugador.moverseIzq();}
-		if(controlador.der.activa){ mapa.Jugador.moverseDer();}
-		if(controlador.arriba.activa){mapa.Jugador.saltar(); Controlador.arriba.activa =false;}
+		if(controlador.izq.activa){ mapa.jugador.moverseIzq();}
+		if(controlador.der.activa){ mapa.jugador.moverseDer();}
+		if(controlador.arriba.activa){mapa.jugador.saltar(); controlador.arriba.activa =false;}
 		
 		mapa.refrescar();
 	}
@@ -26,6 +26,7 @@ window.addEventListener("load",function(event){
 	
 	vista.buffer.canvas.ancho = mapa.ancho;
 	vista.buffer.canvas.height = mapa.alto;
+	
 	window.addEventListener("keydown",estadoTecla);
 	window.addEventListener("keyup",estadoTecla);
 	

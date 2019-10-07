@@ -5,6 +5,11 @@ window.addEventListener("load",function(event){
 		controlador.estadoTecla(event.type,event.key);
 	}
 	
+	var redimensionar = function(event){
+		vista.redimensionar(document.documentElement.clientWidth - 32, document.documentElement.clientHeight - 32,mapa.alto/mapa.ancho);
+		vista.renderizar();
+	}
+	
 	var renderizar = function(event){
 		vista.llenarCanvas(mapa.colorFondo);
 		vista.dibujarJugador(mapa.jugador.x,mapa.jugador.y,mapa.jugador.ancho,mapa.jugador.alto,mapa.jugador.color);
@@ -29,6 +34,9 @@ window.addEventListener("load",function(event){
 	
 	window.addEventListener("keydown",estadoTecla);
 	window.addEventListener("keyup",estadoTecla);
+	window.addEventListener("resize",redimensionar);
+	
+	redimensionar();
 	
 	motor.start();
 	

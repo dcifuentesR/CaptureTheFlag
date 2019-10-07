@@ -29,7 +29,7 @@ window.addEventListener("load",function(event){
 	var mapa = new Mapa();
 	var motor = new Motor(1000/30,renderizar,refrescar);
 	
-	vista.buffer.canvas.ancho = mapa.ancho;
+	vista.buffer.canvas.width = mapa.ancho;
 	vista.buffer.canvas.height = mapa.alto;
 	
 	window.addEventListener("keydown",estadoTecla);

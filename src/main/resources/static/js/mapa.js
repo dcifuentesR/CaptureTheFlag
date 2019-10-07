@@ -28,12 +28,12 @@ class Mapa{
 	
 	refrescar(){
 		this.jugador.velY += this.gravedad;
-
-		this.manejarColisiones(this.jugador);
+		this.jugador.refrescar();
+		
 		this.jugador.velX *= this.friccion;
 		this.jugador.velY *= this.friccion;
 
-		this.jugador.refrescar();
+		this.manejarColisiones(this.jugador);
 	}
 	
 }
@@ -45,7 +45,7 @@ Mapa.Jugador = class {
 		this.alto=16;
 		 this.velX=0;
 		 this.velY=0;
-		 this.saltando = false;
+		 this.saltando = true;
 		 
 		 this.x=x;
 		 this.y=y;
@@ -67,8 +67,10 @@ Mapa.Jugador = class {
 		}
 	}
 	refrescar(){
+		console.log(this.velY +"|||")
 		this.x += this.velX;
 		this.y += this.velY;
+		console.log(this.y);
 	}
 	
 }

@@ -21,6 +21,12 @@
     <script src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
 
     <!-- Nuestro css-->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="css/home.css"
+      th:href="@{/css/home.css}"
+    />
 
   </head>
   <body>
@@ -81,7 +87,7 @@
                 <div class="col-sm-8 main-section">
                   <div class="modal-content">
                     <form class="col-40" >
-                      <div style="padding: 20px 20px 20px 20px" >
+                      <div id="zona-datos"  >
                           <div class="form-group" id="sala-name">
                               <input
                                 type="text"
@@ -99,7 +105,7 @@
                               />
                             </div>
                       </div>
-                      <div style="padding: 20px 20px 20px 20px" >
+                      <div id="zona-mapa">
                           <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
                               <ol class="carousel-indicators">
                                 <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>

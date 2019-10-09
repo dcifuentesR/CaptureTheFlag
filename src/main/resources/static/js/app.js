@@ -11,12 +11,13 @@ var appModule = (function(){
         var password = $('#password').val();   
         var cuenta = {"correo":correo,"contrasena":password,"nick":nick};
         apiClient.saveCuenta(JSON.stringify(cuenta));
+        location.href = "/index.html"
     }
 
     var _check = function(cuenta){
         var password = $('#password').val();
         if (cuenta.contrasena === password){
-            location.href = "/juego.html"
+            location.href = "/home.html"
         }
         else {
             alert("Incorrect password");

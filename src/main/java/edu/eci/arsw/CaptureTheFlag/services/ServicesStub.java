@@ -10,11 +10,7 @@ import edu.eci.arsw.CaptureTheFlag.model.Mira;
 import edu.eci.arsw.CaptureTheFlag.model.Poder;
 import edu.eci.arsw.CaptureTheFlag.model.Sala;
 import edu.eci.arsw.CaptureTheFlag.model.cuentaUsuario.Cuenta;
-import edu.eci.arsw.CaptureTheFlag.persistence.CorreoAlredyExist;
-import edu.eci.arsw.CaptureTheFlag.persistence.CorreoNotFound;
-import edu.eci.arsw.CaptureTheFlag.persistence.LobbyNotFoundException;
-import edu.eci.arsw.CaptureTheFlag.persistence.PlayerAlreadyExist;
-import edu.eci.arsw.CaptureTheFlag.persistence.PlayerNotFoundException;
+import edu.eci.arsw.CaptureTheFlag.persistence.exception.CaptureTheFlagException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -38,15 +34,15 @@ public class ServicesStub implements CaptureTheFlagServices {
     }
 
     @Override
-    public Jugador getJugador(String nombre) throws PlayerNotFoundException {
+    public Jugador getJugador(String nombre) throws CaptureTheFlagException {
         if (jugadores.get(nombre) == null) {
-            throw new PlayerNotFoundException();
+            throw new CaptureTheFlagException(CaptureTheFlagException.PlayerNotFoundException);
         }
         return jugadores.get(nombre);
     }
 
     @Override
-    public void actualizarJugador(Jugador jugador, String nombre) throws PlayerNotFoundException {
+    public void actualizarJugador(Jugador jugador, String nombre) throws CaptureTheFlagException {
         getJugador(nombre);// esto es para checkar que exista el jugador
         jugadores.remove(nombre);
         jugadores.put(nombre, jugador);
@@ -59,23 +55,23 @@ public class ServicesStub implements CaptureTheFlagServices {
     }
 
     @Override
-    public void nuevoJugador(Jugador jugador) throws PlayerAlreadyExist {
+    public void nuevoJugador(Jugador jugador) throws CaptureTheFlagException {
         if (jugadores.get(jugador.getNombre()) != null) {
-            throw new PlayerAlreadyExist();
+            throw new CaptureTheFlagException(CaptureTheFlagException.PlayerAlreadyExist);
         }
         jugadores.put(jugador.getNombre(), jugador);
     }
 
     @Override
-    public Sala getSala(String nombre) throws LobbyNotFoundException {
+    public Sala getSala(String nombre) throws CaptureTheFlagException {
         if (salas.get(nombre) == null) {
-            throw new LobbyNotFoundException();
+            throw new CaptureTheFlagException(CaptureTheFlagException.LobbyNotFound);
         }
         return salas.get(nombre);
     }
 
     @Override
-    public void agregarJugadorSala(Jugador jugador, String sala) throws LobbyNotFoundException {
+    public void agregarJugadorSala(Jugador jugador, String sala) throws CaptureTheFlagException {
         Sala s = getSala(sala);
         s.getJugadores().put(sala, jugador);
     }
@@ -89,26 +85,25 @@ public class ServicesStub implements CaptureTheFlagServices {
     }
 
     @Override
-    public void agregarCuenta(Cuenta cuenta) throws CorreoAlredyExist {
+    public void agregarCuenta(Cuenta cuenta) throws CaptureTheFlagException {
         if (cuentas.get(cuenta.getCorreo()) != null) {
-            throw new CorreoAlredyExist();
+            throw new CaptureTheFlagException(CaptureTheFlagException.CorreoAlreadyExist);
         }
         
         cuentas.put(cuenta.getCorreo(), cuenta);
     }
 
     @Override
-    public Cuenta getCuenta(String correo) throws CorreoNotFound {
+    public Cuenta getCuenta(String correo) throws CaptureTheFlagException {
         if (cuentas.get(correo) == null) {
-            throw new CorreoNotFound();
+            throw new CaptureTheFlagException(CaptureTheFlagException.CorreoNotFound);
         }
         return cuentas.get(correo);
     }
 
 	@Override
-	public Cuenta getCuenta(Integer id) throws CorreoNotFound {
+	public Cuenta getCuenta(Integer id) throws CaptureTheFlagException {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
 }

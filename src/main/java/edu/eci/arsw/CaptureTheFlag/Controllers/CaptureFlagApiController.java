@@ -7,9 +7,8 @@ package edu.eci.arsw.CaptureTheFlag.Controllers;
 
 import edu.eci.arsw.CaptureTheFlag.model.Jugador;
 import edu.eci.arsw.CaptureTheFlag.model.cuentaUsuario.Cuenta;
-import edu.eci.arsw.CaptureTheFlag.persistence.CorreoNotFound;
-import edu.eci.arsw.CaptureTheFlag.persistence.PlayerAlreadyExist;
-import edu.eci.arsw.CaptureTheFlag.persistence.PlayerNotFoundException;
+import edu.eci.arsw.CaptureTheFlag.persistence.exception.CaptureTheFlagException;
+
 import edu.eci.arsw.CaptureTheFlag.persistence.repositorios.RepositorioUsuario;
 import edu.eci.arsw.CaptureTheFlag.services.CaptureTheFlagServices;
 import java.util.ArrayList;
@@ -73,7 +72,7 @@ public class CaptureFlagApiController {
         try {
             services.nuevoJugador(jugador);
             return new ResponseEntity<>(HttpStatus.CREATED);
-        } catch (PlayerAlreadyExist ex) {
+        } catch (CaptureTheFlagException ex) {
             return new ResponseEntity<>("ERROR 403",HttpStatus.FORBIDDEN);
         }
     }

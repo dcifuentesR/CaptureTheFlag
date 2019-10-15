@@ -9,5 +9,4 @@ public class CaptureTheFlagApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(CaptureTheFlagApplication.class, args);
 	}
-
 } 	

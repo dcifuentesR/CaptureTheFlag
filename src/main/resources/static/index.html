@@ -10,8 +10,6 @@
       href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
     />
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-    <script src="js/apiClient.js"></script>
-    <script src="js/app.js"></script>
 
     <!-- Los iconos tipo Solid de Fontawesome-->
     <link
@@ -19,6 +17,10 @@
       href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css"
     />
     <script src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
+
+    <!-- Scripts-->
+    <script src="js/pagina/apiClient.js"></script>
+    <script src="js/pagina/app.js"></script>
 
     <!-- Nuestro css-->
     <link
@@ -35,7 +37,7 @@
           <div class="col-12 user-img">
             <img src="img/avatar.png" />
           </div>
-          <form class="col-12" >
+          <form class="col-12">
             <div class="form-group" id="user-group">
               <input
                 type="text"
@@ -52,7 +54,11 @@
                 id="password"
               />
             </div>
-            <button type="button" class="btn btn-primary" onclick="appModule.checkPassword()">
+            <button
+              type="button"
+              class="btn btn-primary"
+              onclick="appModule.checkPassword()"
+            >
               <i class="fas fa-sign-in-alt"></i> Login
             </button>
           </form>

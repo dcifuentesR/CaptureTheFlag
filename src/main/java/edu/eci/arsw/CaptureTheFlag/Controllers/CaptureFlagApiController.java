@@ -5,14 +5,11 @@
  */
 package edu.eci.arsw.CaptureTheFlag.Controllers;
 
-import edu.eci.arsw.CaptureTheFlag.model.Jugador;
-import edu.eci.arsw.CaptureTheFlag.model.cuentaUsuario.Cuenta;
+import edu.eci.arsw.CaptureTheFlag.model.Cuenta;
 import edu.eci.arsw.CaptureTheFlag.persistence.exception.CaptureTheFlagException;
 
-import edu.eci.arsw.CaptureTheFlag.persistence.repositorios.RepositorioUsuario;
 import edu.eci.arsw.CaptureTheFlag.services.CaptureTheFlagServices;
 import java.util.ArrayList;
-import java.util.Iterator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -39,7 +36,7 @@ public class CaptureFlagApiController {
         try {
             //obtener datos que se enviaran a traves del API
             ArrayList<Cuenta> usuarios = new ArrayList<Cuenta>();
-            usuarios = services.getJugadores();
+            usuarios = services.getCuentas();
             return new ResponseEntity<>(usuarios, HttpStatus.ACCEPTED);
         } catch (Exception ex) {
             return new ResponseEntity<>("400 bad request", HttpStatus.NOT_FOUND);
@@ -53,7 +50,7 @@ public class CaptureFlagApiController {
             Cuenta cuenta = services.getCuenta(nick);
             return new ResponseEntity<>(cuenta, HttpStatus.ACCEPTED);
 
-        } catch (Exception ex) {
+        } catch (CaptureTheFlagException ex) {
             return new ResponseEntity<>("400 bad request", HttpStatus.NOT_FOUND);
         }
     }
@@ -64,7 +61,7 @@ public class CaptureFlagApiController {
         try {
             services.agregarCuenta(cuenta);
             return new ResponseEntity<>(HttpStatus.CREATED);
-        } catch (Exception ex) {
+        } catch (CaptureTheFlagException ex) {
             return new ResponseEntity<>("ERROR 403", HttpStatus.FORBIDDEN);
         }
     }

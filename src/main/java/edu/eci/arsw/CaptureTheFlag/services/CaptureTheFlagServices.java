@@ -1,7 +1,7 @@
 package edu.eci.arsw.CaptureTheFlag.services;
 
-import edu.eci.arsw.CaptureTheFlag.model.Sala;
-import edu.eci.arsw.CaptureTheFlag.model.cuentaUsuario.Cuenta;
+import edu.eci.arsw.CaptureTheFlag.model.Partida;
+import edu.eci.arsw.CaptureTheFlag.model.Cuenta;
 import edu.eci.arsw.CaptureTheFlag.persistence.exception.CaptureTheFlagException;
 import java.util.ArrayList;
 import org.springframework.stereotype.Service;
@@ -14,9 +14,9 @@ public interface CaptureTheFlagServices {
 
     void actualizarCuenta(Cuenta jugador, String nombre) throws CaptureTheFlagException;
 
-    ArrayList<Sala> getPartidas(String nombre) throws CaptureTheFlagException;
+    ArrayList<Partida> getPartidas(String nombre) throws CaptureTheFlagException;
 
-    Sala getPartida(String nombre) throws CaptureTheFlagException;
+    Partida getPartida(String nombre) throws CaptureTheFlagException;
 
     void agregarCuenta(Cuenta cuenta) throws CaptureTheFlagException;
 

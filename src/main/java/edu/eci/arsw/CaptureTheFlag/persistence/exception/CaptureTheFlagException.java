@@ -11,6 +11,10 @@ package edu.eci.arsw.CaptureTheFlag.persistence.exception;
  */
 public class CaptureTheFlagException  extends Exception  {
     
+    /**
+     *
+     */
+    private static final long serialVersionUID = -153103053751423992L;
     public static String CorreoAlreadyExist = "Ya esta en uso este correo";
     public static String CorreoNotFound = "correo no encontrado";
     public static String LobbyAlreadyExist = "ya existe una sala con este nombre";

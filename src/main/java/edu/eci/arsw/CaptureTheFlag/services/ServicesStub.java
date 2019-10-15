@@ -23,62 +23,37 @@ import org.springframework.stereotype.Service;
 @Service
 public class ServicesStub implements CaptureTheFlagServices {
 
-    HashMap<String, Jugador> jugadores = new HashMap<>();
+    HashMap<String, Cuenta> jugadores = new HashMap<>();
     HashMap<String, Sala> salas = new HashMap<>();
     HashMap<String, Cuenta> cuentas = new HashMap<>();
 
     public ServicesStub() {
-        jugadores.put("diego", new Jugador("diego"));
-        jugadores.put("andres", new Jugador("andres"));
-        cuentas.put("andres", new Cuenta("andres","123","andres"));
+        jugadores.put("diego", new Cuenta("diego", "123", "diego"));
+        jugadores.put("andres", new Cuenta("felipe", "123", "felipe"));
+        cuentas.put("andres", new Cuenta("andres", "123", "andres"));
     }
 
-    @Override
-    public Jugador getJugador(String nombre) throws CaptureTheFlagException {
-        if (jugadores.get(nombre) == null) {
-            throw new CaptureTheFlagException(CaptureTheFlagException.PlayerNotFoundException);
-        }
-        return jugadores.get(nombre);
-    }
 
     @Override
-    public void actualizarJugador(Jugador jugador, String nombre) throws CaptureTheFlagException {
-        getJugador(nombre);// esto es para checkar que exista el jugador
+    public void actualizarCuenta(Cuenta jugador, String nombre) throws CaptureTheFlagException {
+        getCuenta(nombre);// esto es para checkar que exista el jugador
         jugadores.remove(nombre);
         jugadores.put(nombre, jugador);
     }
 
-    @Override
-    public void Atacar(Jugador jugador1, Jugador jugador2) {
-        throw new UnsupportedOperationException("Not supported yet."); // To change body of generated methods, choose
-        // Tools | Templates.
-    }
 
     @Override
-    public void nuevoJugador(Jugador jugador) throws CaptureTheFlagException {
-        if (jugadores.get(jugador.getNombre()) != null) {
-            throw new CaptureTheFlagException(CaptureTheFlagException.PlayerAlreadyExist);
-        }
-        jugadores.put(jugador.getNombre(), jugador);
-    }
-
-    @Override
-    public Sala getSala(String nombre) throws CaptureTheFlagException {
+    public Sala getPartida(String nombre) throws CaptureTheFlagException {
         if (salas.get(nombre) == null) {
             throw new CaptureTheFlagException(CaptureTheFlagException.LobbyNotFound);
         }
         return salas.get(nombre);
     }
 
-    @Override
-    public void agregarJugadorSala(Jugador jugador, String sala) throws CaptureTheFlagException {
-        Sala s = getSala(sala);
-        s.getJugadores().put(sala, jugador);
-    }
 
     @Override
-    public ArrayList<Jugador> getJugadores() {
-        ArrayList<Jugador> j = new ArrayList<>();
+    public ArrayList<Cuenta> getCuentas() {
+        ArrayList<Cuenta> j = new ArrayList<>();
         j.addAll(jugadores.values());
         return j;
 
@@ -89,7 +64,7 @@ public class ServicesStub implements CaptureTheFlagServices {
         if (cuentas.get(cuenta.getCorreo()) != null) {
             throw new CaptureTheFlagException(CaptureTheFlagException.CorreoAlreadyExist);
         }
-        
+
         cuentas.put(cuenta.getCorreo(), cuenta);
     }
 
@@ -101,9 +76,17 @@ public class ServicesStub implements CaptureTheFlagServices {
         return cuentas.get(correo);
     }
 
-	@Override
-	public Cuenta getCuenta(Integer id) throws CaptureTheFlagException {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    @Override
+    public Cuenta getCuenta(Integer id) throws CaptureTheFlagException {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+
+    @Override
+    public ArrayList<Sala> getPartidas(String nombre) throws CaptureTheFlagException {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
 }

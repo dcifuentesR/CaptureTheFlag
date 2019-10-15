@@ -55,16 +55,24 @@ var verificationModule =(function(){
 
 
     var check_cookie = function(){
-        /*var user = _readCookie("nickname");
+        /*console.log(document.cookie)
+        var user = _readCookie("nickname");
         if (user == null ){
             alert("Permiso denegado, debe logearse primero.")
             location.href = "/index.html"
         }*/
+        
     }
+
+    var borrar_cookie = function(){
+        document.cookie = 'nickname=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+    }
+
 
     return {
         crear_cookie_sesion: crear_cookie_sesion,
-        check_cookie: check_cookie
+        check_cookie: check_cookie,
+        borrar_cookie:borrar_cookie
     }
 
 })(); 

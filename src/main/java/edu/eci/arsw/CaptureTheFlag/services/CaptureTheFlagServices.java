@@ -1,6 +1,5 @@
 package edu.eci.arsw.CaptureTheFlag.services;
 
-import edu.eci.arsw.CaptureTheFlag.model.Jugador;
 import edu.eci.arsw.CaptureTheFlag.model.Sala;
 import edu.eci.arsw.CaptureTheFlag.model.cuentaUsuario.Cuenta;
 import edu.eci.arsw.CaptureTheFlag.persistence.exception.CaptureTheFlagException;
@@ -10,23 +9,18 @@ import org.springframework.stereotype.Service;
 @Service
 public interface CaptureTheFlagServices {
 
-    Jugador getJugador(String nombre) throws CaptureTheFlagException;
 
-    ArrayList<Jugador> getJugadores();
+    ArrayList<Cuenta> getCuentas();
 
-    void actualizarJugador(Jugador jugador, String nombre) throws CaptureTheFlagException;
+    void actualizarCuenta(Cuenta jugador, String nombre) throws CaptureTheFlagException;
 
-    void Atacar(Jugador jugador1, Jugador jugador2);
+    ArrayList<Sala> getPartidas(String nombre) throws CaptureTheFlagException;
 
-    void nuevoJugador(Jugador jugador) throws CaptureTheFlagException;
-
-    Sala getSala(String nombre) throws CaptureTheFlagException;
-
-    void agregarJugadorSala(Jugador jugador, String sala) throws CaptureTheFlagException;
+    Sala getPartida(String nombre) throws CaptureTheFlagException;
 
     void agregarCuenta(Cuenta cuenta) throws CaptureTheFlagException;
 
     Cuenta getCuenta(Integer id) throws CaptureTheFlagException;
 
-	Cuenta getCuenta(String correo) throws CaptureTheFlagException;
+    Cuenta getCuenta(String nick) throws CaptureTheFlagException;
 }

@@ -33,55 +33,24 @@ public class CaptureFlagApiController {
     @Autowired
     CaptureTheFlagServices services;
 
-    @Autowired
-    RepositorioUsuario repositorioUsuario;
-
-    @RequestMapping(method = GET, value = "/{sala}/jugadores/")
-    public ResponseEntity<?> getJugadores() {
-        try {
-            //obtener datos que se enviaran a traves del API
-            ArrayList<Jugador> players = (ArrayList<Jugador>) services.getJugadores();
-            return new ResponseEntity<>(players, HttpStatus.ACCEPTED);
-
-        } catch (Exception ex) {
-            System.out.println(ex.getMessage());
-            return new ResponseEntity<>("400 bad request", HttpStatus.NOT_FOUND);
-        }
-    }
 
     @RequestMapping(method = GET, value = "/cuentas")
-    public ResponseEntity<?> getUsuarios() {
+    public ResponseEntity<?> getCuentas() {
         try {
             //obtener datos que se enviaran a traves del API
             ArrayList<Cuenta> usuarios = new ArrayList<Cuenta>();
-            Iterable<Cuenta> iterator = repositorioUsuario.findAll();
-            Iterator<Cuenta> it = iterator.iterator();
-            while (it.hasNext()) {
-                Cuenta cuenta = it.next();
-                usuarios.add(cuenta);
-            }
+            usuarios = services.getJugadores();
             return new ResponseEntity<>(usuarios, HttpStatus.ACCEPTED);
         } catch (Exception ex) {
             return new ResponseEntity<>("400 bad request", HttpStatus.NOT_FOUND);
         }
     }
-
-
-    @RequestMapping(path = "/jugadores", method = POST)
-    public ResponseEntity<?> addJugador(@RequestBody Jugador jugador) {
-        try {
-            services.nuevoJugador(jugador);
-            return new ResponseEntity<>(HttpStatus.CREATED);
-        } catch (CaptureTheFlagException ex) {
-            return new ResponseEntity<>("ERROR 403",HttpStatus.FORBIDDEN);
-        }
-    }
     
     @RequestMapping(method = GET, value = "/cuentas/{nick}")
-    public ResponseEntity<?> getUsuario(@PathVariable(name = "nick") String nick) {
+    public ResponseEntity<?> getCuenta(@PathVariable(name = "nick") String nick) {
         try {
             //obtener datos que se enviaran a traves del API
-            Cuenta cuenta = repositorioUsuario.findUser(nick);
+            Cuenta cuenta = services.getCuenta(nick);
             return new ResponseEntity<>(cuenta, HttpStatus.ACCEPTED);
 
         } catch (Exception ex) {
@@ -90,10 +59,10 @@ public class CaptureFlagApiController {
     }
 
     @RequestMapping(path = "/cuentas", method = POST)
-    public ResponseEntity<?> addUsuario(@RequestBody Cuenta cuenta
+    public ResponseEntity<?> addCuenta(@RequestBody Cuenta cuenta
     ) {
         try {
-            repositorioUsuario.save(cuenta);
+            services.agregarCuenta(cuenta);
             return new ResponseEntity<>(HttpStatus.CREATED);
         } catch (Exception ex) {
             return new ResponseEntity<>("ERROR 403", HttpStatus.FORBIDDEN);

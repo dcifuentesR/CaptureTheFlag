@@ -5,15 +5,12 @@
  */
 package edu.eci.arsw.CaptureTheFlag.services;
 
-import edu.eci.arsw.CaptureTheFlag.model.Jugador;
-import edu.eci.arsw.CaptureTheFlag.model.Mira;
-import edu.eci.arsw.CaptureTheFlag.model.Poder;
-import edu.eci.arsw.CaptureTheFlag.model.Sala;
-import edu.eci.arsw.CaptureTheFlag.model.cuentaUsuario.Cuenta;
+
+import edu.eci.arsw.CaptureTheFlag.model.Partida;
+import edu.eci.arsw.CaptureTheFlag.model.Cuenta;
 import edu.eci.arsw.CaptureTheFlag.persistence.exception.CaptureTheFlagException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import org.springframework.stereotype.Service;
 
 /**
@@ -24,7 +21,7 @@ import org.springframework.stereotype.Service;
 public class ServicesStub implements CaptureTheFlagServices {
 
     HashMap<String, Cuenta> jugadores = new HashMap<>();
-    HashMap<String, Sala> salas = new HashMap<>();
+    HashMap<String, Partida> salas = new HashMap<>();
     HashMap<String, Cuenta> cuentas = new HashMap<>();
 
     public ServicesStub() {
@@ -43,7 +40,7 @@ public class ServicesStub implements CaptureTheFlagServices {
 
 
     @Override
-    public Sala getPartida(String nombre) throws CaptureTheFlagException {
+    public Partida getPartida(String nombre) throws CaptureTheFlagException {
         if (salas.get(nombre) == null) {
             throw new CaptureTheFlagException(CaptureTheFlagException.LobbyNotFound);
         }
@@ -84,7 +81,7 @@ public class ServicesStub implements CaptureTheFlagServices {
 
 
     @Override
-    public ArrayList<Sala> getPartidas(String nombre) throws CaptureTheFlagException {
+    public ArrayList<Partida> getPartidas(String nombre) throws CaptureTheFlagException {
         // TODO Auto-generated method stub
         return null;
     }

@@ -1,6 +1,6 @@
 body {
   /*no se repita/ centrado h/ centrado v/ tamaño se ajuste*/
-  background: white;
+  background: cadetblue;
   /*ripo portada/ */
   background-size: cover;
 }
@@ -54,6 +54,10 @@ button {
 }
 
 /*---------------------- parte perfil  -------------------------*/
+#portada-perfil {
+  text-align: center;
+}
+
 .column {
   padding: 20px;
   float: left;
@@ -75,3 +79,6 @@ button {
 }
 
 /*---------------------- parte salas  -------------------------*/
+#Salas {
+  padding: 20px;
+}

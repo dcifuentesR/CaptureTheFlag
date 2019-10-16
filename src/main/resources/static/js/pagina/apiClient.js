@@ -1,26 +1,34 @@
-const apiUri="capturetheflag-arsw.herokuapp.com/";
-apiClient= (function(){
-    return {
+const apiUri = "capturetheflag-arsw.herokuapp.com/";
+apiClient = (function() {
+  return {
+    saveCuenta: function(cuenta) {
+      console.log(cuenta);
+      $.ajax({
+        url: "cuentas/",
+        type: "post",
+        data: cuenta,
+        contentType: "application/json"
+      });
+    },
 
-        saveCuenta: function(cuenta){
-            console.log(cuenta);
-            $.ajax({
-                url: "cuentas/",
-                type: "post",
-                data: cuenta,
-                contentType: "application/json"
-            });
+    checkPassword: function(nick, callback) {
+      jQuery.ajax({
+        url: "cuentas/" + nick,
+        success: function(result) {
+          console.log(result);
+          callback(result);
         },
-
-        checkPassword: function(nick,callback){
-            jQuery.ajax({
-                url: "cuentas/" + nick ,
-                success: function(result) {
-                    console.log(result);
-                  callback(result);
-                },
-                async: true
-            });
+        async: true
+      });
+    },
+    getPartidasUser: function(nick, callback) {
+      $.ajax({
+        url: "cuentas/" + nick + "/partidas",
+        success: function(result) {
+          console.log(result);
+          callback(result);
         }
-    };
+      });
+    }
+  };
 })();

@@ -104,13 +104,13 @@ public class CaptureFlagApiController {
     @RequestMapping(method = POST, value = "/cuentas/{nick}/partidas")
     public ResponseEntity<?> registarPartidaUsuario(@RequestBody Jugar jugar,@PathVariable(name = "nick") String nick) {
         try {
+            System.out.println(jugar);
             services.registrarPartidaUsuario(jugar);
             return new ResponseEntity<>(HttpStatus.CREATED);
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
             return new ResponseEntity<>("400 bad request", HttpStatus.NOT_FOUND);
-        }
+        }   
     }
-    
     
 }

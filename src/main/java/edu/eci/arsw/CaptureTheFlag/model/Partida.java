@@ -1,6 +1,7 @@
 package edu.eci.arsw.CaptureTheFlag.model;
 
 import java.io.Serializable;
+import java.sql.Date;
 import java.sql.Time;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -19,13 +20,9 @@ public class Partida implements Serializable  {
     private Long id;
     
     private Time duracion;
-    
-   /* @OneToMany(mappedBy = "partida", cascade = CascadeType.ALL)
-    private Set<Jugar> jugar;*/
+    private String fecha; 
+    private String nombre;
 
-    public Partida(Time duracion) {
-        this.duracion = duracion;
-    }
 
     public Partida() {
     }
@@ -44,6 +41,26 @@ public class Partida implements Serializable  {
 
     public void setId(Long id) {
         this.id = id;
+    }
+    
+    public String getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(String fecha) {
+        this.fecha = fecha;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public Partida(Time duracion) {
+        this.duracion = duracion;
     }
 /*
     public Set<Jugar> getJugar() {

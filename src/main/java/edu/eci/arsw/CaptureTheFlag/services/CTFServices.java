@@ -101,6 +101,7 @@ public class CTFServices implements CaptureTheFlagServices {
 
     @Override
     public void registrarPartida(Partida partida) {
+        System.out.println(partida.getId());
         repositorioPartida.save(partida);
     }
 

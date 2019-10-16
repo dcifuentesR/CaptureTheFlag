@@ -20,7 +20,7 @@ public class CaptureTheFlagException  extends Exception  {
     public static String LobbyAlreadyExist = "ya existe una sala con este nombre";
     public static String PlayerAlreadyExist = "Ya esta en uso este nick";
     public static String PlayerNotFoundException = "Este jugador no se encuentra registrado";
-    public static String LobbyNotFound = "Sala no encontrada";
+    public static String PartidaNotFound = "Partida no encontrada";
     public CaptureTheFlagException(String message) {
         super(message);
     }

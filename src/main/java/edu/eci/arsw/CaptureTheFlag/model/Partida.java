@@ -1,61 +1,72 @@
 package edu.eci.arsw.CaptureTheFlag.model;
+
 import java.io.Serializable;
 import java.sql.Time;
+import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-
+import javax.persistence.*;
 
 @Entity
 public class Partida implements Serializable {
 
-
-	/**
-	 *
-	 */
-	private static final long serialVersionUID = 1L;
+    /**
+     *
+     */
+    private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private String nombre; 
+    
+    private String nombre;
     private Time duracion;
 
+   /* @OneToMany(mappedBy = "partida", cascade = CascadeType.ALL)
+    private Set<Jugar> jugar;*/
 
-    public Partida(String nombre, Time duracion){
+    public Partida(String nombre, Time duracion) {
         this.nombre = nombre;
+        this.duracion = duracion;
+        /*for (Jugar j : jugar) {
+            j.setPartida(this);
+        }*/
+        //this.jugar = Stream.of(jugar).collect(Collectors.toSet());
+    }
+
+    public Partida() {
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public Time getDuracion() {
+        return duracion;
+    }
+
+    public void setDuracion(Time duracion) {
         this.duracion = duracion;
     }
 
+    public Long getId() {
+        return id;
+    }
 
-	public String getNombre() {
-		return nombre;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
+/*
+    public Set<Jugar> getJugar() {
+        return jugar;
+    }
 
-
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-
-
-	public Time getDuracion() {
-		return duracion;
-	}
-
-
-	public void setDuracion(Time duracion) {
-		this.duracion = duracion;
-	}
-
-
-	public Long getId() {
-		return id;
-	}
-
-
-	public void setId(Long id) {
-		this.id = id;
-	}
+    public void setJugar(Set<Jugar> jugar) {
+        this.jugar = jugar;
+    }*/
 
 }

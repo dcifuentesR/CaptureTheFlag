@@ -5,10 +5,12 @@
  */
 package edu.eci.arsw.CaptureTheFlag.services;
 
-
 import edu.eci.arsw.CaptureTheFlag.model.Partida;
 import edu.eci.arsw.CaptureTheFlag.model.Cuenta;
+import edu.eci.arsw.CaptureTheFlag.model.Jugar;
 import edu.eci.arsw.CaptureTheFlag.persistence.exception.CaptureTheFlagException;
+
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.HashMap;
 import org.springframework.stereotype.Service;
@@ -17,7 +19,7 @@ import org.springframework.stereotype.Service;
  *
  * @author USUARIO
  */
-@Service
+
 public class ServicesStub implements CaptureTheFlagServices {
 
     HashMap<String, Cuenta> jugadores = new HashMap<>();
@@ -30,7 +32,6 @@ public class ServicesStub implements CaptureTheFlagServices {
         cuentas.put("andres", new Cuenta("andres", "123", "andres"));
     }
 
-
     @Override
     public void actualizarCuenta(Cuenta jugador, String nombre) throws CaptureTheFlagException {
         getCuenta(nombre);// esto es para checkar que exista el jugador
@@ -38,15 +39,13 @@ public class ServicesStub implements CaptureTheFlagServices {
         jugadores.put(nombre, jugador);
     }
 
-
     @Override
     public Partida getPartida(String nombre) throws CaptureTheFlagException {
         if (salas.get(nombre) == null) {
-            throw new CaptureTheFlagException(CaptureTheFlagException.LobbyNotFound);
+            throw new CaptureTheFlagException(CaptureTheFlagException.PartidaNotFound);
         }
         return salas.get(nombre);
     }
-
 
     @Override
     public ArrayList<Cuenta> getCuentas() {
@@ -79,11 +78,25 @@ public class ServicesStub implements CaptureTheFlagServices {
         return null;
     }
 
-
     @Override
-    public ArrayList<Partida> getPartidas(String nombre) throws CaptureTheFlagException {
+    public ArrayList<Partida> getPartidas() throws CaptureTheFlagException {
         // TODO Auto-generated method stub
         return null;
     }
+
+    @Override
+    public ArrayList<Jugar> getPartidasUsuario(String nick) throws CaptureTheFlagException {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public void registrarPartida(String nombre, Time duracion, Cuenta cuenta, int kills, int muertes, Time tbandera)
+            throws CaptureTheFlagException {
+        // TODO Auto-generated method stub
+
+    }
+
+  
 
 }

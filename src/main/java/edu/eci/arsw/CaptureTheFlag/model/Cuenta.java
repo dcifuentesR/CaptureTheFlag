@@ -1,10 +1,9 @@
 package edu.eci.arsw.CaptureTheFlag.model;
-import java.io.Serializable;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 
+import java.io.Serializable;
+import java.util.Set;
+import java.util.HashSet;
+import javax.persistence.*;
 
 @Entity
 public class Cuenta implements Serializable {
@@ -16,20 +15,23 @@ public class Cuenta implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
     private String correo;
     private String contrasena;
     private String nick;
-    
-    public Cuenta() {
-    	
-    }
 
-    public Cuenta(String correo, String contrasena, String nick) {
+    
+   /* @OneToMany(mappedBy = "cuenta", cascade = CascadeType.ALL)
+    private Set<Jugar> jugar = new HashSet<>();*/
+   
+    public Cuenta(String correo, String contrasena, String nick, Partida...partidas) {
         this.correo = correo;
-    this.contrasena = contrasena;
+        this.contrasena = contrasena;
         this.nick = nick;
     }
-    
+
+    public Cuenta() {	
+    }
     
 
     public String getCorreo() {
@@ -69,5 +71,13 @@ public class Cuenta implements Serializable {
 	public void setId(Long id) {
 		this.id = id;
 	}
+
+    /*public Set<Jugar> getPartidas() {
+        return jugar;
+    }
+
+    public void setPartidas(Set<Jugar> jugar) {
+        this.jugar = jugar;
+    }*/
 
 }

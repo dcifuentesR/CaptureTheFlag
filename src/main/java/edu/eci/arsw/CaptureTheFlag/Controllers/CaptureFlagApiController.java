@@ -6,6 +6,8 @@
 package edu.eci.arsw.CaptureTheFlag.Controllers;
 
 import edu.eci.arsw.CaptureTheFlag.model.Cuenta;
+import edu.eci.arsw.CaptureTheFlag.model.Jugar;
+import edu.eci.arsw.CaptureTheFlag.model.Partida;
 import edu.eci.arsw.CaptureTheFlag.persistence.exception.CaptureTheFlagException;
 
 import edu.eci.arsw.CaptureTheFlag.services.CaptureTheFlagServices;
@@ -63,6 +65,17 @@ public class CaptureFlagApiController {
             return new ResponseEntity<>(HttpStatus.CREATED);
         } catch (CaptureTheFlagException ex) {
             return new ResponseEntity<>("ERROR 403", HttpStatus.FORBIDDEN);
+        }
+    }
+
+    @RequestMapping(method = GET, value = "/cuentas/{nick}/partidas")
+    public ResponseEntity<?> getPartidasUsuario(@PathVariable(name = "nick") String nick) {
+        try {
+            ArrayList<Jugar> partidas = services.getPartidasUsuario(nick);
+            return new ResponseEntity<>(partidas, HttpStatus.ACCEPTED);
+
+        } catch (CaptureTheFlagException ex) {
+            return new ResponseEntity<>("400 bad request", HttpStatus.NOT_FOUND);
         }
     }
 }

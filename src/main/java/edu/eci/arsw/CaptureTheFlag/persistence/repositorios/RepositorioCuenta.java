@@ -11,6 +11,6 @@ import org.springframework.data.repository.query.Param;
 public interface RepositorioCuenta extends CrudRepository<Cuenta, Integer> {
 
    @Query("SELECT c FROM Cuenta c    WHERE c.nick = :nick")
-    Cuenta findUser(@Param("nick") String correo);
+    Cuenta findUser(@Param("nick") String nick);
 
 }

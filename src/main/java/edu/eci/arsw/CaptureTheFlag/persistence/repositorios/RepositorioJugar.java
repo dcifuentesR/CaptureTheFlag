@@ -11,14 +11,10 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 @Repository
-public interface RepositorioJugar extends CrudRepository<Jugar, Integer> {
+public interface RepositorioJugar extends CrudRepository<Jugar, Long> {
 
-   /* @Query("SELECT p FROM Cuenta p WHERE p.nombre = :nombre")
-    Partida findPartida(@Param("nombre") String nombre);
-*/
     @Query(
-  value = "select * from partida as p, jugar as j, cuenta as c where c.nick = :nick and c.id = j.cuentaid and j.partidaid = p.id", 
-  nativeQuery = true)
+  value = "select j from Partida as p, Jugar as j, Cuenta as c where c.nick = :nick and c.id = j.cuenta and j.partida = p.id")
     ArrayList<Jugar>  findPartidaJugador(@Param("nick") String nombre);
     
 }

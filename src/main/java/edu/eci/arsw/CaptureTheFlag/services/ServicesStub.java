@@ -73,7 +73,7 @@ public class ServicesStub implements CaptureTheFlagServices {
     }
 
     @Override
-    public Cuenta getCuenta(Integer id) throws CaptureTheFlagException {
+    public Cuenta getCuenta(Long id) throws CaptureTheFlagException {
         // TODO Auto-generated method stub
         return null;
     }
@@ -91,10 +91,14 @@ public class ServicesStub implements CaptureTheFlagServices {
     }
 
     @Override
-    public void registrarPartida(String nombre, Time duracion, Cuenta cuenta, int kills, int muertes, Time tbandera)
-            throws CaptureTheFlagException {
+    public void registrarPartidaUsuario(Jugar jugar) throws CaptureTheFlagException {
         // TODO Auto-generated method stub
 
+    }
+
+    @Override
+    public void registrarPartida(Partida partida) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
   

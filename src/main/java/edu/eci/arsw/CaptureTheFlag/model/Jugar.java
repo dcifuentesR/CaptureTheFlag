@@ -22,12 +22,12 @@ public class Jugar implements Serializable {
 
     @Id
     @ManyToOne
-    @JoinColumn (name = "cuentaid")
+    @JoinColumn 
     private Cuenta cuenta;
 
     @Id
     @ManyToOne
-    @JoinColumn (name = "partidaid")
+    @JoinColumn 
     private Partida partida;
 
     private int kills;

@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 @Repository
-public interface RepositorioCuenta extends CrudRepository<Cuenta, Integer> {
+public interface RepositorioCuenta extends CrudRepository<Cuenta, Long> {
 
    @Query("SELECT c FROM Cuenta c    WHERE c.nick = :nick")
     Cuenta findUser(@Param("nick") String nick);

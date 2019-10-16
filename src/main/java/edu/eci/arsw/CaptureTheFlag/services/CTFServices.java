@@ -48,13 +48,11 @@ public class CTFServices implements CaptureTheFlagServices {
 
     @Override
     public void agregarCuenta(Cuenta cuenta) throws CaptureTheFlagException {
-
         repositorioCuenta.save(cuenta);
-
     }
 
     @Override
-    public Cuenta getCuenta(Integer id) throws CaptureTheFlagException {
+    public Cuenta getCuenta(Long id) throws CaptureTheFlagException {
         return repositorioCuenta.findById(id).get();
     }
 
@@ -97,9 +95,13 @@ public class CTFServices implements CaptureTheFlagServices {
     }
 
     @Override
-    public void registrarPartida(String nombre, Time duracion, Cuenta cuenta, int kills, int muertes, Time tbandera) throws CaptureTheFlagException {
-        Jugar jugar = new Jugar(cuenta, kills, muertes, tbandera);
-       // repositorioPartida.save(new Partida(nombre, duracion, jugar));
+    public void registrarPartidaUsuario(Jugar jugar) throws CaptureTheFlagException {
+        repositorioJugar.save(jugar);
+    }
+
+    @Override
+    public void registrarPartida(Partida partida) {
+        repositorioPartida.save(partida);
     }
 
 }

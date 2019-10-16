@@ -68,6 +68,28 @@ public class CaptureFlagApiController {
         }
     }
 
+    @RequestMapping(method = GET, value = "/partidas")
+    public ResponseEntity<?> getPartidas() {
+        try {
+            //obtener datos que se enviaran a traves del API
+            ArrayList<Partida> partidas = new ArrayList<Partida>();
+            partidas = services.getPartidas();
+            return new ResponseEntity<>(partidas, HttpStatus.ACCEPTED);
+        } catch (Exception ex) {
+            return new ResponseEntity<>("400 bad request", HttpStatus.NOT_FOUND);
+        }
+    }
+    
+    @RequestMapping(path = "/partidas", method = POST)
+    public ResponseEntity<?> addPartida(@RequestBody Partida partida) {
+        try {
+            services.registrarPartida(partida);
+            return new ResponseEntity<>(HttpStatus.CREATED);
+        } catch (Exception ex) {
+            return new ResponseEntity<>("ERROR 403", HttpStatus.FORBIDDEN);
+        }
+    }
+    
     @RequestMapping(method = GET, value = "/cuentas/{nick}/partidas")
     public ResponseEntity<?> getPartidasUsuario(@PathVariable(name = "nick") String nick) {
         try {
@@ -78,4 +100,19 @@ public class CaptureFlagApiController {
             return new ResponseEntity<>("400 bad request", HttpStatus.NOT_FOUND);
         }
     }
+    
+    @RequestMapping(method = POST, value = "/cuentas/{nick}/partidas")
+    public ResponseEntity<?> registarPartidaUsuario(@RequestBody Jugar jugar,@PathVariable(name = "nick") String nick) {
+        try {
+            services.registrarPartidaUsuario(jugar);
+            return new ResponseEntity<>(HttpStatus.CREATED);
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+            return new ResponseEntity<>("400 bad request", HttpStatus.NOT_FOUND);
+        }
+    }
+    
+    
+    
+    
 }

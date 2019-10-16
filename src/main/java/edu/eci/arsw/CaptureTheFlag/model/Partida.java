@@ -9,29 +9,24 @@ import java.util.stream.Stream;
 import javax.persistence.*;
 
 @Entity
-public class Partida implements Serializable {
+public class Partida implements Serializable  {
 
     /**
      *
      */
-    private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     
     private String nombre;
     private Time duracion;
-
+    
    /* @OneToMany(mappedBy = "partida", cascade = CascadeType.ALL)
     private Set<Jugar> jugar;*/
 
     public Partida(String nombre, Time duracion) {
         this.nombre = nombre;
         this.duracion = duracion;
-        /*for (Jugar j : jugar) {
-            j.setPartida(this);
-        }*/
-        //this.jugar = Stream.of(jugar).collect(Collectors.toSet());
     }
 
     public Partida() {

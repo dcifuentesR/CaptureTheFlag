@@ -11,7 +11,6 @@ public class Cuenta implements Serializable {
     /**
      *
      */
-    private static final long serialVersionUID = 6036485473204574900L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;

@@ -20,12 +20,12 @@ public class Jugar implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Id
+    @MapsId
     @ManyToOne
     @JoinColumn 
     private Cuenta cuenta;
 
-    @Id
+    @MapsId
     @ManyToOne
     @JoinColumn 
     private Partida partida;
@@ -33,11 +33,17 @@ public class Jugar implements Serializable {
     private int kills;
     private int muertes;
     private Time tbandera;
+    private Integer posicion; 
+    private Integer puntos; 
+
+  
     
-    public Jugar(Cuenta cuenta, int kills, int muertes, Time tbandera) {
+    public Jugar(Cuenta cuenta, int kills, int muertes, Time tbandera, Integer posicion, Integer puntos) {
         this.kills = kills;
         this.muertes = muertes;
         this.tbandera = tbandera;
+        this.posicion = posicion;
+        this.puntos = puntos;
     }
     
     public Jugar(){
@@ -82,6 +88,22 @@ public class Jugar implements Serializable {
 
     public void setTbandera(Time tbandera) {
         this.tbandera = tbandera;
+    }
+    
+      public Integer getPosicion() {
+        return posicion;
+    }
+
+    public void setPosicion(Integer posicion) {
+        this.posicion = posicion;
+    }
+
+    public Integer getPuntos() {
+        return puntos;
+    }
+
+    public void setPuntos(Integer puntos) {
+        this.puntos = puntos;
     }
 
 }

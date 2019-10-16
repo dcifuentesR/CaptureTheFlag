@@ -40,11 +40,11 @@ public class ServicesStub implements CaptureTheFlagServices {
     }
 
     @Override
-    public Partida getPartida(String nombre) throws CaptureTheFlagException {
-        if (salas.get(nombre) == null) {
+    public Partida getPartida(Integer id) throws CaptureTheFlagException {
+        if (salas.get(id) == null) {
             throw new CaptureTheFlagException(CaptureTheFlagException.PartidaNotFound);
         }
-        return salas.get(nombre);
+        return salas.get(id);
     }
 
     @Override

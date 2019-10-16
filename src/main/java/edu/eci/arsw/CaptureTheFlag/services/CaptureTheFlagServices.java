@@ -24,7 +24,7 @@ public interface CaptureTheFlagServices {
 
     ArrayList<Partida> getPartidas() throws CaptureTheFlagException;
 
-    Partida getPartida(String nombre) throws CaptureTheFlagException;
+    Partida getPartida(Integer id) throws CaptureTheFlagException;
     
     ArrayList<Jugar> getPartidasUsuario(String nick) throws CaptureTheFlagException;
 

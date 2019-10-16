@@ -17,6 +17,8 @@ public interface RepositorioJugar extends CrudRepository<Jugar, Long> {
   value = "select j from Partida as p, Jugar as j, Cuenta as c where c.nick = :nick and c.id = j.cuenta and j.partida = p.id")
     ArrayList<Jugar>  findPartidaJugador(@Param("nick") String nombre);
     
+  
+    
 }
 
 

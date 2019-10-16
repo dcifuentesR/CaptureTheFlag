@@ -66,7 +66,7 @@ public class CTFServices implements CaptureTheFlagServices {
     }
 
     @Override
-    public Partida getPartida(String nombre) throws CaptureTheFlagException {
+    public Partida getPartida(Integer id) throws CaptureTheFlagException {
         /*Partida partida = repositorioPartida.findPartida(nombre);
 		if (partida == null){
 			throw new CaptureTheFlagException(CaptureTheFlagException.PartidaNotFound);

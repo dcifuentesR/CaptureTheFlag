@@ -18,26 +18,16 @@ public class Partida implements Serializable  {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     
-    private String nombre;
     private Time duracion;
     
    /* @OneToMany(mappedBy = "partida", cascade = CascadeType.ALL)
     private Set<Jugar> jugar;*/
 
-    public Partida(String nombre, Time duracion) {
-        this.nombre = nombre;
+    public Partida(Time duracion) {
         this.duracion = duracion;
     }
 
     public Partida() {
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
     }
 
     public Time getDuracion() {

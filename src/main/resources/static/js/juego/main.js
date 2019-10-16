@@ -32,6 +32,14 @@ window.addEventListener("load",function(event){
 	vista.buffer.canvas.width = mapa.ancho;
 	vista.buffer.canvas.height = mapa.alto;
 	
+	vista.tileSheet.imagen.addEventListener("load",function(event){
+		redimensionar();
+		
+		motor.start();
+	},{once:true});
+	
+	vista.tileSheet.imagen.src = "js/juego/tileset.png";
+	
 	window.addEventListener("keydown",estadoTecla);
 	window.addEventListener("keyup",estadoTecla);
 	window.addEventListener("resize",redimensionar);

@@ -2,8 +2,13 @@ class Vista{
 	constructor(canvas){
 		this.buffer = document.createElement("canvas").getContext("2d");
 		this.context = canvas.getContext("2d");
+		
+		//--- toca cambiar parametros si se quieren mas tilesheets
+		this.tileSheet = new Vista.TileSheet(16,6);
+		
+		this.dibujarMapa = function(mapa, columnas){
 			
-			
+		};
 			this.dibujarJugador = function(x,y,ancho,alto,color){
 				this.buffer.fillStyle = color;
 				this.buffer.fillRect(Math.floor(x),Math.floor(y),ancho,alto);
@@ -30,4 +35,14 @@ class Vista{
 				
 			};
 	}
-}
+	
+};
+
+Vista.TileSheet = class {
+	
+	constructor(tamanioCasilla,columnas){
+		this.imagen = new Image();
+		this.tamanioCasilla = tamanioCasilla;
+		this.columnas = columnas;
+	}
+};

@@ -4,10 +4,20 @@ class Vista{
 		this.context = canvas.getContext("2d");
 		
 		//--- toca cambiar parametros si se quieren mas tilesheets
-		this.tileSheet = new Vista.TileSheet(16,6);
-		
+		this.tileSheet = new Vista.TileSheet(16,6,10);
+		var test =[];
 		this.dibujarMapa = function(mapa, columnas){
-			
+			for(let i = 0; i<mapa.length; i++){
+				let valCasilla = mapa[i];
+				
+				let sourceX = Math.floor(valCasilla / 1)*this.tileSheet.tamanioCasilla;
+				let sourceY = ((valCasilla % 1)*10)*this.tileSheet.tamanioCasilla;
+				
+				let destinationX = (i % columnas) * this.tileSheet.tamanioCasilla;
+				let destinationY = Math.floor(i / columnas) * this.tileSheet.tamanioCasilla;
+				
+				this.buffer.drawImage(this.tileSheet.imagen,sourceX,sourceY, this.tileSheet.tamanioCasilla,this.tileSheet.tamanioCasilla,destinationX,destinationY,this.tileSheet.tamanioCasilla,this.tileSheet.tamanioCasilla);
+			}
 		};
 			this.dibujarJugador = function(x,y,ancho,alto,color){
 				this.buffer.fillStyle = color;
@@ -40,9 +50,10 @@ class Vista{
 
 Vista.TileSheet = class {
 	
-	constructor(tamanioCasilla,columnas){
+	constructor(tamanioCasilla,columnas,filas){
 		this.imagen = new Image();
 		this.tamanioCasilla = tamanioCasilla;
 		this.columnas = columnas;
+		this.filas = filas;
 	}
 };

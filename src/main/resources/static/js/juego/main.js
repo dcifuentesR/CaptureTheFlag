@@ -12,6 +12,7 @@ window.addEventListener("load",function(event){
 	
 	var renderizar = function(event){
 		vista.llenarCanvas(mapa.colorFondo);
+		vista.dibujarMapa(mapa.map,mapa.columnas);
 		vista.dibujarJugador(mapa.jugador.x,mapa.jugador.y,mapa.jugador.ancho,mapa.jugador.alto,mapa.jugador.color);
 		vista.renderizar();
 	}

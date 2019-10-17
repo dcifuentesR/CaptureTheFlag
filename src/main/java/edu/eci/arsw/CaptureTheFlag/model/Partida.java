@@ -1,16 +1,13 @@
 package edu.eci.arsw.CaptureTheFlag.model;
 
 import java.io.Serializable;
-import java.sql.Date;
 import java.sql.Time;
 import java.util.Set;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import javax.persistence.*;
 
 @Entity
-public class Partida implements Serializable  {
+public class Partida implements Serializable {
 
     /**
      *
@@ -18,9 +15,9 @@ public class Partida implements Serializable  {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    
+
     private Time duracion;
-    private String fecha; 
+    private String fecha;
     private String nombre;
 
     public Partida(Time duracion, String fecha, String nombre) {
@@ -29,9 +26,6 @@ public class Partida implements Serializable  {
         this.nombre = nombre;
     }
 
-
-    
-    
     public Partida() {
     }
 
@@ -50,7 +44,7 @@ public class Partida implements Serializable  {
     public void setId(Long id) {
         this.id = id;
     }
-    
+
     public String getFecha() {
         return fecha;
     }
@@ -70,13 +64,8 @@ public class Partida implements Serializable  {
     public Partida(Time duracion) {
         this.duracion = duracion;
     }
-/*
-    public Set<Jugar> getJugar() {
-        return jugar;
-    }
+    
+  
 
-    public void setJugar(Set<Jugar> jugar) {
-        this.jugar = jugar;
-    }*/
 
 }

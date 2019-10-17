@@ -13,14 +13,12 @@ import javax.persistence.Embeddable;
  *
  * @author USUARIO
  */
-@Embeddable
+
 public class JugarId implements Serializable {
 
-    @Column(name = "cuenta_id")
-    Long cuenta;
+    private Long cuenta;
 
-    @Column(name = "partida_id")
-    Long partida;
+    private Long partida;
 
     public JugarId(Long cuenta, Long partida) {
         this.cuenta = cuenta;

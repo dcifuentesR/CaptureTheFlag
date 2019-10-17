@@ -1,6 +1,7 @@
 package edu.eci.arsw.CaptureTheFlag.model;
 
 import java.io.Serializable;
+import java.util.Set;
 import javax.persistence.*;
 
 @Entity
@@ -17,8 +18,7 @@ public class Cuenta implements Serializable {
     private String contrasena;
     private String nick;
 
-    /* @OneToMany(mappedBy = "cuenta", cascade = CascadeType.ALL)
-    private Set<Jugar> jugar = new HashSet<>();*/
+  
     public Cuenta(String correo, String contrasena, String nick) {
         this.correo = correo;
         this.contrasena = contrasena;
@@ -66,6 +66,8 @@ public class Cuenta implements Serializable {
         this.id = id;
     }
 
+   
+    
     @Override
     public boolean equals(Object obj) {
         return super.equals(obj); //To change body of generated methods, choose Tools | Templates.

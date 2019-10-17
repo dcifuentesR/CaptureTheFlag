@@ -15,17 +15,16 @@ public class Jugar implements Serializable {
      */
     private static final long serialVersionUID = 1L;
 
-   
-    
+     
     @Id
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn (name = "cuenta_id", insertable = false, updatable = false)
-    private Cuenta cuenta;
+    @JoinColumn (name = "cuenta_id", nullable = false, insertable = false, updatable = false)
+    Cuenta cuenta;
 
     @Id 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn (name = "partida_id", insertable = false, updatable = false)
-    private Partida partida;
+    @JoinColumn (name = "partida_id", nullable = false, insertable = false, updatable = false)
+    Partida partida;
 
     private int kills;
     private int muertes;
@@ -41,8 +40,6 @@ public class Jugar implements Serializable {
         this.tbandera = tbandera;
         this.posicion = posicion;
         this.puntos = puntos;
-        //id.setCuenta(cuenta.getId());
-       // id.setPartida(partida.getId());
     }
     
     public Jugar(){

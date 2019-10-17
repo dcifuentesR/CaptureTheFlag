@@ -13,6 +13,8 @@ import edu.eci.arsw.CaptureTheFlag.persistence.exception.CaptureTheFlagException
 import edu.eci.arsw.CaptureTheFlag.persistence.repositorios.RepositorioCuenta;
 import edu.eci.arsw.CaptureTheFlag.persistence.repositorios.RepositorioJugar;
 import edu.eci.arsw.CaptureTheFlag.persistence.repositorios.RepositorioPartida;
+import java.sql.Date;
+import java.time.LocalTime;
 
 @Service("services")
 public class CTFServices implements CaptureTheFlagServices {
@@ -103,6 +105,12 @@ public class CTFServices implements CaptureTheFlagServices {
     public void registrarPartida(Partida partida) {
         System.out.println(partida.getId());
         repositorioPartida.save(partida);
+    }
+
+    @Override
+    public Partida getPartida(String nombre, String fecha) throws CaptureTheFlagException {
+        return repositorioPartida.findPartida(nombre,fecha);
+
     }
 
 }

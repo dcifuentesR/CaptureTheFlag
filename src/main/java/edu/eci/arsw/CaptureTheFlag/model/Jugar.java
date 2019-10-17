@@ -7,7 +7,7 @@ import java.util.Date;
 import java.util.Objects;
 
 @Entity
-@IdClass(Jugar.class)
+@IdClass(JugarId.class)
 public class Jugar implements Serializable {
 
     /**
@@ -15,19 +15,16 @@ public class Jugar implements Serializable {
      */
     private static final long serialVersionUID = 1L;
 
-
+   
+    
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-
-    @MapsId
-    @ManyToOne
-    @JoinColumn 
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn (name = "cuenta_id", insertable = false, updatable = false)
     private Cuenta cuenta;
 
-    @MapsId
-    @ManyToOne
-    @JoinColumn 
+    @Id 
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn (name = "partida_id", insertable = false, updatable = false)
     private Partida partida;
 
     private int kills;
@@ -38,12 +35,14 @@ public class Jugar implements Serializable {
 
   
     
-    public Jugar(Cuenta cuenta, int kills, int muertes, Time tbandera, Integer posicion, Integer puntos) {
+    public Jugar(Cuenta cuenta, Partida partida, int kills, int muertes, Time tbandera, Integer posicion, Integer puntos) {
         this.kills = kills;
         this.muertes = muertes;
         this.tbandera = tbandera;
         this.posicion = posicion;
         this.puntos = puntos;
+        //id.setCuenta(cuenta.getId());
+       // id.setPartida(partida.getId());
     }
     
     public Jugar(){
@@ -100,6 +99,16 @@ public class Jugar implements Serializable {
 
     public Integer getPuntos() {
         return puntos;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return super.equals(obj); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode(); //To change body of generated methods, choose Tools | Templates.
     }
 
     public void setPuntos(Integer puntos) {

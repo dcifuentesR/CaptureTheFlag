@@ -4,6 +4,7 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 import edu.eci.arsw.CaptureTheFlag.model.Jugar;
+import java.sql.Time;
 
 import java.util.ArrayList;
 
@@ -18,7 +19,7 @@ public interface RepositorioJugar extends CrudRepository<Jugar, Long> {
     ArrayList<Jugar>  findPartidaJugador(@Param("nick") String nombre);
     
   
-    
+        
 }
 
 

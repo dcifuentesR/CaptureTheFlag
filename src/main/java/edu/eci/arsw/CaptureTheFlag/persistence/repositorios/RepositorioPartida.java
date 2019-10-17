@@ -11,8 +11,8 @@ import org.springframework.data.repository.query.Param;
 @Repository
 public interface RepositorioPartida extends CrudRepository<Partida, Long> {
 
-   /* @Query("SELECT p FROM Cuenta p WHERE p.nombre = :nombre")
-    Partida findPartida(@Param("nombre") String nombre);
-*/
+   @Query("SELECT p FROM Partida p WHERE p.nombre = :nombre and p.fecha = :fecha")
+    Partida findPartida(@Param("nombre") String nombre, @Param("fecha") String fecha );
+
 
 }

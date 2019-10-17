@@ -80,15 +80,31 @@ public class CaptureFlagApiController {
         }
     }
     
+    @RequestMapping(method = GET, value = "/cuentas/{fecha}/{nombre}")
+    public ResponseEntity<?> getPartida(@PathVariable(name = "fecha") String fecha
+            ,@PathVariable(name = "nombre") String nombre) {
+        try {
+            //obtener datos que se enviaran a traves del API
+            Partida partida = services.getPartida(nombre,fecha);
+            return new ResponseEntity<>(partida, HttpStatus.ACCEPTED);
+
+        } catch (CaptureTheFlagException ex) {
+            return new ResponseEntity<>("400 bad request", HttpStatus.NOT_FOUND);
+        }
+    }
+    
     @RequestMapping(path = "/partidas", method = POST)
     public ResponseEntity<?> addPartida(@RequestBody Partida partida) {
         try {
             services.registrarPartida(partida);
-            return new ResponseEntity<>(HttpStatus.CREATED);
+            Partida partidaf = services.getPartida(partida.getNombre(),partida.getFecha());
+            return new ResponseEntity<>(partidaf,HttpStatus.CREATED);
         } catch (Exception ex) {
             return new ResponseEntity<>("ERROR 403", HttpStatus.FORBIDDEN);
         }
     }
+    
+   
     
     @RequestMapping(method = GET, value = "/cuentas/{nick}/partidas")
     public ResponseEntity<?> getPartidasUsuario(@PathVariable(name = "nick") String nick) {
@@ -104,7 +120,6 @@ public class CaptureFlagApiController {
     @RequestMapping(method = POST, value = "/cuentas/{nick}/partidas")
     public ResponseEntity<?> registarPartidaUsuario(@RequestBody Jugar jugar,@PathVariable(name = "nick") String nick) {
         try {
-            System.out.println(jugar);
             services.registrarPartidaUsuario(jugar);
             return new ResponseEntity<>(HttpStatus.CREATED);
         } catch (Exception ex) {

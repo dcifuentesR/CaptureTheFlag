@@ -23,7 +23,15 @@ public class Partida implements Serializable  {
     private String fecha; 
     private String nombre;
 
+    public Partida(Time duracion, String fecha, String nombre) {
+        this.duracion = duracion;
+        this.fecha = fecha;
+        this.nombre = nombre;
+    }
 
+
+    
+    
     public Partida() {
     }
 

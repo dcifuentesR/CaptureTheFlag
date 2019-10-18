@@ -1,10 +1,12 @@
 class Mapa{
 	constructor(){
+		this.collider= new Mapa.Collider();
+		
 		this.colorFondo = "#000000"
 		this.ancho = 500;
 		this.alto =500;
 		this.friccion=0.9;
-		this.gravedad=3;
+		this.gravedad=2.5;
 		//---------------------por ahora aquí, luego desde un JSON ----------
 		this.columnas = 31;
 		this.filas = 31;
@@ -32,6 +34,27 @@ class Mapa{
 			jugador.velY=0;
 		}
 		
+		var abajo,izquierda,derecha,arriba,valCasilla;
+		//sup-izq
+		arriba = Math.floor(jugador.getArriba() / this.tamanioCasilla);
+		izquierda = Math.floor(jugador.getIzquierda() / this.tamanioCasilla);
+		valCasilla = this.map[arriba * this.columnas + izquierda];
+		this.collider.colisionar(valCasilla,jugador,izquierda*this.tamanioCasilla,arriba*this.tamanioCasilla,this.tamanioCasilla);
+		//sup-der
+		arriba = Math.floor(jugador.getArriba() / this.tamanioCasilla);
+		derecha = Math.floor(jugador.getDerecha() / this.tamanioCasilla);
+		valCasilla = this.map[arriba * this.columnas + derecha];
+		this.collider.colisionar(valCasilla,jugador,derecha*this.tamanioCasilla,arriba*this.tamanioCasilla,this.tamanioCasilla);
+		//inf-izq
+		abajo = Math.floor(jugador.getAbajo() / this.tamanioCasilla);
+		izquierda = Math.floor(jugador.getIzquierda() / this.tamanioCasilla);
+		valCasilla = this.map[abajo * this.columnas + izquierda];
+		this.collider.colisionar(valCasilla,jugador,izquierda*this.tamanioCasilla,abajo*this.tamanioCasilla,this.tamanioCasilla);
+		//inf-der
+		abajo = Math.floor(jugador.getAbajo() / this.tamanioCasilla);
+		derecha = Math.floor(jugador.getDerecha() / this.tamanioCasilla);
+		valCasilla = this.map[abajo * this.columnas + derecha];
+		this.collider.colisionar(valCasilla,jugador,derecha*this.tamanioCasilla,abajo*this.tamanioCasilla,this.tamanioCasilla);
 		
 	}
 	
@@ -78,6 +101,8 @@ Mapa.Jugador = class {
 		}
 	}
 	refrescar(){
+		this.xPrevFrame=this.x;
+		this.yPrevFrame=this.y;
 		this.x += this.velX;
 		this.y += this.velY;
 	}
@@ -110,7 +135,10 @@ Mapa.Jugador = class {
 Mapa.Collider = class {
 	
 	constructor(){
-		
+		this.colisionar = function(posPlataforma,jugador,casillaX,casillaY,tamanioCasilla){
+			if(posPlataforma!=-1)
+				this.manejarColisionesPlataformaArriba(jugador,casillaY);
+		}
 	}
 	
 	manejarColisionesPlataformaAbajo(){
@@ -125,7 +153,12 @@ Mapa.Collider = class {
 		
 	}
 
-	manejarColisionesPlataformaArriba(){
+	manejarColisionesPlataformaArriba(jugador,arribaPlataforma){
+		if(jugador.getAbajo() > arribaPlataforma && jugador.getPrevAbajo() <= arribaPlataforma){
+			jugador.setAbajo(arribaPlataforma - 0.01);
+			jugador.velY = 0;
+			jugador.saltando = false;
+		}
 	
 	}
 	

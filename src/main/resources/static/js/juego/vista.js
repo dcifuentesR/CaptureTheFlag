@@ -21,7 +21,7 @@ class Vista{
 		};
 			this.dibujarJugador = function(x,y,ancho,alto,color){
 				this.buffer.fillStyle = color;
-				this.buffer.fillRect(Math.floor(x),Math.floor(y),ancho,alto);
+				this.buffer.fillRect(Math.round(x),Math.round(y),ancho,alto);
 			};
 			this.llenarCanvas = function(color){
 				this.buffer.fillStyle = color;

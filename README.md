@@ -33,7 +33,7 @@ Juego multijugador web, de plataformas, donde cada jugador debe competir por cap
 
 ### Diagrama de desplieuge 
 
-![alt text](https://github.com/diego2097/CaptureTheFlag/blob/master/pictures/Deployment_Diagram.png)
+![alt text](https://github.com/diego2097/CaptureTheFlag/blob/master/pictures/Deployment_Diagram.PNG)
 
 ### Casos de uso 
 
@@ -48,8 +48,11 @@ Juego multijugador web, de plataformas, donde cada jugador debe competir por cap
 Para ingresar a la aplicacion, usar el usuario **diego**  y la contraseña **123** 
 
 Al loggearse en la aplicacion el usuario sera redirido a la pagina home, donde podra encontrar 3 pestañas **perfil**, **salas** y **crear**. 
+
 En la pestaña perfil podra encontrar toda la informacion relacionada al perfil del usuario como tambien algunas estadisitcas de sus partidas, como victorias globales, muertes, kills y el porcentaje de victorias totales. Tambien se podran encontrar estadisticas mas detalladas sobre todas las partidas que ha jugado el usuario.  
+
 En la pestaña salas, se encuentran todas las salas disponibles en el juego, para unirse a una sala el jugador solo debe clickear en unirse. y sera redirigido a la sala donde esperara a que el dueño de la sala decida iniciar la partida. 
+
 En la pestaña craer el usuario puede crear una sala espesfica, eligiendo el mapa en el que desee jugar. 
 
 

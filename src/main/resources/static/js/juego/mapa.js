@@ -81,6 +81,13 @@ Mapa.Objeto = class {
 		this.xPrevFrame=x;
 		this.yPrevFrame=y;
 	}
+	
+	estaColisionando(objeto){
+		return this.getDerecha() < objeto.getIzquierda()||
+		       this.getAbajo() < objeto.getArriba() ||
+		       this.getIzquierda() > objeto.getDerecha() ||
+		       this.getArriba() > objeto.getAbajo();
+	}
 	/**
 	 * estos getters/setters obtienen y asignan las posisiones de los extremos del jugador.
 	 */

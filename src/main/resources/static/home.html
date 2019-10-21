@@ -20,9 +20,17 @@
     <script src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
 
     <!-- Scripts-->
+     
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.4.0/sockjs.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+
     <script src="js/pagina/apiClient.js"></script>
     <script src="js/pagina/app.js"></script>
     <script src="js/pagina/perfi.js"></script>
+    <script src="js/pagina/salas.js"></script>
 
     <!-- Nuestro css-->
     <link
@@ -39,10 +47,10 @@
           <a class="nav-link" data-toggle="tab" href="#Perfil" onclick="perfilModule.partidasJugadas()">Perfil</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" data-toggle="tab" href="#Salas">Salas</a>
+          <a class="nav-link" data-toggle="tab" href="#Salas" onclick="salasModule.init(1)">Salas</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" data-toggle="tab" href="#Crear">Crear</a>
+          <a class="nav-link" data-toggle="tab" href="#Crear" onclick="salasModule.init(0)">Crear</a>
         </li>
       </ul>
 
@@ -87,39 +95,17 @@
             </div>
           </div>
         </div>
-        <div class="tab-pane fade" id="Salas">
-            <table class="table table-dark">
+        <div class="tab-pane fade" id="Salas" >
+            <table id="tabla-salas" class="table table-dark">
                 <thead>
                   <tr>
-                    <th scope="col">#</th>
                     <th scope="col">Sala</th>
                     <th scope="col">Participantes</th>
-                    <th scope="col">Mapa</th>
                     <th scope="col">Unirse</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>0/10</td>
-                    <td>@mdo</td>
-                    <td><a class="btn btn-primary" href="/juego.html">Unirse</a></td>
-                  </tr>
-                  <tr>
-                    <th scope="row">2</th>
-                    <td>Jacob</td>
-                    <td>0/10</td>
-                    <td>@fat</td>
-                    <td><a class="btn btn-primary" href="/juego.html">Unirse</a></td>
-                  </tr>
-                  <tr>
-                    <th scope="row">3</th>
-                    <td>Larry</td>
-                    <td>0/10</td>
-                    <td>@twitter</td>
-                    <td><a class="btn btn-primary" href="/juego.html">Unirse</a></td>
-                  </tr>
+                  
                 </tbody>
               </table>
         </div>
@@ -134,17 +120,9 @@
                                 type="text"
                                 class="form-control"
                                 placeholder="Nombre Partida"
-                                id="nick"
+                                id="nombre-sala"
                               />
-                            </div>
-                            <div class="form-group" id="contrasena-sala">
-                              <input
-                                type="password"
-                                class="form-control"
-                                placeholder="password"
-                                id="password"
-                              />
-                            </div>
+                           </div>
                       </div>
                       <div id="zona-mapa">
                           <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel"  data-interval="false">
@@ -176,7 +154,7 @@
                       </div>
                     </form>
                     <div class="col-12 forgot" >
-                      <a class="btn btn-primary" href="/juego.html">Crear</a>
+                      <a class="btn btn-primary" onclick="salasModule.createSalas($('#nombre-sala').val())" >Crear</a>
                     </div>
                   </div>
                 </div>

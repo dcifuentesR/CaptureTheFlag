@@ -1,8 +1,11 @@
 package edu.eci.arsw.CaptureTheFlag.model;
 
 import java.io.Serializable;
-import java.util.Set;
-import javax.persistence.*;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 @Entity
 public class Cuenta implements Serializable {
@@ -18,7 +21,13 @@ public class Cuenta implements Serializable {
     private String contrasena;
     private String nick;
 
-  
+    public Cuenta(Long id, String correo, String contrasena, String nick) {
+        this.id = id;
+        this.correo = correo;
+        this.contrasena = contrasena;
+        this.nick = nick;
+    }
+
     public Cuenta(String correo, String contrasena, String nick) {
         this.correo = correo;
         this.contrasena = contrasena;
@@ -66,16 +75,14 @@ public class Cuenta implements Serializable {
         this.id = id;
     }
 
-   
-    
     @Override
     public boolean equals(Object obj) {
-        return super.equals(obj); //To change body of generated methods, choose Tools | Templates.
+        return super.equals(obj); // To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public int hashCode() {
-        return super.hashCode(); //To change body of generated methods, choose Tools | Templates.
+        return super.hashCode(); // To change body of generated methods, choose Tools | Templates.
     }
 
 }

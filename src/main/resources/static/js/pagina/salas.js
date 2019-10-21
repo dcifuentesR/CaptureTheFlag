@@ -32,11 +32,14 @@ var salasModule = (function() {
     );
   };
   var tablaSalas = function() {
-    console.log(tablaSalas);
-    $("#tabla-salas").empty();
+    console.log("tablaSalas");
+    console.log(_salas)
+    $("#tabla-salas > tbody").empty();
     _salas.map(function(sala) {
-      $("#tabla-salas").append(
-        "<tr>" + "<td>" + sala.nombre + "</td>" + "</tr>"
+      $("#tabla-salas > tbody").append(
+        "<tr>" + "<td>" + sala.nombre + "</td>" +
+        "<td>" + Object.keys(sala.miembros).length + "</td>" + 
+        "<td>" + "<a class='btn btn-primary' href='/juego.html'>Unirse</a>" + "</td>" + "</tr>"
       );
     });
   };
@@ -65,6 +68,8 @@ var salasModule = (function() {
         stompClient.subscribe(_subscribe, function(eventbody) {
           var theObject = JSON.parse(eventbody.body);
           console.log(theObject);
+          _salas= theObject;
+          tablaSalas();
         });
       }
     });
@@ -72,6 +77,7 @@ var salasModule = (function() {
 
   return {
     init: function(sub) {
+      console.log(_nameSala);
       salasModule.disconnect();
       if (sub == 1) {
         _subscribe = "/topic/showsala";
@@ -95,7 +101,6 @@ var salasModule = (function() {
       _nameSala = nSala;
       _nick = verificationModule.readCookie("nickname");
       console.log(_nick);
-      console.log(_createSala);
       apiClient.checkPassword(_nick, _createSala);
     },
     disconnect: function() {

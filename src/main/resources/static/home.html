@@ -95,9 +95,9 @@
             </div>
           </div>
         </div>
-        <div class="tab-pane fade" id="Salas" >
+        <div class="tab-pane fade" id="Salas">
             <table id="tabla-salas" class="table table-dark">
-                <thead>
+                <thead class="thead-dark">
                   <tr>
                     <th scope="col">Sala</th>
                     <th scope="col">Participantes</th>
@@ -108,13 +108,15 @@
                   
                 </tbody>
               </table>
+              <button onclick="salasModule.showSalas()" >genTabla</button>
         </div>
+        
         <div class="tab-pane fade" id="Crear">
             <div class="modal-dialog text-center">
                 <div class="col-sm-8 main-section">
                   <div class="modal-content">
-                    <form class="col-40" >
-                      <div id="zona-datos"  >
+                    <form class="col-40" action="/sala.html">
+                      <div id="zona-datos" >
                           <div class="form-group" id="sala-name">
                               <input
                                 type="text"
@@ -152,10 +154,10 @@
                               </a>
                             </div>
                       </div>
+                      <div class="col-12 forgot" >
+                        <a class="btn btn-primary"  onclick="salasModule.createSalas($('#nombre-sala').val())" >Crear</a>
+                      </div>
                     </form>
-                    <div class="col-12 forgot" >
-                      <a class="btn btn-primary" onclick="salasModule.createSalas($('#nombre-sala').val())" >Crear</a>
-                    </div>
                   </div>
                 </div>
               </div>

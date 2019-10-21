@@ -52,4 +52,10 @@ public class Datos {
         this.tbandera = tbandera;
     }
 
+    @Override
+    public String toString() {
+        return "Datos{kills=" + kills + ", muertes=" + muertes + ", puntos=" + puntos + ", tbandera=" + tbandera
+                + ", vida=" + vida + "}";
+    }
+
 }

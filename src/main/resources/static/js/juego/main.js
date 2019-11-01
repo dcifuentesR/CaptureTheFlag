@@ -14,6 +14,7 @@ window.addEventListener("load",function(event){
 		vista.llenarCanvas(mapa.colorFondo);
 		vista.dibujarMapa(mapa.map,mapa.columnas);
 		vista.dibujarJugador(mapa.jugador.x,mapa.jugador.y,mapa.jugador.ancho,mapa.jugador.alto,mapa.jugador.color);
+		vista.dibujarJugador(mapa.bandera.x,mapa.bandera.y,mapa.bandera.ancho,mapa.bandera.alto,"#4287f5");
 		vista.renderizar();
 	}
 	

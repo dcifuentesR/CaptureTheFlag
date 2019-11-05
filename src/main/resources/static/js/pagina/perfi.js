@@ -28,6 +28,7 @@ var perfilModule = (function() {
   };
 
   var _genTable = function(partidasJugadas) {
+    _kills, _muertes, (_total = 0);
     $("#tabla-partidas-jugador > tbody").empty();
     partidasJugadas.map(function(partida) {
       if (partida.posicion == 1) {

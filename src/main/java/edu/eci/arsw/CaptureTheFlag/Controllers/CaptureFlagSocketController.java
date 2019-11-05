@@ -35,6 +35,7 @@ public class CaptureFlagSocketController {
             System.out.println("sala " + s);
         }
         msgt.convertAndSend("/topic/joinsala." + nombre, salas.get(nombre));
+        msgt.convertAndSend("/topic/showsala", salas.values());
     }
 
     @MessageMapping("/joinsala.{nombre}")
@@ -44,8 +45,15 @@ public class CaptureFlagSocketController {
         msgt.convertAndSend("/topic/joinsala." + nombre, salas.get(nombre));
     }
 
+    @MessageMapping("/sala.{nombre}")
+    public void joinSalasEvent(@DestinationVariable String nombre) {
+        System.out.println("entraaaaaaaaaaaaaaaaaaaaaaaaa");
+        msgt.convertAndSend("/topic/joinsala." + nombre, salas.get(nombre));
+    }
+
     @MessageMapping("/showsala")
     public void showSalasEvent() {
         msgt.convertAndSend("/topic/showsala", salas.values());
     }
+
 }

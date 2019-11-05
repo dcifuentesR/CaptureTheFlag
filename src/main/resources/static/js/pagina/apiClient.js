@@ -2,7 +2,7 @@ const apiUri = "capturetheflag-arsw.herokuapp.com/";
 apiClient = (function() {
   return {
     saveCuenta: function(cuenta) {
-      console.log(cuenta);
+      //console.log(cuenta);
       $.ajax({
         url: "cuentas/",
         type: "post",
@@ -15,7 +15,7 @@ apiClient = (function() {
       jQuery.ajax({
         url: "cuentas/" + nick,
         success: function(result) {
-          console.log(result);
+          //console.log(result);
           callback(result);
         },
         async: true
@@ -25,7 +25,7 @@ apiClient = (function() {
       $.ajax({
         url: "cuentas/" + nick + "/partidas",
         success: function(result) {
-          console.log(result);
+          //console.log(result);
           callback(result);
         }
       });

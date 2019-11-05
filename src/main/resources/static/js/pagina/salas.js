@@ -30,16 +30,26 @@ var salasModule = (function() {
       {},
       JSON.stringify(cuenta)
     );
+    location.href = "/sala.html";
   };
+
   var tablaSalas = function() {
     console.log("tablaSalas");
-    console.log(_salas)
+    console.log(_salas);
     $("#tabla-salas > tbody").empty();
     _salas.map(function(sala) {
       $("#tabla-salas > tbody").append(
-        "<tr>" + "<td>" + sala.nombre + "</td>" +
-        "<td>" + Object.keys(sala.miembros).length + "</td>" + 
-        "<td>" + "<a class='btn btn-primary' href='/juego.html'>Unirse</a>" + "</td>" + "</tr>"
+        "<tr>" +
+          "<td>" +
+          sala.nombre +
+          "</td>" +
+          "<td>" +
+          Object.keys(sala.miembros).length +
+          "</td>" +
+          "<td>" +
+          "<a class='btn btn-primary' href='/juego.html'>Unirse</a>" +
+          "</td>" +
+          "</tr>"
       );
     });
   };
@@ -63,21 +73,23 @@ var salasModule = (function() {
         stompClient.subscribe(_subscribe + _nameSala, function(eventbody) {
           var theObject = JSON.parse(eventbody.body);
           _participantes = theObject;
+          tablaParticipantes();
         });
+        stompClient.send("/app/sala." + _nameSala, {}, " ");
       } else {
         stompClient.subscribe(_subscribe, function(eventbody) {
           var theObject = JSON.parse(eventbody.body);
-          console.log(theObject);
-          _salas= theObject;
+          //console.log(theObject);
+          _salas = theObject;
           tablaSalas();
         });
+        stompClient.send("/app/showsala", {}, " ");
       }
     });
   };
 
   return {
     init: function(sub) {
-      console.log(_nameSala);
       salasModule.disconnect();
       if (sub == 1) {
         _subscribe = "/topic/showsala";
@@ -85,12 +97,11 @@ var salasModule = (function() {
         console.log("send");
         //salasModule.showSalas();
       } else {
+        console.log("sala " + _nameSala);
+        _nameSala = verificationModule.readCookie("sala");
         _subscribe = "/topic/joinsala.";
         connectAndSubscribe();
       }
-    },
-    showSalas: function() {
-      stompClient.send("/app/showsala", {}, " ");
     },
     joinSala: function() {
       console.log("joinSalas");
@@ -99,8 +110,8 @@ var salasModule = (function() {
     createSalas: function(nSala) {
       console.log("createSalas");
       _nameSala = nSala;
+      document.cookie = "sala=" + encodeURIComponent(_nameSala);
       _nick = verificationModule.readCookie("nickname");
-      console.log(_nick);
       apiClient.checkPassword(_nick, _createSala);
     },
     disconnect: function() {

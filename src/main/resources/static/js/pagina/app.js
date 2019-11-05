@@ -19,7 +19,7 @@ var appModule = (function() {
     if (cuenta.contrasena === password) {
       nick = $("#nick").val();
       location.href = "/home.html";
-      console.log("appmodule " + nick);
+      //console.log("appmodule " + nick);
       verificationModule.crear_cookie_sesion(nick);
     } else {
       alert("Incorrect password");
@@ -40,7 +40,8 @@ var verificationModule = (function() {
   var readCookie = function(name) {
     var nameEQ = name + "=";
     var ca = document.cookie.split(";");
-
+    console.log("cookie");
+    console.log(ca);
     for (var i = 0; i < ca.length; i++) {
       var c = ca[i];
       while (c.charAt(0) == " ") c = c.substring(1, c.length);

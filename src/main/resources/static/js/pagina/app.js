@@ -35,6 +35,10 @@ var appModule = (function() {
 var verificationModule = (function() {
   var crear_cookie_sesion = function(usuario) {
     document.cookie = "nickname=" + encodeURIComponent(usuario);
+    document.cookie = "sala=";
+    var ca = document.cookie.split(";");
+    console.log("cookie inicial");
+    console.log(ca);
   };
 
   var readCookie = function(name) {

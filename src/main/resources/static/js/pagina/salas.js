@@ -15,15 +15,35 @@ var salasModule = (function() {
   var _participantes;
   var _salas;
 
-  var _createSala = function(cuent) {
-    console.log("_createSala");
-    console.log("cuenta " + cuent + " asdsda " + cuent[0]);
+  var _createCuenta = function(cuent) {
     var cuenta = new Cuenta(
       cuent.id,
       cuent.correo,
       cuent.contrasena,
       cuent.nick
     );
+    return cuenta;
+  };
+
+  var _joinSala = function(cuent) {
+    console.log("_createSala");
+    console.log("cuenta " + cuent + " asdsda " + cuent[0]);
+    var cuenta = _createCuenta(cuent);
+    console.log(cuenta);
+    stompClient.send("/app/joinsala." + _nameSala, {}, JSON.stringify(cuenta));
+    location.href = "/sala.html";
+  };
+
+  var _createSala = function(cuent) {
+    console.log("_createSala");
+    console.log("cuenta " + cuent + " asdsda " + cuent[0]);
+    /*var cuenta = new Cuenta(
+      cuent.id,
+      cuent.correo,
+      cuent.contrasena,
+      cuent.nick
+    );*/
+    var cuenta = _createCuenta(cuent);
     console.log(cuenta);
     stompClient.send(
       "/app/createsala." + _nameSala,
@@ -33,8 +53,8 @@ var salasModule = (function() {
     location.href = "/sala.html";
   };
 
-  var tablaSalas = function() {
-    console.log("tablaSalas");
+  var _tablaSalas = function() {
+    console.log("_tablaSalas");
     console.log(_salas);
     $("#tabla-salas > tbody").empty();
     _salas.map(function(sala) {
@@ -47,19 +67,21 @@ var salasModule = (function() {
           Object.keys(sala.miembros).length +
           "</td>" +
           "<td>" +
-          "<a class='btn btn-primary' href='/juego.html'>Unirse</a>" +
+          "<a class='btn btn-primary' onclick='salasModule.joinSala(\"" +
+          sala.nombre +
+          "\")' >Unirse</a>" +
           "</td>" +
           "</tr>"
       );
     });
   };
 
-  var tablaParticipantes = function() {
-    console.log("tablaParticipantes");
-    $("#tabla-participantes").empty();
-    _participantes.map(function(participante) {
-      $("#tabla-participantes").append(
-        "<tr>" + "<td>" + participante.nombre + "</td>" + "</tr>"
+  var _tablaParticipantes = function(participantes) {
+    console.log("_tablaParticipantes");
+    $("#tabla-participantes > tbody").empty();
+    participantes.map(function(participante) {
+      $("#tabla-participantes > tbody").append(
+        "<tr>" + "<td>" + participante.nick + "</td>" + "</tr>"
       );
     });
   };
@@ -73,19 +95,29 @@ var salasModule = (function() {
         stompClient.subscribe(_subscribe + _nameSala, function(eventbody) {
           var theObject = JSON.parse(eventbody.body);
           _participantes = theObject;
-          tablaParticipantes();
+          _tablaParticipantes(_participantes);
         });
-        stompClient.send("/app/sala." + _nameSala, {}, " ");
+        if (_nameSala) {
+          console.log(_nameSala);
+          stompClient.send("/app/sala." + _nameSala, {}, " ");
+        }
       } else {
         stompClient.subscribe(_subscribe, function(eventbody) {
           var theObject = JSON.parse(eventbody.body);
           //console.log(theObject);
           _salas = theObject;
-          tablaSalas();
+          _tablaSalas();
         });
         stompClient.send("/app/showsala", {}, " ");
       }
     });
+  };
+
+  var _createOrJoinSala = function(nSala, funcion) {
+    _nameSala = nSala;
+    document.cookie = "sala=" + encodeURIComponent(_nameSala);
+    _nick = verificationModule.readCookie("nickname");
+    apiClient.checkPassword(_nick, funcion);
   };
 
   return {
@@ -103,16 +135,13 @@ var salasModule = (function() {
         connectAndSubscribe();
       }
     },
-    joinSala: function() {
+    joinSala: function(nSala) {
       console.log("joinSalas");
-      tablaParticipantes();
+      _createOrJoinSala(nSala, _joinSala);
     },
     createSalas: function(nSala) {
       console.log("createSalas");
-      _nameSala = nSala;
-      document.cookie = "sala=" + encodeURIComponent(_nameSala);
-      _nick = verificationModule.readCookie("nickname");
-      apiClient.checkPassword(_nick, _createSala);
+      _createOrJoinSala(nSala, _createSala);
     },
     disconnect: function() {
       if (stompClient !== null) {

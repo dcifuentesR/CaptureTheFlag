@@ -42,13 +42,12 @@ public class CaptureFlagSocketController {
     public void joinSalasEvent(Cuenta cuenta, @DestinationVariable String nombre) {
         Sala temp = salas.get(nombre);
         temp.addMiembro(cuenta, new Datos());
-        msgt.convertAndSend("/topic/joinsala." + nombre, salas.get(nombre));
+        msgt.convertAndSend("/topic/joinsala." + nombre, salas.get(nombre).getMiembrosName());
     }
 
     @MessageMapping("/sala.{nombre}")
     public void joinSalasEvent(@DestinationVariable String nombre) {
-        System.out.println("entraaaaaaaaaaaaaaaaaaaaaaaaa");
-        msgt.convertAndSend("/topic/joinsala." + nombre, salas.get(nombre));
+        msgt.convertAndSend("/topic/joinsala." + nombre, salas.get(nombre).getMiembrosName());
     }
 
     @MessageMapping("/showsala")

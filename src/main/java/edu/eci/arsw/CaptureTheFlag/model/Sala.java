@@ -1,26 +1,32 @@
 package edu.eci.arsw.CaptureTheFlag.model;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class Sala {
 
     ConcurrentHashMap<Cuenta, Datos> miembros = new ConcurrentHashMap<>();
     String nombre;
-    
 
     public Sala() {
     }
 
     public Sala(String nombre) {
-        this.nombre=nombre;
+        this.nombre = nombre;
     }
 
-    public void addMiembro (Cuenta miembro, Datos datos){
+    public void addMiembro(Cuenta miembro, Datos datos) {
         miembros.put(miembro, datos);
     }
 
     public ConcurrentHashMap<Cuenta, Datos> getMiembros() {
         return miembros;
+    }
+
+    public List<Cuenta> getMiembrosName() {
+        List<Cuenta> temp = new ArrayList<Cuenta>(miembros.keySet());
+        return temp;
     }
 
     public void setMiembros(ConcurrentHashMap<Cuenta, Datos> miembros) {
@@ -39,5 +45,5 @@ public class Sala {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-    
+
 }

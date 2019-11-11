@@ -15,7 +15,7 @@ class Mapa{
 		this.layer="world";
 		
 		this.jugador = new Mapa.Jugador(50,100,16,16,20);
-		this.bandera = new Mapa.Jugador(200,200,16,16,20);
+		this.bandera = new Mapa.ObjetoMovil(200,200,16,16);
 		
 	}
 	manejarColisiones(jugador){
@@ -71,8 +71,7 @@ class Mapa{
 
 		this.manejarColisiones(this.jugador);
 		this.manejarColisiones(this.bandera);
-		console.log(this.jugador.estaColisionando(this.bandera));
-		console.log(this.jugador.tieneBandera);
+		
 		if(this.bandera.estaColisionando(this.jugador))
 			this.jugador.cogerBandera();
 		else this.jugador.tieneBandera=false;
@@ -99,7 +98,7 @@ Mapa.Objeto = class {
 		       this.getArriba() <= objeto.getAbajo();
 	}
 	/**
-	 * estos getters/setters obtienen y asignan las posisiones de los extremos del jugador.
+	 * estos getters/setters obtienen y asignan las posisiones de los extremos del objeto.
 	 */
 	getAbajo(){return this.y + this.alto;}
 	getIzquierda(){return this.x;}
@@ -123,21 +122,15 @@ Mapa.Objeto = class {
 	setPrevArriba(y){this.yPrevFrame=y;}
 }
 
-Mapa.Jugador = class extends Mapa.Objeto{
-	constructor(x,y,ancho,alto,vida){
+Mapa.ObjetoMovil = class extends Mapa.Objeto{
+	constructor(x,y,ancho,alto){
 		super(x,y,ancho,alto);
 		
 		this.color = "#ff0000";
 		
 		this.velX=0;
-		this.velY=0;
-		this.saltando = true;
+		this.velY=0;	
 		
-		this.tieneBandera = false;
-		this.puntos=0;
-
-		this.pasoVelX=0.7
-		this.vida=vida;
 	}
 	
 	moverseIzq(){
@@ -146,6 +139,26 @@ Mapa.Jugador = class extends Mapa.Objeto{
 	
 	moverseDer(){
 		this.velX+=this.pasoVelX;
+	}
+	
+	refrescar(){
+		this.xPrevFrame=this.x;
+		this.yPrevFrame=this.y;
+		this.x += this.velX;
+		this.y += this.velY;
+		
+	}
+}
+
+Mapa.Jugador = class extends Mapa.ObjetoMovil{
+	constructor(x,y,ancho,alto,vida){
+		super(x,y,ancho,alto);
+		this.pasoVelX=0.7;
+		this.saltando = true;
+		
+		this.vida=vida;
+		this.tieneBandera = false;
+		this.puntos=0;
 	}
 	
 	saltar(){
@@ -163,14 +176,12 @@ Mapa.Jugador = class extends Mapa.Objeto{
 		this.yPrevFrame=this.y;
 		this.x += this.velX;
 		this.y += this.velY;
+		
 		if(this.tieneBandera){
-			this.puntos++;
-			
+			this.puntos++;		
 		}
 		console.log(this.puntos);
 	}
-	
-	
 }
 
 Mapa.Collider = class {

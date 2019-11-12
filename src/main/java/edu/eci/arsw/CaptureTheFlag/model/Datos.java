@@ -1,17 +1,22 @@
 package edu.eci.arsw.CaptureTheFlag.model;
 
-import java.sql.Time;
+//import java.sql.Time;
 
 public class Datos {
-    private int kills;
-    private int muertes;
-    private int vida;
-    private int puntos;
-    private Time tbandera;
-    private int x;
-    private int y;
+    private int kills = 0;
+    private int muertes = 0;
+    private int vida = 100;
+    private int puntos = 0;
+    // private Time tbandera;
+    private double x;
+    private double y;
+    private String nick;
 
     public Datos() {
+    }
+
+    public Datos(String nick) {
+        this.nick = nick;
     }
 
     public int getKills() {
@@ -46,34 +51,39 @@ public class Datos {
         this.puntos = puntos;
     }
 
-    public Time getTbandera() {
-        return tbandera;
-    }
-
-    public void setTbandera(Time tbandera) {
-        this.tbandera = tbandera;
-    }
-
     @Override
     public String toString() {
-        return "Datos{kills=" + kills + ", muertes=" + muertes + ", puntos=" + puntos + ", tbandera=" + tbandera
-                + ", vida=" + vida + ", x=" + x + ", y=" + y + "}";
+        return "Datos{kills=" + kills + ", muertes=" + muertes + ", nick=" + nick + ", puntos=" + puntos + ", vida="
+                + vida + ", x=" + x + ", y=" + y + "}";
     }
 
-    public int getX() {
+    public double getX() {
         return x;
     }
 
-    public void setX(int x) {
+    public void setX(double x) {
         this.x = x;
     }
 
-    public int getY() {
+    public double getY() {
         return y;
     }
 
-    public void setY(int y) {
+    public void setY(double y) {
         this.y = y;
+    }
+
+    public void setXY(double x, double y) {
+        this.x = x;
+        this.y = y;
+    }
+
+    public String getNick() {
+        return nick;
+    }
+
+    public void setNick(String nick) {
+        this.nick = nick;
     }
 
 }

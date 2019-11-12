@@ -5,30 +5,20 @@
     <title>Capture The Flag</title>
     <script src="js/pagina/app.js"></script>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.4.0/sockjs.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+
+    <script src="js/juego/conexionPartida.js"></script>
+    <script src="js/juego/main.js"></script>
+    <script src="js/juego/motor.js"></script>
+    <script src="js/juego/vista.js"></script>
+    <script src="js/juego/Controlador.js"></script>
+    <script src="js/juego/mapa.js"></script>
   </head>
-<!--   <h1>Capture The Flag</h1> -->
-  <body onload="verificationModule.check_cookie()">
+  <!--   <h1>Capture The Flag</h1> -->
+  <body onload="partidaModulo.init();verificationModule.check_cookie()">
     <div id="juego"></div>
-    <!--
-    <?php
-    include_once 'app/cargadorArchivosJS.inc.php';
-    ?>
-    -->
-<!--     <script src="js/ajax.js"></script> -->
-<!--     <script src="js/teclado.js"></script> -->
-<!--     <script src="js/rectangulo.js"></script> -->
-<!--     <script src="js/bublePrincipal.js"></script> -->
-<!--     <script src="js/dimensiones.js"></script> -->
-<!--     <script src="js/inicio.js"></script> -->
 
-<script src="js/juego/main.js"></script>
-<script src="js/juego/motor.js"></script>
-<script src="js/juego/vista.js"></script>
-<script src="js/juego/Controlador.js"></script>
-<script src="js/juego/mapa.js"></script>
-
-<canvas id="canvas">
-</canvas>
-
+    <canvas id="canvas"> </canvas>
   </body>
 </html>

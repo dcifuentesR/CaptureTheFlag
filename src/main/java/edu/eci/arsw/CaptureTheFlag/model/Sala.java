@@ -24,6 +24,11 @@ public class Sala {
         return miembros;
     }
 
+    public List<Datos> getDatos() {
+        List<Datos> temp = new ArrayList<Datos>(miembros.values());
+        return temp;
+    }
+
     public List<Cuenta> getMiembrosName() {
         List<Cuenta> temp = new ArrayList<Cuenta>(miembros.keySet());
         return temp;
@@ -44,6 +49,14 @@ public class Sala {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    public void movimientoPJ(String nick, double x, double y) {
+        for (Cuenta c : miembros.keySet()) {
+            if (c.getNick().equals(nick)) {
+                miembros.get(c).setXY(x, y);
+            }
+        }
     }
 
 }

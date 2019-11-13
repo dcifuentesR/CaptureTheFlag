@@ -5,7 +5,7 @@ var partidaModulo = (function() {
   var conexion = false;
   
   var pintarInfoJuego = function(JSONObject){
-	  //main.renderizar(JSONObject);
+	  main.renderizar(JSONObject);
   };
 
   var connectAndSubscribe = function() {

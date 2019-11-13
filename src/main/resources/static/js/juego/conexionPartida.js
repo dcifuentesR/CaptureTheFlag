@@ -35,7 +35,7 @@ var partidaModulo = (function() {
     },
     mover: function(x, y) {
       if (conexion != false) {
-        console.log("mover x" + x + " y " + y);
+        //console.log("mover x" + x + " y " + y);
         stompClient.send(
           "/app/salaMovimiento." + _nameSala,
           {},

@@ -16,7 +16,7 @@ var partidaModulo = (function() {
       console.log("Connected: " + frame);
       stompClient.subscribe(_subscribe + _nameSala, function(eventbody) {
         var theObject = JSON.parse(eventbody.body);
-        //metodos
+            //metodos
         pintarInfoJuego(theObject);
       });
       conexion = true;

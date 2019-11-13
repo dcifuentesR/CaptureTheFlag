@@ -180,7 +180,12 @@ Mapa.Jugador = class extends Mapa.ObjetoMovil{
 		if(this.tieneBandera){
 			this.puntos++;		
 		}
-		console.log(this.puntos);
+		if(this.xPrevFrame !=this.x || this.yPrevFrame!=this.y){
+			console.log(this.x +"||"+this.xPrevFrame+"=>"+this.y+"||"+this.yPrevFrame);
+			partidaModulo.mover(this.x,this.y);
+		}
+			
+		
 	}
 }
 

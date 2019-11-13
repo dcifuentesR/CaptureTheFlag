@@ -3,6 +3,10 @@ var partidaModulo = (function() {
   var _nameSala = null;
   var _nick = null;
   var conexion = false;
+  
+  var pintarInfoJuego = function(JSONObject){
+	  //main.renderizar(JSONObject);
+  };
 
   var connectAndSubscribe = function() {
     console.info("Connecting to WS...");
@@ -13,7 +17,7 @@ var partidaModulo = (function() {
       stompClient.subscribe(_subscribe + _nameSala, function(eventbody) {
         var theObject = JSON.parse(eventbody.body);
         //metodos
-        console.log(theObject);
+        pintarInfoJuego(theObject);
       });
       conexion = true;
     });
@@ -27,10 +31,9 @@ var partidaModulo = (function() {
       _nick = verificationModule.readCookie("nickname");
       _subscribe = "/topic/salaDatos.";
       connectAndSubscribe();
+      main.init();
     },
     mover: function(x, y) {
-      console.log("mover x" + x + " y " + y);
-      console.log(conexion);
       if (conexion != false) {
         console.log("mover x" + x + " y " + y);
         stompClient.send(

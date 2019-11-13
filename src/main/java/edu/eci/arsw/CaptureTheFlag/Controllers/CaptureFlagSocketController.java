@@ -65,6 +65,7 @@ public class CaptureFlagSocketController {
         double x = Double.parseDouble(valores[1]);
         double y = Double.parseDouble(valores[2]);
         System.out.println(nick + " " + x + " " + y);
+        System.out.print(salas.get(nombre));
         salas.get(nombre).movimientoPJ(nick, x, y);
         msgt.convertAndSend("/topic/salaDatos." + nombre, salas.get(nombre).getDatos());
 

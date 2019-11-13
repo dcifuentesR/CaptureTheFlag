@@ -30,10 +30,10 @@ public class CaptureFlagSocketController {
             salaTemp.setMiembros(temp);
             salas.put(nombre, salaTemp);
         }
-        System.out.println(salas.keys().toString());
-        for (String s : salas.keySet()) {
+        //System.out.println(salas.keys().toString());
+        /*for (String s : salas.keySet()) {
             System.out.println("sala " + s);
-        }
+        }*/
         msgt.convertAndSend("/topic/joinsala." + nombre, salas.get(nombre));
         msgt.convertAndSend("/topic/showsala", salas.values());
     }
@@ -64,8 +64,9 @@ public class CaptureFlagSocketController {
         String nick = valores[0];
         double x = Double.parseDouble(valores[1]);
         double y = Double.parseDouble(valores[2]);
-        System.out.println(nick + " " + x + " " + y);
-        System.out.print(salas.get(nombre));
+        //System.out.println(nick + " " + x + " " + y);
+        
+        //System.out.print(salas.get(nombre));
         salas.get(nombre).movimientoPJ(nick, x, y);
         msgt.convertAndSend("/topic/salaDatos." + nombre, salas.get(nombre).getDatos());
 

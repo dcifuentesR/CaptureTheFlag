@@ -5,7 +5,7 @@
 
 ## Descripcion 
 
-Juego multijugador web, de plataformas, donde cada jugador debe competir por capturar la bandera del mapa. En el mapa se encontraran poderes distribuidos aleatoriamente que cada jugador puede obtener para así afectar el rendimiento de los demás o beneficiarse de estos para así mejorar sus probabilidades de conseguir la bandera, cada jugador tendra 100 puntos de vida donde al morir reaparecerán después de 3 segundos, tambien tendra un contador de puntos que ira aumentando dependiendo de cuanto tiempo dure con la bandera, cada partida contara con maximo 5 jugadores y minimo 2. Este juego se desarrollara en java para el backend, html5 y javascript para el frontend y maven para gestionar el proyecto.
+Juego multijugador web,  de plataformas, donde cada jugador debe competir por capturar la bandera del mapa. En el mapa se encontraran poderes distribuidos aleatoriamente que cada jugador puede obtener para así afectar el rendimiento de los demás o beneficiarse de estos para así mejorar sus probabilidades de conseguir la bandera, cada jugador tendra 100 puntos de vida donde al morir reaparecerán después de 3 segundos, tambien tendra un contador de puntos que ira aumentando dependiendo de cuanto tiempo dure con la bandera, cada partida contara con maximo 5 jugadores y minimo 2. Este juego se desarrollara en java para el backend, html5 y javascript para el frontend y maven para gestionar el proyecto.
  
 
 ## Autores 

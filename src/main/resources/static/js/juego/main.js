@@ -36,20 +36,18 @@ var main = (function(){
 			vista.buffer.canvas.width = mapa.ancho;
 			vista.buffer.canvas.height = mapa.alto;
 			
-			vista.tileSheet.imagen.addEventListener("load",function(event){
-				redimensionar();
-				
-				motor.start();
-			},{once:true});
+			redimensionar();
+			motor.start();
 			
 			vista.tileSheet.imagen.src = "js/juego/tileset.png";
 			
 			window.addEventListener("keydown",estadoTecla);
 			window.addEventListener("keyup",estadoTecla);
 			window.addEventListener("resize",redimensionar);
-			redimensionar();
 			
-			motor.start();
+			//vista.dibujarMapa(mapa.map,mapa.columnas);
+			//vista.llenarCanvas(mapa.colorFondo);
+			
 		},
 		renderizar:function(estadoJuego){
 			vista.llenarCanvas(mapa.colorFondo);

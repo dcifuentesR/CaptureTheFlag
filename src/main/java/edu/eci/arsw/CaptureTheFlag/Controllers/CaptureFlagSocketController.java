@@ -68,12 +68,18 @@ public class CaptureFlagSocketController {
         
         //System.out.print(salas.get(nombre));
         salas.get(nombre).movimientoPJ(nick, x, y);
-        msgt.convertAndSend("/topic/salaDatos." + nombre, salas.get(nombre).getDatos());
+        //msgt.convertAndSend("/topic/salaDatos." + nombre, salas.get(nombre).getDatos());
 
     }
 
     @MessageMapping("/salaDatos.{nombre}")
     public void getDatos(@DestinationVariable String nombre) {
+        msgt.convertAndSend("/topic/salaDatos." + nombre, salas.get(nombre).getDatos());
+
+    }
+    
+    @MessageMapping("/salaDatosRefrescar.{nombre}")
+    public void getDatosRefrescar(@DestinationVariable String nombre) {
         msgt.convertAndSend("/topic/salaDatos." + nombre, salas.get(nombre).getDatos());
 
     }

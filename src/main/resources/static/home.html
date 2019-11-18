@@ -41,10 +41,10 @@
     />
 
   </head>
-  <body onload="verificationModule.check_cookie()">
+  <body onload="verificationModule.check_cookie(); perfilModule.init()">
     <ul class="nav nav-pills nav-justified">
         <li class="nav-item">
-          <a class="nav-link" data-toggle="tab" href="#Perfil" onclick="perfilModule.partidasJugadas()">Perfil</a>
+          <a id="inicio-perfil" class="nav-link" data-toggle="tab" href="#Perfil" onclick="perfilModule.partidasJugadas()">Perfil</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" data-toggle="tab" href="#Salas" onclick="salasModule.init(1)">Salas</a>
@@ -59,10 +59,12 @@
           <div class="row">
             <div id = "portada-perfil" class="column left">
               <h1></h1>
-              <img src="img/prueba.gif">
+              <div class="modal-personaje">
+                <img src="img/prueba.gif" class="img-fluid" alt="Responsive image">
+              </div>
             </div>
-            <div class="column right">
-                <div id="datos-promedio">
+            <div id="tablas" class="column right">
+                <div id="datos-promedio" class="table-responsive">
                   <table id="tabla-estadisticas-jugador" class="table table-dark">
                     <thead class="thead-dark">
                       <tr>
@@ -75,7 +77,8 @@
                   <tbody></tbody>
                   </table>
                 </div>
-                <div id= "datos-partida">
+                <br>
+                <div id= "datos-partida" class="table-responsive">
                   <table id="tabla-partidas-jugador" class="table table-dark">
                       <thead class="thead-dark">
                           <tr>
@@ -95,7 +98,8 @@
             </div>
           </div>
         </div>
-        <div class="tab-pane fade" id="Salas">
+        <div class="tab-pane fade table-responsive*--
+        " id="Salas">
             <table id="tabla-salas" class="table table-dark">
                 <thead class="thead-dark">
                   <tr>

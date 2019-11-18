@@ -71,7 +71,12 @@ var perfilModule = (function() {
     $("#portada-perfil > h1").text("Nick: " + _nick);
     apiClient.getPartidasUser(_nick, _genTable);
   };
+
+  var init = function() {
+    document.getElementById("inicio-perfil").click();
+  };
   return {
-    partidasJugadas: partidasJugadas
+    partidasJugadas: partidasJugadas,
+    init: init
   };
 })();

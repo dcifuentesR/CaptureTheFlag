@@ -4,6 +4,12 @@ var main = (function(){
 		controlador.estadoTecla(event.type,event.key);
 	}
 	
+	var disparar=function(){
+		controlador.disparar(event)
+	}
+
+	
+
 	var redimensionar = function(){
 		vista.redimensionar(document.documentElement.clientWidth - 32, document.documentElement.clientHeight - 32,mapa.alto/mapa.ancho);
 		vista.renderizar();
@@ -44,7 +50,13 @@ var main = (function(){
 			window.addEventListener("keydown",estadoTecla);
 			window.addEventListener("keyup",estadoTecla);
 			window.addEventListener("resize",redimensionar);
-			
+			if(window.PointerEvent) {
+				canvas.addEventListener("pointerdown", disparar, false);
+			  }
+			  else {
+				//Provide fallback for user agents that do not support Pointer Events
+				canvas.addEventListener("mousedown", disparar, false);
+			  }	
 			//vista.dibujarMapa(mapa.map,mapa.columnas);
 			//vista.llenarCanvas(mapa.colorFondo);
 			

@@ -188,6 +188,14 @@ Mapa.Jugador = class extends Mapa.ObjetoMovil{
 	}
 }
 
+Mapa.Poder = class extends Mapa.ObjetoMovil{
+	constructor(x,y,ancho,alto,vida){
+		super(x,y,ancho,alto);
+		this.activo = false; 
+	}
+	
+
+}	
 Mapa.Collider = class {
 	
 	constructor(){

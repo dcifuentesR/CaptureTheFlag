@@ -5,7 +5,7 @@ class Controlador {
 		this.der =new EntradaTeclado();
 		this.arriba=new EntradaTeclado();
 		this.x = 0;
-		this.y = 0;
+		this.y =
 		this.estadoTecla = function(tipo,tecla) {
 			var presionada = (tipo == "keydown") ? true :false;
 			switch(tecla){

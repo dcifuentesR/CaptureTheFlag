@@ -3,10 +3,13 @@ var partidaModulo = (function() {
   var _nameSala = null;
   var _nick = null;
   var conexion = false;
+  var theObject = undefined;
   
-  var pintarInfoJuego = function(JSONObject){
+  /*var pintarInfoJuego = function(JSONObject){
 	  main.renderizar(JSONObject);
-  };
+  };*/
+  
+  
 
   var connectAndSubscribe = function() {
     console.info("Connecting to WS...");
@@ -15,9 +18,11 @@ var partidaModulo = (function() {
     stompClient.connect({}, function(frame) {
       console.log("Connected: " + frame);
       stompClient.subscribe(_subscribe + _nameSala, function(eventbody) {
-        var theObject = JSON.parse(eventbody.body);
+    	  console.log(eventbody);
+        theObject = JSON.parse(eventbody.body);
             //metodos
-        pintarInfoJuego(theObject);
+        //pintarInfoJuego(theObject);
+        
       });
       conexion = true;
     });
@@ -42,6 +47,12 @@ var partidaModulo = (function() {
           _nick + ";" + x + ";" + y
         );
       }
+    },
+    getJugadores: function (callback){
+    	if(conexion !=false){
+  	  stompClient.send("/app/salaDatos."+_nameSala,{}, " ");}
+    	if(theObject !==undefined)
+  	  callback(theObject);
     },
     disconnect: function() {
       conexion = false;

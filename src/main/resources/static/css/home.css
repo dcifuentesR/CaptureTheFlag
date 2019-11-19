@@ -1,9 +1,21 @@
+/*---------------------- global  -------------------------*/
 body {
   /*no se repita/ centrado h/ centrado v/ tamaño se ajuste*/
   /*background: cadetblue;*/
   background: url(../img/fondoHome.png) no-repeat center center fixed;
   /*ripo portada/ */
   background-size: cover;
+}
+
+.nav{
+  /*background: rgb(28, 40, 107);*/
+  background: rgba(183, 192, 211, 0.753);
+}
+
+.nav .nav-item{
+  color: #FFF;
+  font-weight: bolder;
+  box-shadow: 0px 0px 5px black;
 }
 
 /*---------------------- parte Crear  -------------------------*/

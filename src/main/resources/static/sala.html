@@ -3,6 +3,12 @@
     <meta charset="utf-8" />
     <title>Capture The Flag</title>
 
+    <!-- FRAMEWORK BOOTSTRAP para el estilo de la pagina-->
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    />
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <!-- Scripts-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
@@ -16,16 +22,35 @@
     <script src="js/pagina/app.js"></script>
     <script src="js/pagina/perfi.js"></script>
     <script src="js/pagina/salas.js"></script>
+
+    <!-- Nuestro css-->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="css/sala.css"
+      th:href="@{/css/sala.css}"
+    />
   </head>
   <body onload="salasModule.init(0)">
-    <table id="tabla-participantes" class="table table-dark">
-      <thead class="thead-dark">
-        <tr>
-          <th scope="col">Nombre</th>
-        </tr>
-      </thead>
-      <tbody></tbody>
-    </table>
-    <a class='btn btn-primary' href='/juego.html'>Jugar</a>
+    <div class="row">
+      <div class="column left">
+        <table id="tabla-participantes" class="table table-dark">
+          <thead class="thead-dark">
+            <tr>
+              <th scope="col">Nombre</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+        <a class="btn btn-primary" href="/juego.html">Jugar</a>
+      </div>
+      <div class="column right">
+        <img
+          src="img/mapa.JPG"
+          class="img-fluid imagen"
+          alt="Responsive image"
+        />
+      </div>
+    </div>
   </body>
 </html>

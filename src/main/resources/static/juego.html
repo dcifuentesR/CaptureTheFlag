@@ -7,10 +7,14 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.4.0/sockjs.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
-    
-    
-	
-    
+
+    <!-- Nuestro css-->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="css/juego.css"
+      th:href="@{/css/juego.css}"
+    />
   </head>
   <!--   <h1>Capture The Flag</h1> -->
   <body onload="partidaModulo.init();verificationModule.check_cookie()">

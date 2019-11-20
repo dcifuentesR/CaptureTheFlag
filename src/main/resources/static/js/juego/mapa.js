@@ -6,7 +6,7 @@ class Mapa{
 		this.ancho = 500;
 		this.alto =500;
 		this.friccion=0.9;
-		this.gravedad=3;
+		this.gravedad=2;
 		//---------------------por ahora aquí, luego desde un JSON ----------
 		this.columnas = 31;
 		this.filas = 31;
@@ -60,6 +60,7 @@ class Mapa{
 	}
 	
 	refrescar(){
+	
 		this.jugador.velY += this.gravedad;
 		this.jugador.refrescar();
 		
@@ -67,7 +68,7 @@ class Mapa{
 		this.bandera.refrescar();
 		
 		this.jugador.velX *= this.friccion;
-		this.jugador.velY *= this.friccion;
+		//this.jugador.velY *= this.friccion;
 
 		this.manejarColisiones(this.jugador);
 		this.manejarColisiones(this.bandera);
@@ -153,8 +154,9 @@ Mapa.ObjetoMovil = class extends Mapa.Objeto{
 Mapa.Jugador = class extends Mapa.ObjetoMovil{
 	constructor(x,y,ancho,alto,vida){
 		super(x,y,ancho,alto);
-		this.pasoVelX=0.7;
+		this.pasoVelX=0.6;
 		this.saltando = true;
+		this.piso = false;
 		
 		this.vida=vida;
 		this.tieneBandera = false;
@@ -164,7 +166,7 @@ Mapa.Jugador = class extends Mapa.ObjetoMovil{
 	saltar(){
 		if(!this.saltando){
 			this.saltando = true;
-			this.velY -= 30;
+			this.velY -= 20;
 		}
 	}
 	
@@ -180,25 +182,14 @@ Mapa.Jugador = class extends Mapa.ObjetoMovil{
 		if(this.tieneBandera){
 			this.puntos++;		
 		}
-		console.log(this.xPrevFrame+""+this.yPrevFrame)
-		console.log(this.x+""+this.y)
 		if(this.xPrevFrame !=this.x || this.yPrevFrame!=this.y-3){
-			console.log();
-			partidaModulo.mover(this.x,this.y-3);
+			partidaModulo.mover(Math.floor(this.x),Math.floor(this.y)-3);
 		}
 			
 		
 	}
 }
 
-Mapa.Poder = class extends Mapa.ObjetoMovil{
-	constructor(x,y,ancho,alto,vida){
-		super(x,y,ancho,alto);
-		this.activo = false; 
-	}
-	
-
-}	
 Mapa.Collider = class {
 	
 	constructor(){
@@ -226,7 +217,6 @@ Mapa.Collider = class {
 			jugador.velY = 0;
 			jugador.saltando = false;
 		}
-	
 	}
 	
 }

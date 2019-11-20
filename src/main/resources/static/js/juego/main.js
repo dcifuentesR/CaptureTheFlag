@@ -44,7 +44,7 @@ var main = (function(){
 	var controlador = new Controlador();
 	var vista = new Vista(document.querySelector("canvas"));
 	var mapa = new Mapa();
-	var motor = new Motor(1000/30,renderizarJugador,refrescar);
+	var motor = new Motor(1000/60,renderizarJugador,refrescar);
 	
 	return {
 		init:function(){

@@ -9,9 +9,8 @@ import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
 
 import edu.eci.arsw.CaptureTheFlag.model.Cuenta;
-import edu.eci.arsw.CaptureTheFlag.model.Datos;
 import edu.eci.arsw.CaptureTheFlag.model.Sala;
-import edu.eci.arsw.CaptureTheFlag.model.Tupla;
+
 
 @Controller
 public class CaptureFlagSocketController {
@@ -25,17 +24,11 @@ public class CaptureFlagSocketController {
     @MessageMapping("/createsala.{nombre}")
     public void createSalasEvent(Cuenta cuenta, @DestinationVariable String nombre) throws Exception {
         if (!salas.containsKey(nombre)) {
-            ConcurrentHashMap<String, Tupla> temp = new ConcurrentHashMap<>();
-            Tupla tuple = new Tupla(cuenta, new Datos(cuenta.getNick()));
-            temp.put(cuenta.getNick(), tuple);
-            Sala salaTemp = new Sala(nombre);
-            salaTemp.setMiembros(temp);
-            salas.put(nombre, salaTemp);
+            Sala sala = new Sala(nombre);
+            sala.addMiembro(cuenta);
+            salas.put(nombre, sala);
         }
-        // System.out.println(salas.keys().toString());
-        /*
-         * for (String s : salas.keySet()) { System.out.println("sala " + s); }
-         */
+        //System.out.println(salas.values().toString());
         msgt.convertAndSend("/topic/joinsala." + nombre, salas.get(nombre));
         msgt.convertAndSend("/topic/showsala", salas.values());
     }
@@ -43,7 +36,7 @@ public class CaptureFlagSocketController {
     @MessageMapping("/joinsala.{nombre}")
     public void joinSalasEvent(Cuenta cuenta, @DestinationVariable String nombre) {
         Sala temp = salas.get(nombre);
-        temp.addMiembro(cuenta, new Datos(cuenta.getNick()));
+        temp.addMiembro(cuenta);
         msgt.convertAndSend("/topic/joinsala." + nombre, salas.get(nombre).getMiembrosName());
     }
 

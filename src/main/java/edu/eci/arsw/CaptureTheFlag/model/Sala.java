@@ -7,7 +7,9 @@ import java.util.concurrent.ConcurrentHashMap;
 public class Sala {
 
     // ConcurrentHashMap<Cuenta, Datos> miembros = new ConcurrentHashMap<>();
-    ConcurrentHashMap<String, Tupla> miembros = new ConcurrentHashMap<>();
+    //ConcurrentHashMap<String, Tupla> miembros = new ConcurrentHashMap<>();
+    private ConcurrentHashMap<String, Datos> datos = new ConcurrentHashMap<>();
+    private ConcurrentHashMap<String, Cuenta> miembros = new ConcurrentHashMap<>();
     String nombre;
 
     public Sala() {
@@ -17,33 +19,23 @@ public class Sala {
         this.nombre = nombre;
     }
 
-    public void addMiembro(Cuenta miembro, Datos datos) {
-        Tupla temp = new Tupla(miembro, datos);
-        miembros.put(miembro.getNick(), temp);
-    }
-
-    public ConcurrentHashMap<String, Tupla> getMiembros() {
-        return miembros;
+    public void addMiembro(Cuenta miembro) {
+        System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+        System.out.println(!miembros.containsKey(miembro.getNick()));
+        if (!miembros.containsKey(miembro.getNick())){
+            miembros.put(miembro.getNick(), miembro);
+            datos.put(miembro.getNick(), new Datos(miembro.getNick()));
+        }
     }
 
     public List<Datos> getDatos() {
-        List<Datos> temp2 = new ArrayList<Datos>();
-        for (Tupla t : miembros.values()) {
-            temp2.add(t.getDatos());
-        }
-        return temp2;
-    }
-
-    public List<Cuenta> getMiembrosName() {
-        List<Cuenta> temp = new ArrayList<Cuenta>();
-        for (Tupla t : miembros.values()) {
-            temp.add(t.getCuenta());
-        }
+        List<Datos> temp = new ArrayList<Datos>(datos.values());
         return temp;
     }
 
-    public void setMiembros(ConcurrentHashMap<String, Tupla> miembros) {
-        this.miembros = miembros;
+    public List<Cuenta> getMiembrosName() {
+        List<Cuenta> temp = new ArrayList<Cuenta>(miembros.values());
+        return temp;
     }
 
     @Override
@@ -60,7 +52,7 @@ public class Sala {
     }
 
     public void movimientoPJ(String nick, double x, double y) {
-        miembros.get(nick).getDatos().setXY(x, y);
+        datos.get(nick).setXY(x, y);
     }
 
 }

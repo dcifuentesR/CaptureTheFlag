@@ -64,7 +64,7 @@ var salasModule = (function() {
           sala.nombre +
           "</td>" +
           "<td>" +
-          Object.keys(sala.miembros).length +
+          Object.keys(sala.miembrosName).length +
           "</td>" +
           "<td>" +
           "<a class='btn btn-primary' onclick='salasModule.joinSala(\"" +

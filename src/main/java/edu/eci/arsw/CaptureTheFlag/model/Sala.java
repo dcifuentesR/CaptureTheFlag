@@ -6,7 +6,8 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class Sala {
 
-    ConcurrentHashMap<Cuenta, Datos> miembros = new ConcurrentHashMap<>();
+    // ConcurrentHashMap<Cuenta, Datos> miembros = new ConcurrentHashMap<>();
+    ConcurrentHashMap<String, Tupla> miembros = new ConcurrentHashMap<>();
     String nombre;
 
     public Sala() {
@@ -17,24 +18,31 @@ public class Sala {
     }
 
     public void addMiembro(Cuenta miembro, Datos datos) {
-        miembros.put(miembro, datos);
+        Tupla temp = new Tupla(miembro, datos);
+        miembros.put(miembro.getNick(), temp);
     }
 
-    public ConcurrentHashMap<Cuenta, Datos> getMiembros() {
+    public ConcurrentHashMap<String, Tupla> getMiembros() {
         return miembros;
     }
 
     public List<Datos> getDatos() {
-        List<Datos> temp = new ArrayList<Datos>(miembros.values());
-        return temp;
+        List<Datos> temp2 = new ArrayList<Datos>();
+        for (Tupla t : miembros.values()) {
+            temp2.add(t.getDatos());
+        }
+        return temp2;
     }
 
     public List<Cuenta> getMiembrosName() {
-        List<Cuenta> temp = new ArrayList<Cuenta>(miembros.keySet());
+        List<Cuenta> temp = new ArrayList<Cuenta>();
+        for (Tupla t : miembros.values()) {
+            temp.add(t.getCuenta());
+        }
         return temp;
     }
 
-    public void setMiembros(ConcurrentHashMap<Cuenta, Datos> miembros) {
+    public void setMiembros(ConcurrentHashMap<String, Tupla> miembros) {
         this.miembros = miembros;
     }
 
@@ -52,11 +60,7 @@ public class Sala {
     }
 
     public void movimientoPJ(String nick, double x, double y) {
-        for (Cuenta c : miembros.keySet()) {
-            if (c.getNick().equals(nick)) {
-                miembros.get(c).setXY(x, y);
-            }
-        }
+        miembros.get(nick).getDatos().setXY(x, y);
     }
 
 }

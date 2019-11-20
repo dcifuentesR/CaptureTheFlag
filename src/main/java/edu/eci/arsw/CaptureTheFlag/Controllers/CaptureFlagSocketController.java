@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import edu.eci.arsw.CaptureTheFlag.model.Cuenta;
 import edu.eci.arsw.CaptureTheFlag.model.Datos;
 import edu.eci.arsw.CaptureTheFlag.model.Sala;
+import edu.eci.arsw.CaptureTheFlag.model.Tupla;
 
 @Controller
 public class CaptureFlagSocketController {
@@ -24,16 +25,17 @@ public class CaptureFlagSocketController {
     @MessageMapping("/createsala.{nombre}")
     public void createSalasEvent(Cuenta cuenta, @DestinationVariable String nombre) throws Exception {
         if (!salas.containsKey(nombre)) {
-            ConcurrentHashMap<Cuenta, Datos> temp = new ConcurrentHashMap<>();
-            temp.put(cuenta, new Datos(cuenta.getNick()));
+            ConcurrentHashMap<String, Tupla> temp = new ConcurrentHashMap<>();
+            Tupla tuple = new Tupla(cuenta, new Datos(cuenta.getNick()));
+            temp.put(cuenta.getNick(), tuple);
             Sala salaTemp = new Sala(nombre);
             salaTemp.setMiembros(temp);
             salas.put(nombre, salaTemp);
         }
-        //System.out.println(salas.keys().toString());
-        /*for (String s : salas.keySet()) {
-            System.out.println("sala " + s);
-        }*/
+        // System.out.println(salas.keys().toString());
+        /*
+         * for (String s : salas.keySet()) { System.out.println("sala " + s); }
+         */
         msgt.convertAndSend("/topic/joinsala." + nombre, salas.get(nombre));
         msgt.convertAndSend("/topic/showsala", salas.values());
     }
@@ -64,11 +66,12 @@ public class CaptureFlagSocketController {
         String nick = valores[0];
         double x = Double.parseDouble(valores[1]);
         double y = Double.parseDouble(valores[2]);
-        //System.out.println(nick + " " + x + " " + y);
-        
-        //System.out.print(salas.get(nombre));
+        // System.out.println(nick + " " + x + " " + y);
+
+        // System.out.print(salas.get(nombre));
         salas.get(nombre).movimientoPJ(nick, x, y);
-        //msgt.convertAndSend("/topic/salaDatos." + nombre, salas.get(nombre).getDatos());
+        // msgt.convertAndSend("/topic/salaDatos." + nombre,
+        // salas.get(nombre).getDatos());
 
     }
 
@@ -77,7 +80,7 @@ public class CaptureFlagSocketController {
         msgt.convertAndSend("/topic/salaDatos." + nombre, salas.get(nombre).getDatos());
 
     }
-    
+
     @MessageMapping("/salaDatosRefrescar.{nombre}")
     public void getDatosRefrescar(@DestinationVariable String nombre) {
         msgt.convertAndSend("/topic/salaDatos." + nombre, salas.get(nombre).getDatos());

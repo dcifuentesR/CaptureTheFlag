@@ -108,7 +108,7 @@ public class CaptureFlagSocketController {
 
     @MessageMapping("/salaBandera.{nombre}")
     public void cogerBandera(String nick, @DestinationVariable String nombre) {
-
+        salas.get(nombre).banderaPersonaje(nick);
     }
 
 }

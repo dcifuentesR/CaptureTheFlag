@@ -11,6 +11,8 @@ public class Datos {
     private double x;
     private double y;
     private String nick;
+    private boolean bandera = false;
+    private boolean bG;
 
     public Datos() {
     }
@@ -40,6 +42,12 @@ public class Datos {
     }
 
     public void setVida(int vida) {
+        if (vida <= 0) {
+            if (bandera) {
+                quitarBandera();
+            }
+            vida = 100;
+        }
         this.vida = vida;
     }
 
@@ -49,12 +57,6 @@ public class Datos {
 
     public void setPuntos(int puntos) {
         this.puntos = puntos;
-    }
-
-    @Override
-    public String toString() {
-        return "Datos{kills=" + kills + ", muertes=" + muertes + ", nick=" + nick + ", puntos=" + puntos + ", vida="
-                + vida + ", x=" + x + ", y=" + y + "}";
     }
 
     public double getX() {
@@ -84,6 +86,43 @@ public class Datos {
 
     public void setNick(String nick) {
         this.nick = nick;
+    }
+
+    @Override
+    public String toString() {
+        return "Datos {bandera=" + bandera + ", kills=" + kills + ", muertes=" + muertes + ", nick=" + nick
+                + ", puntos=" + puntos + ", vida=" + vida + ", x=" + x + ", y=" + y + "}";
+    }
+
+    public boolean isBandera() {
+        return bandera;
+    }
+
+    public void cogerBandera() {
+        if (!bG) {
+            bandera = true;
+            bG = true;
+        }
+    }
+
+    public void quitarBandera() {
+        if (bandera) {
+            bandera = false;
+            bG = false;
+        }
+    }
+
+    public void setBandera(boolean bandera) {
+        this.bandera = bandera;
+
+    }
+
+    public boolean isbG() {
+        return bG;
+    }
+
+    public void setbG(boolean bG) {
+        this.bG = bG;
     }
 
 }

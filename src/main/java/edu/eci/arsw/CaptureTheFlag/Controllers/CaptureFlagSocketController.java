@@ -104,4 +104,11 @@ public class CaptureFlagSocketController {
         double y = Double.parseDouble(valores[2]);
     }
 
+    // bandera
+
+    @MessageMapping("/salaBandera.{nombre}")
+    public void cogerBandera(String nick, @DestinationVariable String nombre) {
+
+    }
+
 }

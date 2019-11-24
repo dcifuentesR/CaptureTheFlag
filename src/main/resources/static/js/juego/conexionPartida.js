@@ -77,6 +77,9 @@ var partidaModulo = (function() {
       }
       if (theBalaObjects !== undefined) callback(theObject);
     },
+    cogerBandera: function() {
+      stompClient.send("/app/salaBandera." + _nameSala, {}, _nick);
+    },
     disconnect: function() {
       conexion = false;
       if (stompClient !== null) {

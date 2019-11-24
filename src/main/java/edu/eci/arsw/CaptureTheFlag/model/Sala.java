@@ -12,7 +12,8 @@ public class Sala {
     private ConcurrentHashMap<String, Cuenta> miembros = new ConcurrentHashMap<>();
     private ConcurrentHashMap<String, Bala> balas = new ConcurrentHashMap<>();
 
-    String nombre;
+    private String nombre;
+    private boolean bandera = false;
 
     public Sala() {
     }
@@ -24,7 +25,9 @@ public class Sala {
     public void addMiembro(Cuenta miembro) {
         if (!miembros.containsKey(miembro.getNick())) {
             miembros.put(miembro.getNick(), miembro);
-            datos.put(miembro.getNick(), new Datos(miembro.getNick()));
+            Datos temp = new Datos(miembro.getNick());
+            temp.setbG(bandera);
+            datos.put(miembro.getNick(), temp);
         }
     }
 
@@ -64,6 +67,13 @@ public class Sala {
     public List<Bala> getBalas() {
         List<Bala> temp = new ArrayList<Bala>(balas.values());
         return temp;
+    }
+
+    /*-----------------bandera --------------*/
+    public void banderaPersonaje(String nick) {
+        if (!bandera) {
+            datos.get(nick).setBandera(true);
+        }
     }
 
 }

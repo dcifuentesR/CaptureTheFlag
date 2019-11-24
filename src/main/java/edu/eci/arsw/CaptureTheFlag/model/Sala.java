@@ -7,9 +7,11 @@ import java.util.concurrent.ConcurrentHashMap;
 public class Sala {
 
     // ConcurrentHashMap<Cuenta, Datos> miembros = new ConcurrentHashMap<>();
-    //ConcurrentHashMap<String, Tupla> miembros = new ConcurrentHashMap<>();
+    // ConcurrentHashMap<String, Tupla> miembros = new ConcurrentHashMap<>();
     private ConcurrentHashMap<String, Datos> datos = new ConcurrentHashMap<>();
     private ConcurrentHashMap<String, Cuenta> miembros = new ConcurrentHashMap<>();
+    private ConcurrentHashMap<String, Bala> balas = new ConcurrentHashMap<>();
+
     String nombre;
 
     public Sala() {
@@ -20,9 +22,7 @@ public class Sala {
     }
 
     public void addMiembro(Cuenta miembro) {
-        System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
-        System.out.println(!miembros.containsKey(miembro.getNick()));
-        if (!miembros.containsKey(miembro.getNick())){
+        if (!miembros.containsKey(miembro.getNick())) {
             miembros.put(miembro.getNick(), miembro);
             datos.put(miembro.getNick(), new Datos(miembro.getNick()));
         }
@@ -53,6 +53,17 @@ public class Sala {
 
     public void movimientoPJ(String nick, double x, double y) {
         datos.get(nick).setXY(x, y);
+    }
+
+    /*-----------------balas --------------*/
+    public void createBala(String key, String poder, double x, double y, int dano) {
+        Bala bala = new Bala(poder, x, y, dano);
+        balas.put(key, bala);
+    }
+
+    public List<Bala> getBalas() {
+        List<Bala> temp = new ArrayList<Bala>(balas.values());
+        return temp;
     }
 
 }

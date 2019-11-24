@@ -11,7 +11,6 @@ import org.springframework.stereotype.Controller;
 import edu.eci.arsw.CaptureTheFlag.model.Cuenta;
 import edu.eci.arsw.CaptureTheFlag.model.Sala;
 
-
 @Controller
 public class CaptureFlagSocketController {
     @Autowired
@@ -28,7 +27,7 @@ public class CaptureFlagSocketController {
             sala.addMiembro(cuenta);
             salas.put(nombre, sala);
         }
-        //System.out.println(salas.values().toString());
+        // System.out.println(salas.values().toString());
         msgt.convertAndSend("/topic/joinsala." + nombre, salas.get(nombre));
         msgt.convertAndSend("/topic/showsala", salas.values());
     }
@@ -51,7 +50,7 @@ public class CaptureFlagSocketController {
     }
 
     // ------------------ controladores de la partida-----------------------------//
-
+    // jugador
     @MessageMapping("/salaMovimiento.{nombre}")
     public void movimientos(String val, @DestinationVariable String nombre) {
         String temp = val;
@@ -78,6 +77,31 @@ public class CaptureFlagSocketController {
     public void getDatosRefrescar(@DestinationVariable String nombre) {
         msgt.convertAndSend("/topic/salaDatos." + nombre, salas.get(nombre).getDatos());
 
+    }
+
+    // Bala
+    @MessageMapping("/createBalas.{nombre}")
+    public void createBala(String valor, @DestinationVariable String nombre) {
+        String[] valores = valor.split(";");
+        String key = valores[0];
+        String poder = valores[1];
+        double x = Double.parseDouble(valores[2]);
+        double y = Double.parseDouble(valores[3]);
+        int dano = Integer.parseInt(valores[4]);
+        salas.get(nombre).createBala(key, poder, x, y, dano);
+    }
+
+    @MessageMapping("/salaBalas.{nombre}")
+    public void getBalas(@DestinationVariable String nombre) {
+        msgt.convertAndSend("/topic/salaBalas." + nombre, salas.get(nombre).getBalas());
+    }
+
+    @MessageMapping("/movimientoBalas.{nombre}")
+    public void movimientoBalas(String valor, @DestinationVariable String nombre) {
+        String[] valores = valor.split(";");
+        String key = valores[0];
+        double x = Double.parseDouble(valores[1]);
+        double y = Double.parseDouble(valores[2]);
     }
 
 }

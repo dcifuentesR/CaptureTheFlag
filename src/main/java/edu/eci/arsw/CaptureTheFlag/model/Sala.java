@@ -65,7 +65,7 @@ public class Sala {
 
     /*-----------------balas --------------*/
     public void createBala(String key, String poder, double x, double y, int dano) {
-        Bala bala = new Bala(poder, x, y, dano);
+        Bala bala = new Bala(key, poder, x, y, dano);
         balas.put(key, bala);
     }
 

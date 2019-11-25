@@ -20,11 +20,11 @@ var partidaModulo = (function() {
     var socket = new SockJS("/stompendpoint");
     stompClient = Stomp.over(socket);
     stompClient.connect({}, function(frame) {
-      console.log("Connected: " + frame);
+      //console.log("Connected: " + frame);
       stompClient.subscribe("/topic/salaDatos." + _nameSala, function(
         eventbody
       ) {
-        console.log(eventbody);
+        //console.log(eventbody);
         theObject = JSON.parse(eventbody.body);
         //metodos
         //pintarInfoJuego(theObject);
@@ -33,7 +33,7 @@ var partidaModulo = (function() {
       stompClient.subscribe("/topic/salaBalas." + _nameSala, function(
         eventbody
       ) {
-        console.log(eventbody);
+        //console.log(eventbody);
         //metodos
         theBalaObjects = JSON.parse(eventbody.body);
       });
@@ -41,7 +41,7 @@ var partidaModulo = (function() {
       stompClient.subscribe("/topic/salaBandera." + _nameSala, function(
         eventbody
       ) {
-        console.log(eventbody);
+        //console.log(eventbody);
         //metodos
         theBanderaObjects = JSON.parse(eventbody.body);
       });
@@ -66,7 +66,7 @@ var partidaModulo = (function() {
       if (stompClient !== null) {
         stompClient.disconnect();
       }
-      console.log("Disconnected");
+      //console.log("Disconnected");
     },
     //-------------------jugador
     mover: function(x, y) {
@@ -92,7 +92,7 @@ var partidaModulo = (function() {
     },
     //-------------------bala
     crearDisparo: function(id, poder, x, y, dano) {
-      var key = _nick + id;
+      var key = _nick + "," + id;
       _crearBala(key, poder, x, y, dano);
     },
     getBalas: function(callback) {

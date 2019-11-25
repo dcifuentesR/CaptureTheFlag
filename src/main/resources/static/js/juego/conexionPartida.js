@@ -42,6 +42,7 @@ var partidaModulo = (function() {
   };
 
   return {
+    //conexion
     init: function() {
       partidaModulo.disconnect();
       //console.log("sala " + _nameSala);
@@ -51,6 +52,14 @@ var partidaModulo = (function() {
       connectAndSubscribe();
       main.init();
     },
+    disconnect: function() {
+      conexion = false;
+      if (stompClient !== null) {
+        stompClient.disconnect();
+      }
+      console.log("Disconnected");
+    },
+    //-------------------jugador
     mover: function(x, y) {
       if (conexion != false) {
         // console.log("mover x" + x + " y " + y);
@@ -67,6 +76,12 @@ var partidaModulo = (function() {
       }
       if (theObject !== undefined) callback(theObject);
     },
+
+    setVidaPJ: function(vida) {
+      var valores = _nick + ";" + vida;
+      stompClient.send("/app/vidaPj." + _nameSala, {}, valores);
+    },
+    //-------------------bala
     crearDisparo: function(id, poder, x, y, dano) {
       var key = _nick + id;
       _crearBala(key, poder, x, y, dano);
@@ -77,15 +92,17 @@ var partidaModulo = (function() {
       }
       if (theBalaObjects !== undefined) callback(theObject);
     },
+    moverBala: function(id, x, y) {
+      var valores = _nick + id + ";" + x + ";" + y;
+      stompClient.send("/app/movimientoBalas." + _nameSala, {}, valores);
+    },
+    colisionBala: function(id) {
+      var key = _nick + id;
+      stompClient.send("/app/colisionBala." + _nameSala, {}, key);
+    },
+    //-------------------bandera
     cogerBandera: function() {
       stompClient.send("/app/salaBandera." + _nameSala, {}, _nick);
-    },
-    disconnect: function() {
-      conexion = false;
-      if (stompClient !== null) {
-        stompClient.disconnect();
-      }
-      console.log("Disconnected");
     }
   };
 })();

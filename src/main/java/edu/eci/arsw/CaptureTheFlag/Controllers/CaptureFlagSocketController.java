@@ -74,14 +74,8 @@ public class CaptureFlagSocketController {
 
     }
 
-    @MessageMapping("/salaDatosRefrescar.{nombre}")
-    public void getDatosRefrescar(@DestinationVariable String nombre) {
-        msgt.convertAndSend("/topic/salaDatos." + nombre, salas.get(nombre).getDatos());
-
-    }
-
     @MessageMapping("/vidaPj.{nombre}")
-    public void quitarVidaPersonaje(String valor, @DestinationVariable String nombre) {
+    public void setVidaPersonaje(String valor, @DestinationVariable String nombre) {
         String[] valores = valor.split(";");
         String nick = valores[0];
         int vida = Integer.parseInt(valores[1]);

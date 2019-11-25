@@ -107,11 +107,11 @@ var partidaModulo = (function() {
       if (theBalaObjects !== undefined) callback(theBalaObjects);
     },
     moverBala: function(id, x, y) {
-      var valores = _nick + id + ";" + x + ";" + y;
+      var valores = _nick + "," + id + ";" + x + ";" + y;
       stompClient.send("/app/movimientoBalas." + _nameSala, {}, valores);
     },
     colisionBala: function(id) {
-      var key = _nick + id;
+      var key = _nick + "," + id;
       stompClient.send("/app/colisionBala." + _nameSala, {}, key);
     },
     //-------------------bandera

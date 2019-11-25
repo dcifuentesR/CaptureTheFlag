@@ -12,7 +12,7 @@ public class Datos {
     private double y;
     private String nick;
     private boolean bandera = false;
-    private boolean bG;
+    private Bandera bG;
 
     public Datos() {
     }
@@ -80,6 +80,9 @@ public class Datos {
     public void setXY(double x, double y) {
         this.x = x;
         this.y = y;
+        if (bandera) {
+            bG.setXY(x, y);
+        }
     }
 
     public String getNick() {
@@ -101,16 +104,17 @@ public class Datos {
     }
 
     public void cogerBandera() {
-        if (!bG) {
+        if (!bG.isTomada()) {
             bandera = true;
-            bG = true;
+            bG.setTomada(true);
         }
     }
 
     public void quitarBandera() {
         if (bandera) {
             bandera = false;
-            bG = false;
+            bG.setTomada(false);
+            bG.setXY(x, y);
         }
     }
 
@@ -119,11 +123,11 @@ public class Datos {
 
     }
 
-    public boolean isbG() {
+    public Bandera isbG() {
         return bG;
     }
 
-    public void setbG(boolean bG) {
+    public void setbG(Bandera bG) {
         this.bG = bG;
     }
 

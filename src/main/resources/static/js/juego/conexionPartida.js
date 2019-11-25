@@ -5,6 +5,7 @@ var partidaModulo = (function() {
   var conexion = false;
   var theObject = undefined;
   var theBalaObjects = undefined;
+  var theBanderaObjects = undefined;
 
   /*var pintarInfoJuego = function(JSONObject){
 	  main.renderizar(JSONObject);
@@ -35,6 +36,14 @@ var partidaModulo = (function() {
         console.log(eventbody);
         //metodos
         theBalaObjects = JSON.parse(eventbody.body);
+      });
+
+      stompClient.subscribe("/topic/salaBandera." + _nameSala, function(
+        eventbody
+      ) {
+        console.log(eventbody);
+        //metodos
+        theBanderaObjects = JSON.parse(eventbody.body);
       });
 
       conexion = true;
@@ -90,7 +99,7 @@ var partidaModulo = (function() {
       if (conexion != false) {
         stompClient.send("/app/salaBalas." + _nameSala, {}, " ");
       }
-      if (theBalaObjects !== undefined) callback(theObject);
+      if (theBalaObjects !== undefined) callback(theBalaObjects);
     },
     moverBala: function(id, x, y) {
       var valores = _nick + id + ";" + x + ";" + y;
@@ -102,7 +111,13 @@ var partidaModulo = (function() {
     },
     //-------------------bandera
     cogerBandera: function() {
-      stompClient.send("/app/salaBandera." + _nameSala, {}, _nick);
+      stompClient.send("/app/cogerBandera." + _nameSala, {}, _nick);
+    },
+    getBandera: function() {
+      if (conexion != false) {
+        stompClient.send("/app/salaBandera." + _nameSala, {}, " ");
+      }
+      if (theBanderaObjects !== undefined) callback(theBanderaObjects);
     }
   };
 })();

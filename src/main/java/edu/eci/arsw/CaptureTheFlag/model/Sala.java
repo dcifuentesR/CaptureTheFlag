@@ -13,7 +13,7 @@ public class Sala {
     private ConcurrentHashMap<String, Bala> balas = new ConcurrentHashMap<>();
 
     private String nombre;
-    private boolean bandera = false;
+    private Bandera bandera = new Bandera();
 
     public Sala() {
     }
@@ -84,9 +84,13 @@ public class Sala {
 
     /*-----------------bandera --------------*/
     public void banderaPersonaje(String nick) {
-        if (!bandera) {
-            datos.get(nick).setBandera(true);
+        if (!bandera.isTomada()) {
+            datos.get(nick).cogerBandera();
         }
+    }
+
+    public Bandera getBandera() {
+        return bandera;
     }
 
 }

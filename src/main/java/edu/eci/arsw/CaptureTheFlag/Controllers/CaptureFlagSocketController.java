@@ -114,8 +114,12 @@ public class CaptureFlagSocketController {
     }
 
     // bandera
-
     @MessageMapping("/salaBandera.{nombre}")
+    public void getBandera(@DestinationVariable String nombre) {
+        msgt.convertAndSend("/topic/salaBandera." + nombre, salas.get(nombre).getBandera());
+    }
+
+    @MessageMapping("/cogerBandera.{nombre}")
     public void cogerBandera(String nick, @DestinationVariable String nombre) {
         salas.get(nombre).banderaPersonaje(nick);
     }

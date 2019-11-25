@@ -4,8 +4,6 @@ class Controlador {
 		this.izq = new EntradaTeclado();
 		this.der =new EntradaTeclado();
 		this.arriba=new EntradaTeclado();
-		this.x = 0;
-		this.y =
 		this.estadoTecla = function(tipo,tecla) {
 			var presionada = (tipo == "keydown") ? true :false;
 			switch(tecla){
@@ -15,13 +13,19 @@ class Controlador {
 			}
 		}
 
-		this.disparo = function(event){
-			var canvas = document.getElementById("myCanvas"),
-			context = canvas.getContext("2d");
+		this.disparar = function(event,callback){
+			var canvas = document.getElementById("canvas")
+			var context = canvas.getContext("2d");
 			var offsetleft = parseInt(getOffset(canvas).left, 10);
 			var offsettop = parseInt(getOffset(canvas).top, 10);
-			var x = event.pageX - offsetleft;
-			var y = event.pageY - offsettop;
+			var rect = canvas.getBoundingClientRect();
+		 	var x =(event.clientX - rect.left) / (rect.right - rect.left) * canvas.width;
+			var y =(event.clientY - rect.top) / (rect.bottom - rect.top) * canvas.height
+			//var x = event.pageX - canvas.getBoundingClientRect().left + 8;
+			//var y = event.pageY - canvas.getBoundingClientRect().top + 8;
+			//console.log("window" + window.scrollY);
+			console.log("canvas " + x,y);
+			callback(x,y);
 		}
 
 		var getOffset = function (obj) {
@@ -51,5 +55,3 @@ class EntradaTeclado {
 				this.estaPresionada=presionada;
 		}
 }
-	
-	

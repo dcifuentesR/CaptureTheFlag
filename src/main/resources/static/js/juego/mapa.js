@@ -77,6 +77,19 @@ class Mapa{
 		this.bandera.refrescar();
 		this.manejarColisiones(this.bandera);
 		
+		console.log("size "+ Object.keys(this.jugador.poder).length);
+		
+		if (Object.keys(this.jugador.poder).length > 0){
+			for (var key in this.jugador.poder) {
+				if (this.jugador.poder[key].fin == false){
+					delete this.jugador.poder[key];
+				}
+				else{
+					this.jugador.poder[key].refrescar();
+				}
+			}
+		}
+		
 		partidaModulo.moverBandera(this.bandera.x,this.bandera.y);
 		
 		if(this.bandera.estaColisionando(this.jugador))
@@ -173,7 +186,7 @@ Mapa.Jugador = class extends Mapa.ObjetoMovil{
 		this.pasoVelX=0.6;
 		this.saltando = true;
 		this.piso = false;
-		
+		this.poder = {};	
 		this.vida=vida;
 		this.tieneBandera = false;
 		this.puntos=0;
@@ -201,8 +214,75 @@ Mapa.Jugador = class extends Mapa.ObjetoMovil{
 		if(this.xPrevFrame !=this.x || this.yPrevFrame!=this.y-3){
 			partidaModulo.mover(Math.floor(this.x),Math.floor(this.y)-3);
 		}
-			
-		
+	}
+	manejarColisiones(poder){
+		var nick = poder.id.split(",")[0];
+		if (appModule.readCookie() != nick){
+			if (Math.abs(poder.x - this.x) <0.05  && Math.abs(poder.y-this.y) < 0.05){
+				this.vida = vida - poder.damage;
+
+			}
+		}
+	}
+	
+}
+
+
+Mapa.Poder = class extends Mapa.ObjetoMovil{
+	constructor(x,y,xf,yf,ancho,alto,fin,id){
+		super(x,y,ancho,alto)
+		this.activo = false;
+		this.drecorrida = 0;
+		this.damage = 0; 
+		this.xf = xf;
+		this.yf = yf;
+		this.m = 0; 
+		this.b = 0;
+		this.tipo = "";
+		this.id = id;   
+		this.fin = fin; 
+	}
+
+	construirRecta(){
+		this.m = (this.yf-this.y)/(this.xf-this.x); 
+		this.b = (this.x * -1 * this.m) + this.y;
+	}
+}
+
+Mapa.Poder.Disparo = class extends Mapa.Poder{
+	constructor(x,y,xf,yf,ancho,alto,fin,id){
+		super(x,y,xf,yf,ancho,alto,fin,id)
+		this.damage = 20; 
+		this.tipo = "Disparo";
+		this.construirRecta();
+	}
+
+	refrescar(){
+		//Este if revisa que el poder haya llegado a su destino. 
+		if (Math.abs(this.x-this.xf) > 0.09 || Math.abs(this.y-this.yf) > 0.09){
+			if (this.x > this.xf) {
+				this.x--;
+				this.y = this.m*this.x+this.b;
+				partidaModulo.moverBala(this.id,this.x,this.y);
+				//console.log("x = "+ x + " y = "+ y); e.getTime()
+			  }
+			  else if (this.x < this.xf){
+				this.x++;
+				this.y = this.m*this.x+this.b;
+				partidaModulo.moverBala(this.id,this.x,this.y);
+				//console.log("x = "+ x + " y = "+ y);  e.getTime()
+			  }
+			  else{ 
+				if (this.y < this.yf) this.y++;
+				else this.y--;
+				partidaModulo.moverBala(this.id,this.x,this.y);
+				//console.log("x = "+ x + " y = "+ y)  e.getTime()
+			  }
+		}
+		else {
+			partidaModulo.colisionBala(this.id);
+			this.fin = false;
+		}	 
 	}
 }
 

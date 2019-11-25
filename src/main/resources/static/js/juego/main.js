@@ -5,12 +5,24 @@ var main = (function(){
 	}
 	
 	var disparar=function(){
-		controlador.disparar(event)
+		controlador.disparar(event,activarPoder)
 	}
 
 	var redimensionar = function(){
 		vista.redimensionar(document.documentElement.clientWidth - 32, document.documentElement.clientHeight - 32,mapa.alto/mapa.ancho);
 		vista.renderizar();
+	}
+	
+	var activarPoder=function(xf,yf){
+		var e = new Date();
+		console.log("disparo");
+		var key = e.getTime();
+		mapa.jugador.poder[key] = new Mapa.Poder.Disparo(mapa.jugador.x,
+			mapa.jugador.y,xf,yf,16,16,true,key);
+		//mapa.jugador.poder[last].construirRecta();
+		partidaModulo.crearDisparo(mapa.jugador.poder[key].id,mapa.jugador.poder[key].tipo
+		,mapa.jugador.poder[key].x,mapa.jugador.poder[key].y,mapa.jugador.poder[key].damage);
+		console.log("crear disparo");		
 	}
 	
 	var renderizarJugador = function(timeStamp){
@@ -30,6 +42,13 @@ var main = (function(){
 		partidaModulo.getBandera(function(estadoBandera){
 			vista.dibujarJugador(estadoBandera["x"],estadoBandera["y"],14,14,"#29ff34");
 			vista.renderizar();
+		});
+		partidaModulo.getBalas(function(estadoDisparos){
+			estadoDisparos.forEach(function(elementoActual){	
+				console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+				vista.dibujarPoder(elementoActual);
+			});
+			vista.renderizar();			
 		});
 		
 		

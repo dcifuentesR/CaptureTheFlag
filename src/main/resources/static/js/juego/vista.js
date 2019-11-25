@@ -18,10 +18,20 @@ class Vista{
 			}
 			
 		};
+
 		this.dibujarJugador = function(x,y,ancho,alto,color){
 			this.buffer.fillStyle = color;
 			this.buffer.fillRect(Math.round(x),Math.round(y),ancho,alto);
 		};
+
+		this.dibujarPoder = function(poder){
+			console.log("entra a vista");
+			console.log(poder.x + " "+ poder.y)
+			var poderI = new Image(); 
+			poderI.src = "img/disparo.png";
+			this.buffer.drawImage(poderI,poder.x,poder.y,16,16);	
+		}
+
 		this.llenarCanvas = function(color){
 			this.buffer.fillStyle = color;
 			this.buffer.fillRect(0,0,this.buffer.canvas.width,this.buffer.canvas.height);

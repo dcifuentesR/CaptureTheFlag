@@ -119,6 +119,8 @@ public class CaptureFlagSocketController {
     @MessageMapping("/colisionBala.{nombre}")
     public void colisionBala(String bala, @DestinationVariable String nombre) {
         salas.get(nombre).colisionBala(bala);
+        msgt.convertAndSend("/topic/eliBalaLocal." + nombre, salas.get(nombre).getBala(bala));
+        
     }
 
     // bandera

@@ -78,6 +78,10 @@ public class Sala {
         return temp;
     }
 
+    public Bala getBala(String key){
+        return balas.get(key);
+    }
+
     public void moverBala(String key, double x, double y) {
         balas.get(key).moverBala(x, y);
     }

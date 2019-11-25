@@ -6,6 +6,7 @@ var partidaModulo = (function() {
   var theObject = undefined;
   var theBalaObjects = undefined;
   var theBanderaObjects = undefined;
+  var _callback;
 
   /*var pintarInfoJuego = function(JSONObject){
 	  main.renderizar(JSONObject);
@@ -33,9 +34,22 @@ var partidaModulo = (function() {
       stompClient.subscribe("/topic/salaBalas." + _nameSala, function(
         eventbody
       ) {
+        //console.log("eventbodyeventbodyeventbodyeventbodyeventbodyeventbody");
         //console.log(eventbody);
         //metodos
         theBalaObjects = JSON.parse(eventbody.body);
+      });
+
+      stompClient.subscribe("/topic/eliBalaLocal." + _nameSala, function(
+        eventbody
+      ) {
+        //console.log(eventbody);
+        //metodos
+        console.log("eventbodyeventbodyeventbodyeventbodyeventbodyeventbody");
+        console.log("eventbodyeventbody "+eventbody);
+        var thebalaEObjects = JSON.parse(eventbody.body);
+        _callback(thebalaEObjects);
+
       });
 
       stompClient.subscribe("/topic/salaBandera." + _nameSala, function(
@@ -97,6 +111,7 @@ var partidaModulo = (function() {
     },
 
     setVidaPJ: function(vida) {
+      console.log("vida aa " + vida);
       var valores = _nick + ";" + vida;
       stompClient.send("/app/vidaPj." + _nameSala, {}, valores);
     },
@@ -123,6 +138,9 @@ var partidaModulo = (function() {
     colisionBala: function(id) {
       var key = _nick + "," + id;
       stompClient.send("/app/colisionBala." + _nameSala, {}, key);
+    },
+    getBalaEliminarLocal: function(callback) {
+      _callback = callback;
     },
     //-------------------bandera
     cogerBandera: function() {

@@ -46,6 +46,8 @@ var main = (function(){
 		partidaModulo.getBalas(function(estadoDisparos){
 			estadoDisparos.forEach(function(elementoActual){	
 				console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+				console.log("elemento "+elementoActual);
+				mapa.jugador.manejarColisiones(elementoActual);
 				vista.dibujarPoder(elementoActual);
 			});
 			vista.renderizar();			

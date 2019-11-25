@@ -57,9 +57,18 @@ public class Bala {
         this.dano = dano;
     }
 
+    public String getKey(){
+        return key;
+    }
+
+    public void setKey(String key){
+        this.key = key;
+    }
+
     @Override
     public String toString() {
         return "Bala {dano=" + dano + ", key=" + key + ", poder=" + poder + ", x=" + x + ", y=" + y + "}";
     }
+    
 
 }

@@ -122,6 +122,15 @@ public class CaptureFlagSocketController {
     }
 
     // bandera
+    @MessageMapping("/movimientoBandera.{nombre}")
+    public void movimientoBandera(String valor,@DestinationVariable String nombre) {
+    	String[] valores = valor.split(";");
+    	String key = valores[0];
+    	double x = Double.parseDouble(valores[1]);
+        double y = Double.parseDouble(valores[2]);
+        salas.get(nombre).movimientoBandera(x, y);
+    }
+    
     @MessageMapping("/salaBandera.{nombre}")
     public void getBandera(@DestinationVariable String nombre) {
         msgt.convertAndSend("/topic/salaBandera." + nombre, salas.get(nombre).getBandera());

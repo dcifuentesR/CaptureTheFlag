@@ -8,8 +8,6 @@ var main = (function(){
 		controlador.disparar(event)
 	}
 
-	
-
 	var redimensionar = function(){
 		vista.redimensionar(document.documentElement.clientWidth - 32, document.documentElement.clientHeight - 32,mapa.alto/mapa.ancho);
 		vista.renderizar();
@@ -24,12 +22,16 @@ var main = (function(){
 		partidaModulo.getJugadores(function(estadoJuego){
 			vista.llenarCanvas(mapa.colorFondo);
 			vista.dibujarMapa(mapa.map,mapa.columnas);
-			console.log(estadoJuego+"||||||||");
 			estadoJuego.forEach(function(elementoActual){
 				vista.dibujarJugador(elementoActual["x"],elementoActual["y"],16,16,"#4287f5");
 			});
 			vista.renderizar();
 		});
+		partidaModulo.getBandera(function(estadoBandera){
+			vista.dibujarJugador(estadoBandera["x"],estadoBandera["y"],14,14,"#29ff34");
+			vista.renderizar();
+		});
+		
 		
 	}
 	
@@ -71,6 +73,10 @@ var main = (function(){
 			//vista.llenarCanvas(mapa.colorFondo);
 			
 		},
+		terminarJuego(callback){
+			motor.stop();
+			callback();
+		}
 //		renderizar:function(estadoJuego){
 //			vista.llenarCanvas(mapa.colorFondo);
 //			vista.dibujarMapa(mapa.map,mapa.columnas);

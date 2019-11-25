@@ -65,7 +65,7 @@ class Mapa{
 		this.jugador.refrescar();
 		
 		this.jugador.velX *= this.friccion;
-		this.jugador.velY *= this.friccion;
+		//this.jugador.velY *= this.friccion;
 
 		this.manejarColisiones(this.jugador);
 		if(this.jugador.tieneBandera){
@@ -196,7 +196,7 @@ Mapa.Jugador = class extends Mapa.ObjetoMovil{
 	saltar(){
 		if(!this.saltando){
 			this.saltando = true;
-			this.velY -= 20;
+			this.velY -= 30;
 		}
 	}
 	

@@ -79,6 +79,16 @@ var partidaModulo = (function() {
         );
       }
     },
+    moverBandera:function(x,y){
+    	if(conexion !=false) {
+    		stompClient.send(
+    			"/app/movimientoBandera."+_nameSala,
+    			{},
+    			_nick +";"+x+";"+y
+    		
+    		);
+    	}
+    },
     getJugadores: function(callback) {
       if (conexion != false) {
         stompClient.send("/app/salaDatos." + _nameSala, {}, " ");
@@ -118,7 +128,7 @@ var partidaModulo = (function() {
     cogerBandera: function() {
       stompClient.send("/app/cogerBandera." + _nameSala, {}, _nick);
     },
-    getBandera: function() {
+    getBandera: function(callback) {
       if (conexion != false) {
         stompClient.send("/app/salaBandera." + _nameSala, {}, " ");
       }

@@ -87,6 +87,10 @@ public class Sala {
     }
 
     /*-----------------bandera --------------*/
+    public void movimientoBandera(double x, double y) {
+    	bandera.setXY(x, y);
+    }
+    
     public void banderaPersonaje(String nick) {
         if (!bandera.isTomada()) {
             datos.get(nick).cogerBandera();

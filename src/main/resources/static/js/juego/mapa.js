@@ -64,18 +64,23 @@ class Mapa{
 		this.jugador.velY += this.gravedad;
 		this.jugador.refrescar();
 		
-		this.bandera.velY += this.gravedad;
-		this.bandera.refrescar();
-		
 		this.jugador.velX *= this.friccion;
-		//this.jugador.velY *= this.friccion;
+		this.jugador.velY *= this.friccion;
 
 		this.manejarColisiones(this.jugador);
+		if(this.jugador.tieneBandera){
+			this.bandera.x=this.jugador.x;
+			this.bandera.y=this.jugador.y;
+		}else if(!this.jugador.tieneBandera){
+			this.bandera.velY += this.gravedad;
+		}
+		this.bandera.refrescar();
 		this.manejarColisiones(this.bandera);
+		
+		partidaModulo.moverBandera(this.bandera.x,this.bandera.y);
 		
 		if(this.bandera.estaColisionando(this.jugador))
 			this.jugador.cogerBandera();
-		else this.jugador.tieneBandera=false;
 	}
 	
 }
@@ -150,6 +155,17 @@ Mapa.ObjetoMovil = class extends Mapa.Objeto{
 		
 	}
 }
+
+//Mapa.Bandera = class extends Mapa.ObjetoMovil{
+//	constructor(x,y,ancho,alto){
+//		super(x,y,ancho,alto);
+//	}
+//	refrescar(){
+//		if(jugador.tieneBandera){
+//			
+//		}else
+//	}
+//};
 
 Mapa.Jugador = class extends Mapa.ObjetoMovil{
 	constructor(x,y,ancho,alto,vida){

@@ -90,6 +90,11 @@ var partidaModulo = (function() {
       var valores = _nick + ";" + vida;
       stompClient.send("/app/vidaPj." + _nameSala, {}, valores);
     },
+
+    addPuntos: function(punto) {
+      var valores = _nick + ";" + punto;
+      stompClient.send("/app/addPuntosPj." + _nameSala, {}, valores);
+    },
     //-------------------bala
     crearDisparo: function(id, poder, x, y, dano) {
       var key = _nick + "," + id;

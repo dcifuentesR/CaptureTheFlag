@@ -82,6 +82,14 @@ public class CaptureFlagSocketController {
         salas.get(nombre).setVidaPJ(nick, vida);
     }
 
+    @MessageMapping("/addPuntosPj.{nombre}")
+    public void addPuntosPJ(String valor, @DestinationVariable String nombre) {
+        String[] valores = valor.split(";");
+        String nick = valores[0];
+        int punto = Integer.parseInt(valores[1]);
+        salas.get(nombre).addPuntos(nick, punto);
+    }
+
     // Bala
     @MessageMapping("/createBalas.{nombre}")
     public void createBala(String valor, @DestinationVariable String nombre) {

@@ -58,7 +58,7 @@ public class Datos {
     }
 
     public void setPuntos(int puntos) {
-        this.puntos = puntos;
+        this.puntos += puntos;
     }
 
     public double getX() {

@@ -63,6 +63,10 @@ public class Sala {
         datos.get(nick).setVida(vida);
     }
 
+    public void addPuntos(String nick, int puntos) {
+        datos.get(nick).setPuntos(puntos);
+    }
+
     /*-----------------balas --------------*/
     public void createBala(String key, String poder, double x, double y, int dano) {
         Bala bala = new Bala(key, poder, x, y, dano);

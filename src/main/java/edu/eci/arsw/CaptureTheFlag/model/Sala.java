@@ -54,8 +54,13 @@ public class Sala {
         this.nombre = nombre;
     }
 
+    /*-----------------jugador --------------*/
     public void movimientoPJ(String nick, double x, double y) {
         datos.get(nick).setXY(x, y);
+    }
+
+    public void setVidaPJ(String nick, int vida) {
+        datos.get(nick).setVida(vida);
     }
 
     /*-----------------balas --------------*/
@@ -67,6 +72,14 @@ public class Sala {
     public List<Bala> getBalas() {
         List<Bala> temp = new ArrayList<Bala>(balas.values());
         return temp;
+    }
+
+    public void moverBala(String key, double x, double y) {
+        balas.get(key).moverBala(x, y);
+    }
+
+    public void colisionBala(String bala) {
+        balas.remove(bala);
     }
 
     /*-----------------bandera --------------*/

@@ -50,6 +50,7 @@ public class CaptureFlagSocketController {
     }
 
     // ------------------ controladores de la partida-----------------------------//
+
     // jugador
     @MessageMapping("/salaMovimiento.{nombre}")
     public void movimientos(String val, @DestinationVariable String nombre) {
@@ -79,6 +80,14 @@ public class CaptureFlagSocketController {
 
     }
 
+    @MessageMapping("/vidaPj.{nombre}")
+    public void quitarVidaPersonaje(String valor, @DestinationVariable String nombre) {
+        String[] valores = valor.split(";");
+        String nick = valores[0];
+        int vida = Integer.parseInt(valores[1]);
+        salas.get(nombre).setVidaPJ(nick, vida);
+    }
+
     // Bala
     @MessageMapping("/createBalas.{nombre}")
     public void createBala(String valor, @DestinationVariable String nombre) {
@@ -102,6 +111,12 @@ public class CaptureFlagSocketController {
         String key = valores[0];
         double x = Double.parseDouble(valores[1]);
         double y = Double.parseDouble(valores[2]);
+        salas.get(nombre).moverBala(key, x, y);
+    }
+
+    @MessageMapping("/colisionBala.{nombre}")
+    public void colisionBala(String bala, @DestinationVariable String nombre) {
+        salas.get(nombre).colisionBala(bala);
     }
 
     // bandera

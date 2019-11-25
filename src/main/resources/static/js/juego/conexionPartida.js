@@ -67,7 +67,7 @@ var partidaModulo = (function() {
       }
       if (theObject !== undefined) callback(theObject);
     },
-    disparo: function(id, poder, x, y, dano) {
+    crearDisparo: function(id, poder, x, y, dano) {
       var key = _nick + id;
       _crearBala(key, poder, x, y, dano);
     },

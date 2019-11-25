@@ -47,6 +47,8 @@ public class Datos {
                 quitarBandera();
             }
             vida = 100;
+            x = 50;
+            y = 50;
         }
         this.vida = vida;
     }

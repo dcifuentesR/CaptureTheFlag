@@ -1,7 +1,7 @@
 class Mapa{
 	constructor(){
 		this.collider= new Mapa.Collider();
-		
+		this.colliderBala = new Mapa.ColliderBala();
 		this.colorFondo = "#000000"
 		this.ancho = 500;
 		this.alto =500;
@@ -17,6 +17,30 @@ class Mapa{
 		this.jugador = new Mapa.Jugador(50,100,16,16,100);
 		this.bandera = new Mapa.ObjetoMovil(200,200,16,16);
 		
+	}
+
+	colisionesPlataformas(objeto, collider){
+		var abajo,izquierda,derecha,arriba,valCasilla;
+		//sup-izq
+		arriba = Math.floor(objeto.getArriba() / this.tamanioCasilla);
+		izquierda = Math.floor(objeto.getIzquierda() / this.tamanioCasilla);
+		valCasilla = this.map[arriba * this.columnas + izquierda];
+		collider.colisionar(valCasilla,objeto,izquierda*this.tamanioCasilla,arriba*this.tamanioCasilla,this.tamanioCasilla);
+		//sup-der
+		arriba = Math.floor(objeto.getArriba() / this.tamanioCasilla);
+		derecha = Math.floor(objeto.getDerecha() / this.tamanioCasilla);
+		valCasilla = this.map[arriba * this.columnas + derecha];
+		collider.colisionar(valCasilla,objeto,derecha*this.tamanioCasilla,arriba*this.tamanioCasilla,this.tamanioCasilla);
+		//inf-izq
+		abajo = Math.floor(objeto.getAbajo() / this.tamanioCasilla);
+		izquierda = Math.floor(objeto.getIzquierda() / this.tamanioCasilla);
+		valCasilla = this.map[abajo * this.columnas + izquierda];
+		collider.colisionar(valCasilla,objeto,izquierda*this.tamanioCasilla,abajo*this.tamanioCasilla,this.tamanioCasilla);
+		//inf-der
+		abajo = Math.floor(objeto.getAbajo() / this.tamanioCasilla);
+		derecha = Math.floor(objeto.getDerecha() / this.tamanioCasilla);
+		valCasilla = this.map[abajo * this.columnas + derecha];
+		collider.colisionar(valCasilla,objeto,derecha*this.tamanioCasilla,abajo*this.tamanioCasilla,this.tamanioCasilla);
 	}
 	manejarColisiones(jugador){
 		if(jugador.x<0){
@@ -34,29 +58,26 @@ class Mapa{
 			jugador.y = this.alto - jugador.alto;
 			jugador.velY=0;
 		}
+		this.colisionesPlataformas(jugador,this.collider);
 		
-		var abajo,izquierda,derecha,arriba,valCasilla;
-		//sup-izq
-		arriba = Math.floor(jugador.getArriba() / this.tamanioCasilla);
-		izquierda = Math.floor(jugador.getIzquierda() / this.tamanioCasilla);
-		valCasilla = this.map[arriba * this.columnas + izquierda];
-		this.collider.colisionar(valCasilla,jugador,izquierda*this.tamanioCasilla,arriba*this.tamanioCasilla,this.tamanioCasilla);
-		//sup-der
-		arriba = Math.floor(jugador.getArriba() / this.tamanioCasilla);
-		derecha = Math.floor(jugador.getDerecha() / this.tamanioCasilla);
-		valCasilla = this.map[arriba * this.columnas + derecha];
-		this.collider.colisionar(valCasilla,jugador,derecha*this.tamanioCasilla,arriba*this.tamanioCasilla,this.tamanioCasilla);
-		//inf-izq
-		abajo = Math.floor(jugador.getAbajo() / this.tamanioCasilla);
-		izquierda = Math.floor(jugador.getIzquierda() / this.tamanioCasilla);
-		valCasilla = this.map[abajo * this.columnas + izquierda];
-		this.collider.colisionar(valCasilla,jugador,izquierda*this.tamanioCasilla,abajo*this.tamanioCasilla,this.tamanioCasilla);
-		//inf-der
-		abajo = Math.floor(jugador.getAbajo() / this.tamanioCasilla);
-		derecha = Math.floor(jugador.getDerecha() / this.tamanioCasilla);
-		valCasilla = this.map[abajo * this.columnas + derecha];
-		this.collider.colisionar(valCasilla,jugador,derecha*this.tamanioCasilla,abajo*this.tamanioCasilla,this.tamanioCasilla);
-		
+	}
+
+	manejarColisionesBala(bala){
+		if(bala.x<2){
+			partidaModulo.colisionBala(bala.id);
+			bala.fin = false;
+		}else if(bala.x+bala.ancho > this.ancho - 4){
+			partidaModulo.colisionBala(bala.id);
+			bala.fin = false;
+		}
+		if(bala.y <2){
+			partidaModulo.colisionBala(bala.id);
+			bala.fin = false;
+		}else if(bala.y +bala.alto > this.alto - 4){
+			partidaModulo.colisionBala(bala.id);
+			bala.fin = false;
+		}
+		this.colisionesPlataformas(bala,this.colliderBala);
 	}
 	
 	refrescar(){
@@ -81,6 +102,7 @@ class Mapa{
 		
 		if (Object.keys(this.jugador.poder).length > 0){
 			for (var key in this.jugador.poder) {
+				this.manejarColisionesBala(this.jugador.poder[key]);
 				if (this.jugador.poder[key].fin == false){
 					delete this.jugador.poder[key];
 				}
@@ -223,7 +245,8 @@ Mapa.Jugador = class extends Mapa.ObjetoMovil{
 		var id = lista[1];
 		if (verificationModule.readCookie("nickname") != nick){
 			if (Math.abs(poder.x - this.x) < 14  && Math.abs(poder.y-this.y) < 14){
-				this.vida = this.vida - parseInt(poder.damage,10);
+				console.log("vida perro" + this.vida);
+				this.vida = this.vida - parseInt(poder.dano,10);
 				partidaModulo.setVidaPJ(this.vida);
 				partidaModulo.colisionBala(id);
 			}
@@ -235,6 +258,7 @@ Mapa.Jugador = class extends Mapa.ObjetoMovil{
 		var id = lista[1];
 		if (id in poder){
 			this.poder[id].fin = false;
+			
 		}
 		
 
@@ -255,7 +279,9 @@ Mapa.Poder = class extends Mapa.ObjetoMovil{
 		this.b = 0;
 		this.tipo = "";
 		this.id = id;   
-		this.fin = fin; 
+		this.fin = fin;
+		this.xi = x; 
+		this.yi = y; 
 	}
 
 	construirRecta(){
@@ -275,20 +301,20 @@ Mapa.Poder.Disparo = class extends Mapa.Poder{
 	refrescar(){
 		//Este if revisa que el poder haya llegado a su destino. 
 		if (Math.abs(this.x-this.xf) > 0.09 || Math.abs(this.y-this.yf) > 0.09){
-			if (this.x > this.xf) {
+			if (this.xi > this.xf) {
 				this.x--;
 				this.y = this.m*this.x+this.b;
 				partidaModulo.moverBala(this.id,this.x,this.y);
 				//console.log("x = "+ x + " y = "+ y); e.getTime()
 			  }
-			  else if (this.x < this.xf){
+			  else if (this.xi < this.xf){
 				this.x++;
 				this.y = this.m*this.x+this.b;
 				partidaModulo.moverBala(this.id,this.x,this.y);
 				//console.log("x = "+ x + " y = "+ y);  e.getTime()
 			  }
 			  else{ 
-				if (this.y < this.yf) this.y++;
+				if (this.yi < this.yf) this.y++;
 				else this.y--;
 				partidaModulo.moverBala(this.id,this.x,this.y);
 				//console.log("x = "+ x + " y = "+ y)  e.getTime()
@@ -330,4 +356,31 @@ Mapa.Collider = class {
 		}
 	}
 	
+}
+Mapa.ColliderBala = class {
+	constructor(){
+		this.colisionar = function(posPlataforma,bala,casillaX,casillaY,tamanioCasilla){
+			if(posPlataforma!==-1)
+				this.manejarColisionesPlataformaArriba(bala,casillaY);
+		}
+	}
+	
+	manejarColisionesPlataformaAbajo(){
+		
+	}
+	
+	manejarColisionesPlataformaIzquierda(){
+		
+	}
+	
+	manejarColisionesPlataformaDerecha(){
+		
+	}
+
+	manejarColisionesPlataformaArriba(bala,arribaPlataforma){
+		if(bala.getAbajo() > arribaPlataforma){
+			partidaModulo.colisionBala(bala.id);
+			bala.fin = false;
+		}
+	}
 }

@@ -78,12 +78,14 @@ public class Sala {
         return temp;
     }
 
-    public Bala getBala(String key){
+    public Bala getBala(String key) {
         return balas.get(key);
     }
 
     public void moverBala(String key, double x, double y) {
-        balas.get(key).moverBala(x, y);
+        if (balas.containsKey(key)) {
+            balas.get(key).moverBala(x, y);
+        }
     }
 
     public void colisionBala(String bala) {
@@ -92,9 +94,9 @@ public class Sala {
 
     /*-----------------bandera --------------*/
     public void movimientoBandera(double x, double y) {
-    	bandera.setXY(x, y);
+        bandera.setXY(x, y);
     }
-    
+
     public void banderaPersonaje(String nick) {
         if (!bandera.isTomada()) {
             datos.get(nick).cogerBandera();

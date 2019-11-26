@@ -46,9 +46,6 @@ public class Datos {
             if (bandera) {
                 quitarBandera();
             }
-            vida = 100;
-            x = 50;
-            y = 50;
         }
         this.vida = vida;
     }

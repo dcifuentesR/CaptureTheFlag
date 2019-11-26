@@ -46,10 +46,9 @@ var partidaModulo = (function() {
         //console.log(eventbody);
         //metodos
         console.log("eventbodyeventbodyeventbodyeventbodyeventbodyeventbody");
-        console.log("eventbodyeventbody "+eventbody);
+        console.log("eventbodyeventbody " + eventbody);
         var thebalaEObjects = JSON.parse(eventbody.body);
         _callback(thebalaEObjects);
-
       });
 
       stompClient.subscribe("/topic/salaBandera." + _nameSala, function(
@@ -93,15 +92,14 @@ var partidaModulo = (function() {
         );
       }
     },
-    moverBandera:function(x,y){
-    	if(conexion !=false) {
-    		stompClient.send(
-    			"/app/movimientoBandera."+_nameSala,
-    			{},
-    			_nick +";"+x+";"+y
-    		
-    		);
-    	}
+    moverBandera: function(x, y) {
+      if (conexion != false) {
+        stompClient.send(
+          "/app/movimientoBandera." + _nameSala,
+          {},
+          _nick + ";" + x + ";" + y
+        );
+      }
     },
     getJugadores: function(callback) {
       if (conexion != false) {
@@ -136,8 +134,12 @@ var partidaModulo = (function() {
       stompClient.send("/app/movimientoBalas." + _nameSala, {}, valores);
     },
     colisionBala: function(id) {
-      var key = _nick + "," + id;
-      stompClient.send("/app/colisionBala." + _nameSala, {}, key);
+      if ("," in id) {
+        stompClient.send("/app/colisionBala." + _nameSala, {}, id);
+      } else {
+        var key = _nick + "," + id;
+        stompClient.send("/app/colisionBala." + _nameSala, {}, key);
+      }
     },
     getBalaEliminarLocal: function(callback) {
       _callback = callback;

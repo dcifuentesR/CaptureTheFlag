@@ -89,7 +89,9 @@ public class Sala {
     }
 
     public void colisionBala(String bala) {
-        balas.remove(bala);
+        if (balas.containsKey(bala)) {
+            balas.remove(bala);
+        }
     }
 
     /*-----------------bandera --------------*/

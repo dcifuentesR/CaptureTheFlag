@@ -134,10 +134,11 @@ var partidaModulo = (function() {
       stompClient.send("/app/movimientoBalas." + _nameSala, {}, valores);
     },
     colisionBala: function(id) {
-      if (id.indexOf(",") != -1) {
-        stompClient.send("/app/colisionBala." + _nameSala, {}, id);
+      var id2 = String(id);
+      if (id2.indexOf(",") != -1) {
+        stompClient.send("/app/colisionBala." + _nameSala, {}, id2);
       } else {
-        var key = _nick + "," + id;
+        var key = _nick + "," + id2;
         stompClient.send("/app/colisionBala." + _nameSala, {}, key);
       }
     },

@@ -134,7 +134,7 @@ var partidaModulo = (function() {
       stompClient.send("/app/movimientoBalas." + _nameSala, {}, valores);
     },
     colisionBala: function(id) {
-      if ("," in id) {
+      if (id.indexOf(",") != -1) {
         stompClient.send("/app/colisionBala." + _nameSala, {}, id);
       } else {
         var key = _nick + "," + id;

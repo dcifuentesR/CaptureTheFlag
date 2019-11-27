@@ -33,7 +33,7 @@ Juego multijugador web, de plataformas,donde cada jugador debe competir por capt
 
 ### Diagrama de desplieuge 
 
-![alt text](https://github.com/diego2097/CaptureTheFlag/blob/master/pictures/Deployment_Diagram.png)
+![alt text](https://github.com/diego2097/CaptureTheFlag/blob/master/pictures/Deployment_Diagram.PNG)
 
 ### Casos de uso 
 

@@ -90,6 +90,19 @@ public class CaptureFlagSocketController {
         salas.get(nombre).addPuntos(nick, punto);
     }
 
+    @MessageMapping("/addKillPj.{nombre}")
+    public void addKillPJ(String nick, @DestinationVariable String nombre) {
+        salas.get(nombre).addKill(nick);
+    }
+
+    @MessageMapping("/setMuertePj.{nombre}")
+    public void setMuertePJ(String valor, @DestinationVariable String nombre) {
+        String[] valores = valor.split(";");
+        String nick = valores[0];
+        int muertes = Integer.parseInt(valores[1]);
+        salas.get(nombre).setMuerte(nick, muertes);
+    }
+
     // Bala
     @MessageMapping("/createBalas.{nombre}")
     public void createBala(String valor, @DestinationVariable String nombre) {

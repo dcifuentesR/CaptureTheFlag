@@ -60,7 +60,7 @@ var partidaModulo = (function() {
   };
 
   return {
-    //conexion
+    //-------------------conexion
     init: function() {
       partidaModulo.disconnect();
       //console.log("sala " + _nameSala);
@@ -114,6 +114,16 @@ var partidaModulo = (function() {
       var valores = _nick + ";" + punto;
       stompClient.send("/app/addPuntosPj." + _nameSala, {}, valores);
     },
+
+    killPJ: function(asesino) {
+      stompClient.send("/app/addKillPj." + _nameSala, {}, asesino);
+    },
+
+    setMuerte: function(muertes) {
+      var valores = _nick + ";" + muertes;
+      stompClient.send("/app/setMuertePj." + _nameSala, {}, valores);
+    },
+
     //-------------------bala
     crearDisparo: function(id, poder, x, y, dano) {
       var key = _nick + "," + id;

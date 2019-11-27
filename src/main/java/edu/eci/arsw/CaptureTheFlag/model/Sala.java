@@ -67,6 +67,14 @@ public class Sala {
         datos.get(nick).setPuntos(puntos);
     }
 
+    public void addKill(String nick) {
+        datos.get(nick).setKills(datos.get(nick).getKills() + 1);
+    }
+
+    public void setMuerte(String nick, int muertes) {
+        datos.get(nick).setMuertes(muertes);
+    }
+
     /*-----------------balas --------------*/
     public void createBala(String key, String poder, double x, double y, int dano) {
         Bala bala = new Bala(key, poder, x, y, dano);

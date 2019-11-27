@@ -86,6 +86,7 @@ var partidaModulo = (function() {
     },
     //-------------------sala
     finSala: function() {
+      stompClient.send("/app/salaDatos." + _nameSala, {}, " ");
       stompClient.send("/app/finSala." + _nameSala, {}, " ");
     },
     getSalaViva: function() {
@@ -97,15 +98,6 @@ var partidaModulo = (function() {
         // console.log("mover x" + x + " y " + y);
         stompClient.send(
           "/app/salaMovimiento." + _nameSala,
-          {},
-          _nick + ";" + x + ";" + y
-        );
-      }
-    },
-    moverBandera: function(x, y) {
-      if (conexion != false) {
-        stompClient.send(
-          "/app/movimientoBandera." + _nameSala,
           {},
           _nick + ";" + x + ";" + y
         );
@@ -166,6 +158,15 @@ var partidaModulo = (function() {
       _callback = callback;
     },
     //-------------------bandera
+    moverBandera: function(x, y) {
+      if (conexion != false) {
+        stompClient.send(
+          "/app/movimientoBandera." + _nameSala,
+          {},
+          _nick + ";" + x + ";" + y
+        );
+      }
+    },
     cogerBandera: function() {
       stompClient.send("/app/cogerBandera." + _nameSala, {}, _nick);
     },

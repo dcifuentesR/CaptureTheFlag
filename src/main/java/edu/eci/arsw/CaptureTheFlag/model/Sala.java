@@ -13,13 +13,14 @@ public class Sala {
     private ConcurrentHashMap<String, Bala> balas = new ConcurrentHashMap<>();
 
     private String nombre;
-    private Bandera bandera = new Bandera();
+    private Bandera bandera;
 
     public Sala() {
     }
 
     public Sala(String nombre) {
         this.nombre = nombre;
+        this.bandera = new Bandera();
     }
 
     public void addMiembro(Cuenta miembro) {

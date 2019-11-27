@@ -2,8 +2,8 @@ package edu.eci.arsw.CaptureTheFlag.model;
 
 public class Bandera {
 
-    private double x;
-    private double y;
+    private double x=50;
+    private double y=50;
     private boolean tomada = false;
 
     public Bandera() {

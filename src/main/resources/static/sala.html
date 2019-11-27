@@ -31,7 +31,7 @@
       th:href="@{/css/sala.css}"
     />
   </head>
-  <body onload="salasModule.init(0)">
+  <body onload="salasModule.init(0);verificationModule.check_cookie()">
     <div class="row">
       <div class="column left">
         <table id="tabla-participantes" class="table table-dark">

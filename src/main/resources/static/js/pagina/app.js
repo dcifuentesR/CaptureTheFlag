@@ -57,12 +57,12 @@ var verificationModule = (function() {
   };
 
   var check_cookie = function() {
-    /*console.log(document.cookie)
+    console.log(document.cookie)
         var user = readCookie("nickname");
         if (user == null ){
             alert("Permiso denegado, debe logearse primero.")
             location.href = "/index.html"
-        }*/
+        }
   };
 
   var borrar_cookie = function() {

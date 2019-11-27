@@ -43,10 +43,6 @@ var partidaModulo = (function() {
       stompClient.subscribe("/topic/eliBalaLocal." + _nameSala, function(
         eventbody
       ) {
-        //console.log(eventbody);
-        //metodos
-        console.log("eventbodyeventbodyeventbodyeventbodyeventbodyeventbody");
-        console.log("eventbodyeventbody " + eventbody);
         var thebalaEObjects = JSON.parse(eventbody.body);
         _callback(thebalaEObjects);
       });

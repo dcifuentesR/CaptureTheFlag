@@ -210,6 +210,7 @@ Mapa.Jugador = class extends Mapa.ObjetoMovil{
 		this.piso = false;
 		this.poder = {};	
 		this.vida=vida;
+		this.self = this;
 		this.tieneBandera = false;
 		this.puntos=0;
 		partidaModulo.getBalaEliminarLocal(this.eliminarBala);
@@ -245,23 +246,31 @@ Mapa.Jugador = class extends Mapa.ObjetoMovil{
 		var id = lista[1];
 		if (verificationModule.readCookie("nickname") != nick){
 			if (Math.abs(poder.x - this.x) < 14  && Math.abs(poder.y-this.y) < 14){
+				this.vida = this.vida - parseInt(poder.dano,10)/2;
 				console.log("vida perro" + this.vida);
-				this.vida = this.vida - parseInt(poder.dano,10);
 				partidaModulo.setVidaPJ(this.vida);
-				partidaModulo.colisionBala(id);
+				partidaModulo.colisionBala(poder.key);
+				if (this.vida <= 0) this.reiniciar();
 			}
 		}
 	}
 
 	eliminarBala(json){
-		var lista = json.key.split(","); 
+	/*	var lista = json.key.split(","); 
 		var id = lista[1];
-		if (id in poder){
+		console.log("thissss "+self.poder);
+		//console.log("dict "+this.poder);
+		if (this.poder != undefined && Object.keys(this.poder).indexOf(id) != -1 ){
 			this.poder[id].fin = false;
-			
-		}
-		
+		}*/
+	}
 
+	reiniciar(){
+		this.x = 30;
+		this.y = 20;
+		//this.xPrevFrame = this.x;
+		//this.yPrevFrame = this.y;
+		this.vida = 100;
 	}
 	
 }

@@ -79,7 +79,17 @@ class Mapa{
 		}
 		this.colisionesPlataformas(bala,this.colliderBala);
 	}
-	
+
+	checkBanderaJugador(json){
+		this.bandera = new Mapa.ObjetoMovil(json.x,json.y,16,16);
+		if (verificationModule.readCookie("nickname") == json.nick){
+			this.jugador.cogerBandera();
+		}
+		else if (this.bandera.estaColisionando(this.jugador)){
+			partidaModulo.cogerBandera();
+		}
+	}
+
 	refrescar(){
 	
 		this.jugador.velY += this.gravedad;
@@ -111,13 +121,10 @@ class Mapa{
 				}
 			}
 		}
-		
-		partidaModulo.moverBandera(this.bandera.x,this.bandera.y);
-		
-		if(this.bandera.estaColisionando(this.jugador))
-			this.jugador.cogerBandera();
+		if (this.jugador.tieneBandera){
+			partidaModulo.moverBandera(this.bandera.x,this.bandera.y);
+		}
 	}
-	
 }
 
 Mapa.Objeto = class {
@@ -210,7 +217,6 @@ Mapa.Jugador = class extends Mapa.ObjetoMovil{
 		this.piso = false;
 		this.poder = {};	
 		this.vida=vida;
-		this.self = this;
 		this.tieneBandera = false;
 		this.puntos=0;
 		partidaModulo.getBalaEliminarLocal(this.eliminarBala);
@@ -268,12 +274,14 @@ Mapa.Jugador = class extends Mapa.ObjetoMovil{
 	}
 
 	reiniciar(nick){
+		partidaModulo.addPuntos(this.puntos);
 		this.x = 30;
 		this.y = 20;
 		this.vida = 100;
 		this.muertes++;
 		partidaModulo.setMuerte(this.muertes);
 		partidaModulo.killPJ(nick);
+		this.tieneBandera = false;
 	}
 	
 }

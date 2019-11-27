@@ -2,6 +2,7 @@ package edu.eci.arsw.CaptureTheFlag.Controllers;
 
 import java.util.concurrent.ConcurrentHashMap;
 
+import org.hibernate.annotations.SourceType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
@@ -186,6 +187,7 @@ public class CaptureFlagSocketController {
 
     @MessageMapping("/cogerBandera.{nombre}")
     public void cogerBandera(String nick, @DestinationVariable String nombre) {
+        System.out.println( salas.get(nombre).getDatos());
         if (salas.containsKey(nombre)) {
             salas.get(nombre).banderaPersonaje(nick);
             msgt.convertAndSend("/topic/salaBandera." + nombre, salas.get(nombre).getBandera());

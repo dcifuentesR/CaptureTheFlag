@@ -40,6 +40,7 @@ var main = (function(){
 			vista.renderizar();
 		});
 		partidaModulo.getBandera(function(estadoBandera){
+			mapa.checkBanderaJugador(estadoBandera);
 			vista.dibujarJugador(estadoBandera["x"],estadoBandera["y"],14,14,"#29ff34");
 			vista.renderizar();
 		});

@@ -112,6 +112,7 @@ public class Datos {
             bandera = false;
             bG.setTomada(false);
             bG.setXY(x, y);
+            bG.setNick(null);
         }
     }
 

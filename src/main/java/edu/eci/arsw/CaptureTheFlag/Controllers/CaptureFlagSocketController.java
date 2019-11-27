@@ -118,21 +118,22 @@ public class CaptureFlagSocketController {
 
     @MessageMapping("/colisionBala.{nombre}")
     public void colisionBala(String bala, @DestinationVariable String nombre) {
-        salas.get(nombre).colisionBala(bala);
-        msgt.convertAndSend("/topic/eliBalaLocal." + nombre, salas.get(nombre).getBala(bala));
-        
+        if (salas.get(nombre).getBala(bala) != null) {
+            msgt.convertAndSend("/topic/eliBalaLocal." + nombre, salas.get(nombre).getBala(bala));
+            salas.get(nombre).colisionBala(bala);
+        }
     }
 
     // bandera
     @MessageMapping("/movimientoBandera.{nombre}")
-    public void movimientoBandera(String valor,@DestinationVariable String nombre) {
-    	String[] valores = valor.split(";");
-    	String key = valores[0];
-    	double x = Double.parseDouble(valores[1]);
+    public void movimientoBandera(String valor, @DestinationVariable String nombre) {
+        String[] valores = valor.split(";");
+        String key = valores[0];
+        double x = Double.parseDouble(valores[1]);
         double y = Double.parseDouble(valores[2]);
         salas.get(nombre).movimientoBandera(x, y);
     }
-    
+
     @MessageMapping("/salaBandera.{nombre}")
     public void getBandera(@DestinationVariable String nombre) {
         msgt.convertAndSend("/topic/salaBandera." + nombre, salas.get(nombre).getBandera());

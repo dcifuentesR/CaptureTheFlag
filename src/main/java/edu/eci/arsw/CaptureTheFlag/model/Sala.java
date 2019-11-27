@@ -79,7 +79,11 @@ public class Sala {
     }
 
     public Bala getBala(String key) {
-        return balas.get(key);
+        if (balas.containsKey(key)) {
+            return balas.get(key);
+        }
+        return null;
+
     }
 
     public void moverBala(String key, double x, double y) {

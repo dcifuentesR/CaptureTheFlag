@@ -227,7 +227,7 @@ Mapa.Jugador = class extends Mapa.ObjetoMovil{
 	saltar(){
 		if(!this.saltando){
 			this.saltando = true;
-			this.velY -= 30;
+			this.velY -= 20;
 		}
 	}
 	

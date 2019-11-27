@@ -187,7 +187,7 @@ public class CaptureFlagSocketController {
 
     @MessageMapping("/cogerBandera.{nombre}")
     public void cogerBandera(String nick, @DestinationVariable String nombre) {
-        System.out.println( salas.get(nombre).getDatos());
+        //System.out.println( salas.get(nombre).getDatos());
         if (salas.containsKey(nombre)) {
             salas.get(nombre).banderaPersonaje(nick);
             msgt.convertAndSend("/topic/salaBandera." + nombre, salas.get(nombre).getBandera());

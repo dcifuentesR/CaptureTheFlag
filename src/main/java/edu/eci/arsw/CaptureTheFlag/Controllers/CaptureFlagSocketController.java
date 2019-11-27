@@ -49,112 +49,142 @@ public class CaptureFlagSocketController {
         msgt.convertAndSend("/topic/showsala", salas.values());
     }
 
+    @MessageMapping("/finSala.{nombre}")
+    public void finSala(@DestinationVariable String nombre) {
+        if (salas.containsKey(nombre)) {
+            msgt.convertAndSend("/topic/finSala." + nombre, "fin");
+            salas.remove(nombre);
+        }
+
+    }
+
     // ------------------ controladores de la partida-----------------------------//
 
     // jugador
     @MessageMapping("/salaMovimiento.{nombre}")
     public void movimientos(String val, @DestinationVariable String nombre) {
-        String temp = val;
-        String[] valores = temp.split(";");
-        String nick = valores[0];
-        double x = Double.parseDouble(valores[1]);
-        double y = Double.parseDouble(valores[2]);
-        // System.out.println(nick + " " + x + " " + y);
-
-        // System.out.print(salas.get(nombre));
-        salas.get(nombre).movimientoPJ(nick, x, y);
-        // msgt.convertAndSend("/topic/salaDatos." + nombre,
-        // salas.get(nombre).getDatos());
-
+        if (salas.containsKey(nombre)) {
+            String temp = val;
+            String[] valores = temp.split(";");
+            String nick = valores[0];
+            double x = Double.parseDouble(valores[1]);
+            double y = Double.parseDouble(valores[2]);
+            salas.get(nombre).movimientoPJ(nick, x, y);
+        }
     }
 
     @MessageMapping("/salaDatos.{nombre}")
     public void getDatos(@DestinationVariable String nombre) {
-        msgt.convertAndSend("/topic/salaDatos." + nombre, salas.get(nombre).getDatos());
+        if (salas.containsKey(nombre)) {
+            msgt.convertAndSend("/topic/salaDatos." + nombre, salas.get(nombre).getDatos());
+        }
 
     }
 
     @MessageMapping("/vidaPj.{nombre}")
     public void setVidaPersonaje(String valor, @DestinationVariable String nombre) {
-        String[] valores = valor.split(";");
-        String nick = valores[0];
-        int vida = Integer.parseInt(valores[1]);
-        salas.get(nombre).setVidaPJ(nick, vida);
+        if (salas.containsKey(nombre)) {
+            String[] valores = valor.split(";");
+            String nick = valores[0];
+            int vida = Integer.parseInt(valores[1]);
+            salas.get(nombre).setVidaPJ(nick, vida);
+        }
     }
 
     @MessageMapping("/addPuntosPj.{nombre}")
     public void addPuntosPJ(String valor, @DestinationVariable String nombre) {
-        String[] valores = valor.split(";");
-        String nick = valores[0];
-        int punto = Integer.parseInt(valores[1]);
-        salas.get(nombre).addPuntos(nick, punto);
+        if (salas.containsKey(nombre)) {
+            String[] valores = valor.split(";");
+            String nick = valores[0];
+            int punto = Integer.parseInt(valores[1]);
+            salas.get(nombre).addPuntos(nick, punto);
+        }
     }
 
     @MessageMapping("/addKillPj.{nombre}")
     public void addKillPJ(String nick, @DestinationVariable String nombre) {
-        salas.get(nombre).addKill(nick);
+        if (salas.containsKey(nombre)) {
+            salas.get(nombre).addKill(nick);
+        }
     }
 
     @MessageMapping("/setMuertePj.{nombre}")
     public void setMuertePJ(String valor, @DestinationVariable String nombre) {
-        String[] valores = valor.split(";");
-        String nick = valores[0];
-        int muertes = Integer.parseInt(valores[1]);
-        salas.get(nombre).setMuerte(nick, muertes);
+        if (salas.containsKey(nombre)) {
+            String[] valores = valor.split(";");
+            String nick = valores[0];
+            int muertes = Integer.parseInt(valores[1]);
+            salas.get(nombre).setMuerte(nick, muertes);
+        }
     }
 
     // Bala
     @MessageMapping("/createBalas.{nombre}")
     public void createBala(String valor, @DestinationVariable String nombre) {
-        String[] valores = valor.split(";");
-        String key = valores[0];
-        String poder = valores[1];
-        double x = Double.parseDouble(valores[2]);
-        double y = Double.parseDouble(valores[3]);
-        int dano = Integer.parseInt(valores[4]);
-        salas.get(nombre).createBala(key, poder, x, y, dano);
+        if (salas.containsKey(nombre)) {
+            String[] valores = valor.split(";");
+            String key = valores[0];
+            String poder = valores[1];
+            double x = Double.parseDouble(valores[2]);
+            double y = Double.parseDouble(valores[3]);
+            int dano = Integer.parseInt(valores[4]);
+            salas.get(nombre).createBala(key, poder, x, y, dano);
+        }
     }
 
     @MessageMapping("/salaBalas.{nombre}")
     public void getBalas(@DestinationVariable String nombre) {
-        msgt.convertAndSend("/topic/salaBalas." + nombre, salas.get(nombre).getBalas());
+        if (salas.containsKey(nombre)) {
+            msgt.convertAndSend("/topic/salaBalas." + nombre, salas.get(nombre).getBalas());
+        }
     }
 
     @MessageMapping("/movimientoBalas.{nombre}")
     public void movimientoBalas(String valor, @DestinationVariable String nombre) {
-        String[] valores = valor.split(";");
-        String key = valores[0];
-        double x = Double.parseDouble(valores[1]);
-        double y = Double.parseDouble(valores[2]);
-        salas.get(nombre).moverBala(key, x, y);
+        if (salas.containsKey(nombre)) {
+            String[] valores = valor.split(";");
+            String key = valores[0];
+            double x = Double.parseDouble(valores[1]);
+            double y = Double.parseDouble(valores[2]);
+            salas.get(nombre).moverBala(key, x, y);
+        }
     }
 
     @MessageMapping("/colisionBala.{nombre}")
     public void colisionBala(String bala, @DestinationVariable String nombre) {
-        if (salas.get(nombre).getBala(bala) != null) {
-            msgt.convertAndSend("/topic/eliBalaLocal." + nombre, salas.get(nombre).getBala(bala));
-            salas.get(nombre).colisionBala(bala);
+        if (salas.containsKey(nombre)) {
+            if (salas.get(nombre).getBala(bala) != null) {
+                msgt.convertAndSend("/topic/eliBalaLocal." + nombre, salas.get(nombre).getBala(bala));
+                salas.get(nombre).colisionBala(bala);
+            }
         }
+
     }
 
     // bandera
     @MessageMapping("/movimientoBandera.{nombre}")
     public void movimientoBandera(String valor, @DestinationVariable String nombre) {
-        String[] valores = valor.split(";");
-        String key = valores[0];
-        double x = Double.parseDouble(valores[1]);
-        double y = Double.parseDouble(valores[2]);
-        salas.get(nombre).movimientoBandera(x, y);
+        if (salas.containsKey(nombre)) {
+            String[] valores = valor.split(";");
+            String key = valores[0];
+            double x = Double.parseDouble(valores[1]);
+            double y = Double.parseDouble(valores[2]);
+            salas.get(nombre).movimientoBandera(x, y);
+        }
     }
 
     @MessageMapping("/salaBandera.{nombre}")
     public void getBandera(@DestinationVariable String nombre) {
-        msgt.convertAndSend("/topic/salaBandera." + nombre, salas.get(nombre).getBandera());
+        if (salas.containsKey(nombre)) {
+            msgt.convertAndSend("/topic/salaBandera." + nombre, salas.get(nombre).getBandera());
+        }
     }
 
     @MessageMapping("/cogerBandera.{nombre}")
     public void cogerBandera(String nick, @DestinationVariable String nombre) {
-        salas.get(nombre).banderaPersonaje(nick);
+        if (salas.containsKey(nombre)) {
+            salas.get(nombre).banderaPersonaje(nick);
+        }
     }
 
 }

@@ -7,6 +7,7 @@ var partidaModulo = (function() {
   var theBalaObjects = undefined;
   var theBanderaObjects = undefined;
   var _callback;
+  var salaViva = true;
 
   /*var pintarInfoJuego = function(JSONObject){
 	  main.renderizar(JSONObject);
@@ -34,7 +35,6 @@ var partidaModulo = (function() {
       stompClient.subscribe("/topic/salaBalas." + _nameSala, function(
         eventbody
       ) {
-        //console.log("eventbodyeventbodyeventbodyeventbodyeventbodyeventbody");
         //console.log(eventbody);
         //metodos
         theBalaObjects = JSON.parse(eventbody.body);
@@ -53,6 +53,13 @@ var partidaModulo = (function() {
         //console.log(eventbody);
         //metodos
         theBanderaObjects = JSON.parse(eventbody.body);
+      });
+
+      stompClient.subscribe("/topic/finSala." + _nameSala, function(eventbody) {
+        //console.log(eventbody);
+        //metodos
+        salaViva = false;
+        alert("Fin partida");
       });
 
       conexion = true;
@@ -76,6 +83,13 @@ var partidaModulo = (function() {
         stompClient.disconnect();
       }
       //console.log("Disconnected");
+    },
+    //-------------------sala
+    finSala: function() {
+      stompClient.send("/app/finSala." + _nameSala, {}, " ");
+    },
+    getSalaViva: function() {
+      return salaViva;
     },
     //-------------------jugador
     mover: function(x, y) {

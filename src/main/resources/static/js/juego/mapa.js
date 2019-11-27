@@ -214,6 +214,8 @@ Mapa.Jugador = class extends Mapa.ObjetoMovil{
 		this.tieneBandera = false;
 		this.puntos=0;
 		partidaModulo.getBalaEliminarLocal(this.eliminarBala);
+		this.muertes = 0;
+		this.kills = 0;
 	}
 	
 	saltar(){
@@ -250,7 +252,7 @@ Mapa.Jugador = class extends Mapa.ObjetoMovil{
 				console.log("vida perro" + this.vida);
 				partidaModulo.setVidaPJ(this.vida);
 				partidaModulo.colisionBala(poder.key);
-				if (this.vida <= 0) this.reiniciar();
+				if (this.vida <= 0) this.reiniciar(nick);
 			}
 		}
 	}
@@ -265,12 +267,13 @@ Mapa.Jugador = class extends Mapa.ObjetoMovil{
 		}*/
 	}
 
-	reiniciar(){
+	reiniciar(nick){
 		this.x = 30;
 		this.y = 20;
-		//this.xPrevFrame = this.x;
-		//this.yPrevFrame = this.y;
 		this.vida = 100;
+		this.muertes++;
+		partidaModulo.setMuerte(this.muertes);
+		partidaModulo.killPJ(nick);
 	}
 	
 }
@@ -291,6 +294,7 @@ Mapa.Poder = class extends Mapa.ObjetoMovil{
 		this.fin = fin;
 		this.xi = x; 
 		this.yi = y; 
+		this.velX = 2;
 	}
 
 	construirRecta(){
@@ -308,31 +312,47 @@ Mapa.Poder.Disparo = class extends Mapa.Poder{
 	}
 
 	refrescar(){
-		//Este if revisa que el poder haya llegado a su destino. 
-		if (Math.abs(this.x-this.xf) > 0.09 || Math.abs(this.y-this.yf) > 0.09){
-			if (this.xi > this.xf) {
-				this.x--;
-				this.y = this.m*this.x+this.b;
-				partidaModulo.moverBala(this.id,this.x,this.y);
-				//console.log("x = "+ x + " y = "+ y); e.getTime()
-			  }
-			  else if (this.xi < this.xf){
-				this.x++;
-				this.y = this.m*this.x+this.b;
-				partidaModulo.moverBala(this.id,this.x,this.y);
-				//console.log("x = "+ x + " y = "+ y);  e.getTime()
-			  }
-			  else{ 
-				if (this.yi < this.yf) this.y++;
-				else this.y--;
-				partidaModulo.moverBala(this.id,this.x,this.y);
-				//console.log("x = "+ x + " y = "+ y)  e.getTime()
-			  }
+		var ytemp = this.y; 
+		var xtemp = this.x;
+		var yt = 0; 
+		var catx = 1; 
+		var caty = 0; 
+		var modulo = 0;
+		var xu = 0; 
+		var yu = 0; 
+		if (this.xi > this.xf) {
+			this.x--;
+			yt = this.m*this.x+this.b;
+			caty = Math.abs(ytemp - yt); 
+			modulo = Math.sqrt(catx + Math.pow(caty,2))
+			xu = (catx / modulo) * this.velX; yu = (caty / modulo) * this.velX; 
+			this.x = xtemp - xu; 
+			if (this.yf > this.yi) this.y = ytemp + yu; 
+			else this.y = ytemp - yu;
+			console.log("unitario " + Math.sqrt(Math.pow(xu,2) + Math.pow(yu,2)))
+			partidaModulo.moverBala(this.id,this.x,this.y);
+			//console.log("x = "+ x + " y = "+ y); e.getTime()
 		}
-		else {
-			partidaModulo.colisionBala(this.id);
-			this.fin = false;
-		}	 
+		else if (this.xi < this.xf){
+			this.x++;
+			yt = this.m*this.x+this.b;
+			caty = Math.abs(ytemp - yt); 
+			modulo = Math.sqrt(catx + Math.pow(caty,2))
+			xu = (catx / modulo) * this.velX; yu = (caty / modulo) * this.velX; 
+			this.x = xtemp + xu; 
+			if (this.yf > this.yi) this.y = ytemp + yu; 
+			else this.y = ytemp - yu;
+			console.log("unitario " + Math.sqrt(Math.pow(xu,2) + Math.pow(yu,2)))
+			partidaModulo.moverBala(this.id,this.x,this.y);
+			//console.log("x = "+ x + " y = "+ y); e.getTime()
+			}
+		else{ 
+			console.log("se va a la mierda");
+			if (this.yi < this.yf) this.y++ ;
+			else this.y = this.y--;
+			partidaModulo.moverBala(this.id,this.x,this.y);
+			//console.log("x = "+ x + " y = "+ y)  e.getTime()
+			} 
 	}
 }
 

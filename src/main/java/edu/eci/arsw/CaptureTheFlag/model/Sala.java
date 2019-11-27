@@ -115,6 +115,7 @@ public class Sala {
     public void banderaPersonaje(String nick) {
         if (!bandera.isTomada()) {
             datos.get(nick).cogerBandera();
+            bandera.setNick(nick);
         }
     }
 

@@ -1,9 +1,9 @@
 package edu.eci.arsw.CaptureTheFlag.model;
 
 public class Bandera {
-
-    private double x=50;
-    private double y=50;
+    private String nick;
+    private double x = 50;
+    private double y = 50;
     private boolean tomada = false;
 
     public Bandera() {
@@ -38,9 +38,17 @@ public class Bandera {
         this.tomada = tomada;
     }
 
+    public String getNick() {
+        return nick;
+    }
+
+    public void setNick(String nick) {
+        this.nick = nick;
+    }
+
     @Override
     public String toString() {
-        return "Bandera {tomada=" + tomada + ", x=" + x + ", y=" + y + "}";
+        return "Bandera {nick=" + nick + ", tomada=" + tomada + ", x=" + x + ", y=" + y + "}";
     }
 
 }

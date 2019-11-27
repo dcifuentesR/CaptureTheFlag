@@ -166,10 +166,14 @@ public class CaptureFlagSocketController {
     public void movimientoBandera(String valor, @DestinationVariable String nombre) {
         if (salas.containsKey(nombre)) {
             String[] valores = valor.split(";");
-            String key = valores[0];
+            String nick = valores[0];
             double x = Double.parseDouble(valores[1]);
             double y = Double.parseDouble(valores[2]);
-            salas.get(nombre).movimientoBandera(x, y);
+            if (nick == salas.get(nombre).getBandera().getNick()) {
+                salas.get(nombre).movimientoBandera(x, y);
+                msgt.convertAndSend("/topic/salaBandera." + nombre, salas.get(nombre).getBandera());
+            }
+
         }
     }
 
@@ -184,6 +188,7 @@ public class CaptureFlagSocketController {
     public void cogerBandera(String nick, @DestinationVariable String nombre) {
         if (salas.containsKey(nombre)) {
             salas.get(nombre).banderaPersonaje(nick);
+            msgt.convertAndSend("/topic/salaBandera." + nombre, salas.get(nombre).getBandera());
         }
     }
 

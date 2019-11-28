@@ -7,6 +7,8 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.4.0/sockjs.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+    <!-- JQuery-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
     <!-- Nuestro css-->
     <link
@@ -18,14 +20,37 @@
   </head>
   <!--   <h1>Capture The Flag</h1> -->
   <body onload="partidaModulo.init();verificationModule.check_cookie()">
-    <div id="juego"></div>
 
-    <canvas id="canvas"> </canvas>
+    <div class="row">
+      <div id="juego" class="column left">
+        <div class="row">
+          <div class="column left">
+            <img class="column left" id = "heart" src="img/heart.png" >
+            <img class="imagen" id = "mira" src="img/mira.png">
+            <img class="imagen" id = "fantasma" src="img/deaths.png">
+            <img class="imagen" id = "bandera" src="img/deaths.png">
+          </div>
+        <div class="column right">
+          <h1 id ="vida"></h1>
+          <h1 id ="kills"></h1>
+          <h1 id ="muertes"></h1>
+          <h1 id ="puntos"></h1>
+        </div>
+      </div>
+        
+      </div>
+      
+      <div class="column right">
+        <canvas id="canvas"> </canvas>
+      </div>
+    </div>
+    
     <script src="js/juego/conexionPartida.js"></script>
     <script src="js/juego/motor.js"></script>
     <script src="js/juego/vista.js"></script>
     <script src="js/juego/Controlador.js"></script>
     <script src="js/juego/mapa.js"></script>
     <script src="js/juego/main.js"></script>
+   
   </body>
 </html>

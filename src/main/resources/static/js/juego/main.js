@@ -35,6 +35,7 @@ var main = (function(){
 			vista.llenarCanvas(mapa.colorFondo);
 			vista.dibujarMapa(mapa.map,mapa.columnas);
 			estadoJuego.forEach(function(elementoActual){
+				mapa.checkKills(elementoActual);
 				vista.dibujarJugador(elementoActual["x"],elementoActual["y"],16,16,"#4287f5");
 			});
 			vista.renderizar();

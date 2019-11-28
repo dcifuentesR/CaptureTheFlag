@@ -82,11 +82,18 @@ class Mapa{
 
 	checkBanderaJugador(json){
 		this.bandera = new Mapa.ObjetoMovil(json.x,json.y,16,16);
-		if (verificationModule.readCookie("nickname") == json.nick){
+		if (this.jugador.nick == json.nick){
 			this.jugador.cogerBandera();
 		}
 		else if (this.bandera.estaColisionando(this.jugador)){
 			partidaModulo.cogerBandera();
+		}
+	}
+
+	checkKills(json){
+		if (this.jugador.nick == json.nick){
+			this.jugador.kills = json.kills;
+			$("#kills").text(this.jugador.kills);	
 		}
 	}
 
@@ -122,6 +129,7 @@ class Mapa{
 			}
 		}
 		if (this.jugador.tieneBandera){
+			this.jugador.time++;
 			partidaModulo.moverBandera(this.bandera.x,this.bandera.y);
 		}
 	}
@@ -217,11 +225,17 @@ Mapa.Jugador = class extends Mapa.ObjetoMovil{
 		this.piso = false;
 		this.poder = {};	
 		this.vida=vida;
+		$("#vida").text(this.vida);
 		this.tieneBandera = false;
 		this.puntos=0;
+		$("#puntos").text(this.puntos);
 		partidaModulo.getBalaEliminarLocal(this.eliminarBala);
 		this.muertes = 0;
+		$("#muertes").text(this.muertes);
 		this.kills = 0;
+		$("#kills").text(this.kills);
+		this.nick = verificationModule.readCookie("nickname");
+		this.time = 0;
 	}
 	
 	saltar(){
@@ -234,14 +248,17 @@ Mapa.Jugador = class extends Mapa.ObjetoMovil{
 	cogerBandera(){
 		this.tieneBandera=true;
 	}
+	
 	refrescar(){
 		this.xPrevFrame=this.x;
 		this.yPrevFrame=this.y;
 		this.x += this.velX;
 		this.y += this.velY;
 		
-		if(this.tieneBandera){
-			this.puntos++;		
+		if(this.tieneBandera == true && this.time > 60){
+			this.puntos++;
+			this.time = 0;		
+			$("#puntos").text(this.puntos);
 		}
 		if(this.xPrevFrame !=this.x || this.yPrevFrame!=this.y-3){
 			partidaModulo.mover(Math.floor(this.x),Math.floor(this.y)-3);
@@ -257,6 +274,7 @@ Mapa.Jugador = class extends Mapa.ObjetoMovil{
 				this.vida = this.vida - parseInt(poder.dano,10)/2;
 				console.log("vida perro" + this.vida);
 				partidaModulo.setVidaPJ(this.vida);
+				$("#vida").text(this.vida);
 				partidaModulo.colisionBala(poder.key);
 				if (this.vida <= 0) this.reiniciar(nick);
 			}
@@ -278,10 +296,13 @@ Mapa.Jugador = class extends Mapa.ObjetoMovil{
 		this.x = 30;
 		this.y = 20;
 		this.vida = 100;
+		$("#vida").text(this.vida);
 		this.muertes++;
+		$("#muertes").text(this.muertes);
 		partidaModulo.setMuerte(this.muertes);
 		partidaModulo.killPJ(nick);
 		this.tieneBandera = false;
+		this.time = 0;
 	}
 	
 }
@@ -355,7 +376,6 @@ Mapa.Poder.Disparo = class extends Mapa.Poder{
 			//console.log("x = "+ x + " y = "+ y); e.getTime()
 			}
 		else{ 
-			console.log("se va a la mierda");
 			if (this.yi < this.yf) this.y++ ;
 			else this.y = this.y--;
 			partidaModulo.moverBala(this.id,this.x,this.y);

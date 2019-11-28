@@ -104,6 +104,7 @@ public class Datos {
         if (!bG.isTomada()) {
             bandera = true;
             bG.setTomada(true);
+            bG.setNick(nick);
         }
     }
 
@@ -112,7 +113,7 @@ public class Datos {
             bandera = false;
             bG.setTomada(false);
             bG.setXY(x, y);
-            bG.setNick(null);
+            bG.setNick("............");
         }
     }
 

@@ -2,7 +2,7 @@
 body {
   /*no se repita/ centrado h/ centrado v/ tamaño se ajuste*/
   /*background: cadetblue;*/
-  background: url(../img/fondoHome.png) no-repeat center center fixed;
+  background: url(../img/fondoHome.webp) no-repeat center center fixed;
   /*ripo portada/ */
   background-size: cover;
 }

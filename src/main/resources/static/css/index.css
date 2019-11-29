@@ -1,6 +1,6 @@
 body {
   /*no se repita/ centrado h/ centrado v/ tamaño se ajuste*/
-  background: url(../img/fondo1.jpg) no-repeat center center fixed;
+  background: url(../img/fondo1.webp) no-repeat center center fixed;
   /*ripo portada/ */
   background-size: cover;
 }

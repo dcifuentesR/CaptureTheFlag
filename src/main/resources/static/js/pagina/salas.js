@@ -26,8 +26,6 @@ var salasModule = (function() {
   };
 
   var _joinSala = function(cuent) {
-    console.log("_createSala");
-    console.log("cuenta " + cuent + " asdsda " + cuent[0]);
     var cuenta = _createCuenta(cuent);
     console.log(cuenta);
     stompClient.send("/app/joinsala." + _nameSala, {}, JSON.stringify(cuenta));
@@ -35,8 +33,6 @@ var salasModule = (function() {
   };
 
   var _createSala = function(cuent) {
-    console.log("_createSala");
-    console.log("cuenta " + cuent + " asdsda " + cuent[0]);
     /*var cuenta = new Cuenta(
       cuent.id,
       cuent.correo,
@@ -44,7 +40,6 @@ var salasModule = (function() {
       cuent.nick
     );*/
     var cuenta = _createCuenta(cuent);
-    console.log(cuenta);
     stompClient.send(
       "/app/createsala." + _nameSala,
       {},
@@ -54,8 +49,6 @@ var salasModule = (function() {
   };
 
   var _tablaSalas = function() {
-    console.log("_tablaSalas");
-    console.log(_salas);
     $("#tabla-salas > tbody").empty();
     _salas.map(function(sala) {
       $("#tabla-salas > tbody").append(
@@ -77,7 +70,6 @@ var salasModule = (function() {
   };
 
   var _tablaParticipantes = function(participantes) {
-    console.log("_tablaParticipantes");
     $("#tabla-participantes > tbody").empty();
     participantes.map(function(participante) {
       $("#tabla-participantes > tbody").append(
@@ -98,13 +90,11 @@ var salasModule = (function() {
           _tablaParticipantes(_participantes);
         });
         if (_nameSala) {
-          console.log(_nameSala);
           stompClient.send("/app/sala." + _nameSala, {}, " ");
         }
       } else {
         stompClient.subscribe(_subscribe, function(eventbody) {
           var theObject = JSON.parse(eventbody.body);
-          //console.log(theObject);
           _salas = theObject;
           _tablaSalas();
         });
@@ -114,10 +104,24 @@ var salasModule = (function() {
   };
 
   var _createOrJoinSala = function(nSala, funcion) {
-	var date = new Date();
+    var date = new Date();
     _nameSala = nSala;
     document.cookie = "sala=" + encodeURIComponent(_nameSala);
-	document.cookie = "fechaSala=" + encodeURIComponent(date.getFullYear()+"-"+date.getMonth()+"-"+date.getDate()+"-"+date.getHours()+":"+date.getMinutes()+":"+date.getSeconds());
+    document.cookie =
+      "fechaSala=" +
+      encodeURIComponent(
+        date.getFullYear() +
+          "-" +
+          date.getMonth() +
+          "-" +
+          date.getDate() +
+          "-" +
+          date.getHours() +
+          ":" +
+          date.getMinutes() +
+          ":" +
+          date.getSeconds()
+      );
     _nick = verificationModule.readCookie("nickname");
     apiClient.checkPassword(_nick, funcion);
   };
@@ -128,21 +132,17 @@ var salasModule = (function() {
       if (sub == 1) {
         _subscribe = "/topic/showsala";
         connectAndSubscribe();
-        console.log("send");
         //salasModule.showSalas();
       } else {
-        console.log("sala " + _nameSala);
         _nameSala = verificationModule.readCookie("sala");
         _subscribe = "/topic/joinsala.";
         connectAndSubscribe();
       }
     },
     joinSala: function(nSala) {
-      console.log("joinSalas");
       _createOrJoinSala(nSala, _joinSala);
     },
     createSalas: function(nSala) {
-      console.log("createSalas");
       _createOrJoinSala(nSala, _createSala);
     },
     disconnect: function() {

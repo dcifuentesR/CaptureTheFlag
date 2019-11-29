@@ -9,9 +9,6 @@ var partidaModulo = (function() {
   var _callback;
   var salaViva = true;
 
-  /*var pintarInfoJuego = function(JSONObject){
-	  main.renderizar(JSONObject);
-  };*/
   var _crearBala = function(key, poder, x, y, dano) {
     var valor = key + ";" + poder + ";" + x + ";" + y + ";" + dano;
     stompClient.send("/app/createBalas." + _nameSala, {}, valor);
@@ -22,21 +19,16 @@ var partidaModulo = (function() {
     var socket = new SockJS("/stompendpoint");
     stompClient = Stomp.over(socket);
     stompClient.connect({}, function(frame) {
-      //console.log("Connected: " + frame);
+      console.log("Connected: " + frame);
       stompClient.subscribe("/topic/salaDatos." + _nameSala, function(
         eventbody
       ) {
-        //console.log(eventbody);
         theObject = JSON.parse(eventbody.body);
-        //metodos
-        //pintarInfoJuego(theObject);
       });
 
       stompClient.subscribe("/topic/salaBalas." + _nameSala, function(
         eventbody
       ) {
-        //console.log(eventbody);
-        //metodos
         theBalaObjects = JSON.parse(eventbody.body);
       });
 
@@ -50,18 +42,11 @@ var partidaModulo = (function() {
       stompClient.subscribe("/topic/salaBandera." + _nameSala, function(
         eventbody
       ) {
-        //console.log(eventbody);
-        //metodos
         theBanderaObjects = JSON.parse(eventbody.body);
       });
 
       stompClient.subscribe("/topic/finSala." + _nameSala, function(eventbody) {
-        //console.log(eventbody);
-        //metodos
-        //console.log("datos ganador -1" + eventbody);
-        //console.log("datos ganador 0" + eventbody.body);
         theObject = JSON.parse(eventbody.body);
-        //console.log("datos ganador 1" + theObject);
         vistahtmlModule.mobalDatos(theObject);
         salaViva = false;
       });
@@ -115,7 +100,7 @@ var partidaModulo = (function() {
     },
 
     setVidaPJ: function(vida) {
-      console.log("vida aa " + vida);
+      //console.log("vida aa " + vida);
       var valores = _nick + ";" + vida;
       stompClient.send("/app/vidaPj." + _nameSala, {}, valores);
     },

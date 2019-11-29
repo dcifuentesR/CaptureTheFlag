@@ -13,32 +13,45 @@ var appModule = (function() {
     apiClient.saveCuenta(JSON.stringify(cuenta));
     location.href = "/index.html";
   };
-  
-   var addPartida = function() {
+
+  var addPartida = function() {
     var fecha;
-    var nombre; 
-    var partida = {fecha: fecha, nombre: nombre};
+    var nombre;
+    var partida = { fecha: fecha, nombre: nombre };
     apiClient.savePartida(JSON.stringify(partida));
   };
-  
-  var addJugar = function(kills,muertes,posicion,puntos){
-    var partida = _getPartida(verificationModule.readCookie("sala"),verificationModule.readCookie("fechaSala"));
+
+  var addJugar = function(kills, muertes, posicion, puntos) {
+    var partida = _getPartida(
+      verificationModule.readCookie("sala"),
+      verificationModule.readCookie("fechaSala")
+    );
     var jugador = _getJugador(verificationModule.readCookie("nickname"));
-    var jugar = {cuenta:{id:jugador.id,correo:jugador.correo,contrasena:jugador.contrasena,nick:jugador.nick},
-    partida:{id:partida.id,fecha:partida.fecha,nombre:partida.nombre},
-    kills:kills,muertes:muertes,posicion:posicion,puntos:puntos};
-    apiClient.saveJugar(JSON.stringify(jugar),jugador.nick);
+    var jugar = {
+      cuenta: {
+        id: jugador.id,
+        correo: jugador.correo,
+        contrasena: jugador.contrasena,
+        nick: jugador.nick
+      },
+      partida: { id: partida.id, fecha: partida.fecha, nombre: partida.nombre },
+      kills: kills,
+      muertes: muertes,
+      posicion: posicion,
+      puntos: puntos
+    };
+    apiClient.saveJugar(JSON.stringify(jugar), jugador.nick);
   };
 
-  var _getPartida = function(nombre,fecha){
-    var partida = apiClient.getPartida(nombre,fecha);
-    return partida; 
-  }
+  var _getPartida = function(nombre, fecha) {
+    var partida = apiClient.getPartida(nombre, fecha);
+    return partida;
+  };
 
-  var _getJugador = function(nick){
+  var _getJugador = function(nick) {
     var jugador = apiClient.getJugador(nick);
     return jugador;
-  }
+  };
 
   var _check = function(cuenta) {
     var password = $("#password").val();
@@ -55,7 +68,7 @@ var appModule = (function() {
   return {
     checkPassword: checkPassword,
     addAcount: addAcount,
-	addPartida: addPartida,
+    addPartida: addPartida,
     addJugar: addJugar
   };
 })();
@@ -64,17 +77,17 @@ var verificationModule = (function() {
   var crear_cookie_sesion = function(usuario) {
     document.cookie = "nickname=" + encodeURIComponent(usuario);
     document.cookie = "sala=";
-	document.cookie = "fechaSala=";
+    document.cookie = "fechaSala=";
     var ca = document.cookie.split(";");
-    console.log("cookie inicial");
-    console.log(ca);
+    //console.log("cookie inicial");
+    //console.log(ca);
   };
 
   var readCookie = function(name) {
     var nameEQ = name + "=";
     var ca = document.cookie.split(";");
-    console.log("cookie");
-    console.log(ca);
+    //console.log("cookie");
+    //console.log(ca);
     for (var i = 0; i < ca.length; i++) {
       var c = ca[i];
       while (c.charAt(0) == " ") c = c.substring(1, c.length);
@@ -86,12 +99,12 @@ var verificationModule = (function() {
   };
 
   var check_cookie = function() {
-    console.log(document.cookie)
-        var user = readCookie("nickname");
-        if (user == null ){
-            alert("Permiso denegado, debe logearse primero.")
-            location.href = "/index.html"
-        }
+    //console.log(document.cookie)
+    var user = readCookie("nickname");
+    if (user == null) {
+      alert("Permiso denegado, debe logearse primero.");
+      location.href = "/index.html";
+    }
   };
 
   var borrar_cookie = function() {

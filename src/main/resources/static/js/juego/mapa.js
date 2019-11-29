@@ -82,8 +82,10 @@ class Mapa{
 
 	checkBanderaJugador(json){
 		this.bandera = new Mapa.ObjetoMovil(json.x,json.y,16,16);
-		if (this.jugador.nick == json.nick){
+		if (this.jugador.nick == json.nick && this.jugador.tieneBandera != true){
 			this.jugador.cogerBandera();
+		}else if (this.jugador.nick != json.nick && this.jugador.tieneBandera != false) {
+			this.jugador.quitarBandera();
 		}
 		else if (this.bandera.estaColisionando(this.jugador)){
 			partidaModulo.cogerBandera();
@@ -115,7 +117,7 @@ class Mapa{
 		this.bandera.refrescar();
 		this.manejarColisiones(this.bandera);
 		
-		console.log("size "+ Object.keys(this.jugador.poder).length);
+		//console.log("size "+ Object.keys(this.jugador.poder).length);
 		
 		if (Object.keys(this.jugador.poder).length > 0){
 			for (var key in this.jugador.poder) {
@@ -244,7 +246,9 @@ Mapa.Jugador = class extends Mapa.ObjetoMovil{
 			this.velY -= 20;
 		}
 	}
-	
+	quitarBandera(){
+		this.tieneBandera=false;
+	}
 	cogerBandera(){
 		this.tieneBandera=true;
 	}
@@ -254,8 +258,8 @@ Mapa.Jugador = class extends Mapa.ObjetoMovil{
 		this.yPrevFrame=this.y;
 		this.x += this.velX;
 		this.y += this.velY;
-		
 		if(this.tieneBandera == true && this.time > 60){
+			//console.log("tieneBandera "+this.tieneBandera);
 			this.puntos++;
 			this.time = 0;		
 			$("#puntos").text(this.puntos);
@@ -265,14 +269,14 @@ Mapa.Jugador = class extends Mapa.ObjetoMovil{
 		}
 	}
 	manejarColisiones(poder){
-		console.log("poder "+poder);
+		//console.log("poder "+poder);
 		var lista = poder.key.split(","); 
 		var nick = lista[0];
 		var id = lista[1];
 		if (verificationModule.readCookie("nickname") != nick){
 			if (Math.abs(poder.x - this.x) < 14  && Math.abs(poder.y-this.y) < 14){
 				this.vida = this.vida - parseInt(poder.dano,10)/2;
-				console.log("vida perro" + this.vida);
+				//console.log("vida perro" + this.vida);
 				partidaModulo.setVidaPJ(this.vida);
 				$("#vida").text(this.vida);
 				partidaModulo.colisionBala(poder.key);
@@ -292,6 +296,7 @@ Mapa.Jugador = class extends Mapa.ObjetoMovil{
 	}
 
 	reiniciar(nick){
+		this.tieneBandera = false;
 		partidaModulo.addPuntos(this.puntos);
 		this.x = 30;
 		this.y = 20;
@@ -301,8 +306,8 @@ Mapa.Jugador = class extends Mapa.ObjetoMovil{
 		$("#muertes").text(this.muertes);
 		partidaModulo.setMuerte(this.muertes);
 		partidaModulo.killPJ(nick);
-		this.tieneBandera = false;
 		this.time = 0;
+		//console.log("tieneBandera 1 "+this.tieneBandera);
 	}
 	
 }
@@ -358,7 +363,7 @@ Mapa.Poder.Disparo = class extends Mapa.Poder{
 			this.x = xtemp - xu; 
 			if (this.yf > this.yi) this.y = ytemp + yu; 
 			else this.y = ytemp - yu;
-			console.log("unitario " + Math.sqrt(Math.pow(xu,2) + Math.pow(yu,2)))
+			//console.log("unitario " + Math.sqrt(Math.pow(xu,2) + Math.pow(yu,2)))
 			partidaModulo.moverBala(this.id,this.x,this.y);
 			//console.log("x = "+ x + " y = "+ y); e.getTime()
 		}
@@ -371,7 +376,7 @@ Mapa.Poder.Disparo = class extends Mapa.Poder{
 			this.x = xtemp + xu; 
 			if (this.yf > this.yi) this.y = ytemp + yu; 
 			else this.y = ytemp - yu;
-			console.log("unitario " + Math.sqrt(Math.pow(xu,2) + Math.pow(yu,2)))
+			//console.log("unitario " + Math.sqrt(Math.pow(xu,2) + Math.pow(yu,2)))
 			partidaModulo.moverBala(this.id,this.x,this.y);
 			//console.log("x = "+ x + " y = "+ y); e.getTime()
 			}

@@ -114,8 +114,10 @@ var salasModule = (function() {
   };
 
   var _createOrJoinSala = function(nSala, funcion) {
+	var date = new Date();
     _nameSala = nSala;
     document.cookie = "sala=" + encodeURIComponent(_nameSala);
+	document.cookie = "fechaSala=" + encodeURIComponent(date.getFullYear()+"-"+date.getMonth()+"-"+date.getDate()+"-"+date.getHours()+":"+date.getMinutes()+":"+date.getSeconds());
     _nick = verificationModule.readCookie("nickname");
     apiClient.checkPassword(_nick, funcion);
   };

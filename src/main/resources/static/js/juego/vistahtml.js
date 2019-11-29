@@ -26,10 +26,15 @@ vistahtmlModule = (function() {
     $("#exampleModalCenter").modal("show");
   };
 
+  var redireccion = function() {
+    location.href = "/home.html";
+  };
+
   var mobalDatos = function(datos) {
     tablaGanador(datos);
   };
   return {
-    mobalDatos: mobalDatos
+    mobalDatos: mobalDatos,
+    redireccion: redireccion
   };
 })();

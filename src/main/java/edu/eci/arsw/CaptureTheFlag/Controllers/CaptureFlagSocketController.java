@@ -53,10 +53,9 @@ public class CaptureFlagSocketController {
     @MessageMapping("/finSala.{nombre}")
     public void finSala(@DestinationVariable String nombre) {
         if (salas.containsKey(nombre)) {
-            msgt.convertAndSend("/topic/finSala." + nombre, "fin");
+            msgt.convertAndSend("/topic/finSala."+ nombre, salas.get(nombre).getDatos());
             salas.remove(nombre);
         }
-
     }
 
     // ------------------ controladores de la partida-----------------------------//
@@ -187,7 +186,7 @@ public class CaptureFlagSocketController {
 
     @MessageMapping("/cogerBandera.{nombre}")
     public void cogerBandera(String nick, @DestinationVariable String nombre) {
-        //System.out.println( salas.get(nombre).getDatos());
+        // System.out.println( salas.get(nombre).getDatos());
         if (salas.containsKey(nombre)) {
             salas.get(nombre).banderaPersonaje(nick);
             msgt.convertAndSend("/topic/salaBandera." + nombre, salas.get(nombre).getBandera());

@@ -28,16 +28,14 @@ public class Jugar implements Serializable {
 
     private int kills;
     private int muertes;
-    private Time tbandera;
     private Integer posicion; 
     private Integer puntos; 
 
   
     
-    public Jugar(Cuenta cuenta, Partida partida, int kills, int muertes, Time tbandera, Integer posicion, Integer puntos) {
+    public Jugar(Cuenta cuenta, Partida partida, int kills, int muertes, Integer posicion, Integer puntos) {
         this.kills = kills;
         this.muertes = muertes;
-        this.tbandera = tbandera;
         this.posicion = posicion;
         this.puntos = puntos;
     }
@@ -78,14 +76,6 @@ public class Jugar implements Serializable {
         this.muertes = muertes;
     }
 
-    public Time getTbandera() {
-        return tbandera;
-    }
-
-    public void setTbandera(Time tbandera) {
-        this.tbandera = tbandera;
-    }
-    
       public Integer getPosicion() {
         return posicion;
     }

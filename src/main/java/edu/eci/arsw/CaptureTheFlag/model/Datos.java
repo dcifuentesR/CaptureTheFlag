@@ -130,8 +130,4 @@ public class Datos {
         this.bG = bG;
     }
 
-    public Bandera getbG() {
-        return bG;
-    }
-
 }

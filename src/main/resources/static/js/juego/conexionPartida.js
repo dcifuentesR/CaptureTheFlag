@@ -58,12 +58,8 @@ var partidaModulo = (function() {
       stompClient.subscribe("/topic/finSala." + _nameSala, function(eventbody) {
         //console.log(eventbody);
         //metodos
-        console.log("datos ganador -1" + eventbody);
-        console.log("datos ganador 0" + eventbody.body);
-        theObject = JSON.parse(eventbody.body);
-        console.log("datos ganador 1" + theObject);
-        vistahtmlModule.mobalDatos(theObject);
         salaViva = false;
+        alert("Fin partida");
       });
 
       conexion = true;

@@ -2,14 +2,12 @@ package edu.eci.arsw.CaptureTheFlag.model;
 
 import java.io.Serializable;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-
 public class Cuenta implements Serializable {
 
     /**
@@ -21,7 +19,6 @@ public class Cuenta implements Serializable {
 
     private String correo;
     private String contrasena;
-    @Column(unique=true)
     private String nick;
 
     public Cuenta(Long id, String correo, String contrasena, String nick) {

@@ -5,7 +5,7 @@ class Motor {
   constructor(timeStep, update, render) {
     this.inicioJuego = new Date();
     this.finJuego = new Date();
-    this.fin = 1000 * 60 * 1;
+    this.fin = 1000 * 60 * 5;
     this.accumulatedTime = 0;
     this.animationFrameRequest = undefined;
     this.time = undefined;

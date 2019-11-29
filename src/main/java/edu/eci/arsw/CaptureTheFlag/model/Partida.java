@@ -7,9 +7,6 @@ import java.sql.Time;
 import javax.persistence.*;
 
 @Entity
-@Table(uniqueConstraints={
-    @UniqueConstraint(columnNames = {"fecha", "nombre"})
-}) 
 public class Partida implements Serializable {
 
     /**
@@ -19,15 +16,25 @@ public class Partida implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    private Time duracion;
     private String fecha;
     private String nombre;
 
-    public Partida(String fecha, String nombre) {
+    public Partida(Time duracion, String fecha, String nombre) {
+        this.duracion = duracion;
         this.fecha = fecha;
         this.nombre = nombre;
     }
 
     public Partida() {
+    }
+
+    public Time getDuracion() {
+        return duracion;
+    }
+
+    public void setDuracion(Time duracion) {
+        this.duracion = duracion;
     }
 
     public Long getId() {
@@ -53,4 +60,12 @@ public class Partida implements Serializable {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
+
+    public Partida(Time duracion) {
+        this.duracion = duracion;
+    }
+    
+  
+
+
 }

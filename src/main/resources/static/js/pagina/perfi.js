@@ -58,6 +58,9 @@ var perfilModule = (function() {
           partida.kills +
           "</td>" +
           "<td>" +
+          partida.partida.duracion +
+          "</td>" +
+          "<td>" +
           partida.partida.fecha +
           "</td>" +
           "</tr>"

@@ -27,7 +27,7 @@ class Vista{
 			console.log("entra a vista");
 			console.log(poder.x + " "+ poder.y)
 			var poderI = new Image(); 
-			poderI.src = "img/disparo.png";
+			poderI.src = "img/disparo.webp";
 			this.buffer.drawImage(poderI,poder.x,poder.y,16,16);	
 		}
 

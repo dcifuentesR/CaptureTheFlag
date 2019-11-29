@@ -1,5 +1,6 @@
 var appModule = (function() {
   var nick;
+
   var checkPassword = function() {
     var nick = $("#nick").val();
     apiClient.checkPassword(nick, _check);
@@ -14,6 +15,32 @@ var appModule = (function() {
     location.href = "/index.html";
   };
 
+  var addPartida = function() {
+    var fecha;
+    var nombre; 
+    var partida = {fecha: fecha, nombre: nombre};
+    apiClient.savePartida(JSON.stringify(partida));
+  };
+
+  var addJugar = function(kills,muertes,posicion,puntos){
+    var partida = _getPartida(verificationModule.readCookie("sala"),verificationModule.readCookie("fechaSala"));
+    var jugador = _getJugador(verificationModule.readCookie("nickname"));
+    var jugar = {cuenta:{id:jugador.id,correo:jugador.correo,contrasena:jugador.contrasena,nick:jugador.nick},
+    partida:{id:partida.id,fecha:partida.fecha,nombre:partida.nombre},
+    kills:kills,muertes:muertes,posicion:posicion,puntos:puntos};
+    apiClient.saveJugar(JSON.stringify(jugar),jugador.nick);
+  };
+
+  var _getPartida = function(nombre,fecha){
+    var partida = apiClient.getPartida(nombre,fecha);
+    return partida; 
+  }
+
+  var _getJugador = function(nick){
+    var jugador = apiClient.getJugador(nick);
+    return jugador;
+  }
+
   var _check = function(cuenta) {
     var password = $("#password").val();
     if (cuenta.contrasena === password) {
@@ -25,10 +52,12 @@ var appModule = (function() {
       alert("Incorrect password");
     }
   };
-
+ 
   return {
     checkPassword: checkPassword,
-    addAcount: addAcount
+    addAcount: addAcount,
+    addPartida: addPartida,
+    addJugar: addJugar
   };
 })();
 
@@ -36,6 +65,7 @@ var verificationModule = (function() {
   var crear_cookie_sesion = function(usuario) {
     document.cookie = "nickname=" + encodeURIComponent(usuario);
     document.cookie = "sala=";
+    document.cookie = "fechaSala=";
     var ca = document.cookie.split(";");
     console.log("cookie inicial");
     console.log(ca);

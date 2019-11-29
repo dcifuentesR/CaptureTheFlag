@@ -28,7 +28,6 @@ public class Jugar implements Serializable {
 
     private int kills;
     private int muertes;
-    private Time tbandera;
     private Integer posicion; 
     private Integer puntos; 
 

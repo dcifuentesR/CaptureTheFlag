@@ -7,6 +7,9 @@ import java.sql.Time;
 import javax.persistence.*;
 
 @Entity
+@Table(uniqueConstraints={
+    @UniqueConstraint(columnNames = {"fecha", "nombre"})
+}) 
 public class Partida implements Serializable {
 
     /**

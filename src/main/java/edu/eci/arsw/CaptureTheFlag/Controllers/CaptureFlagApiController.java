@@ -80,7 +80,7 @@ public class CaptureFlagApiController {
         }
     }
     
-    @RequestMapping(method = GET, value = "/cuentas/{fecha}/{nombre}")
+    @RequestMapping(method = GET, value = "/partidas/{fecha}/{nombre}")
     public ResponseEntity<?> getPartida(@PathVariable(name = "fecha") String fecha
             ,@PathVariable(name = "nombre") String nombre) {
         try {
@@ -100,6 +100,7 @@ public class CaptureFlagApiController {
             Partida partidaf = services.getPartida(partida.getNombre(),partida.getFecha());
             return new ResponseEntity<>(partidaf,HttpStatus.CREATED);
         } catch (Exception ex) {
+            System.out.println(ex.getMessage());
             return new ResponseEntity<>("ERROR 403", HttpStatus.FORBIDDEN);
         }
     }

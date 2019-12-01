@@ -104,6 +104,28 @@ var main = (function() {
   var mapa = new Mapa();
   var motor = new Motor(1000 / 60, refrescar, renderizarJugador);
 
+  var terminarJuego = function(){
+      enviarPuntosFinales();
+      partidaModulo.finSala();
+
+      //var posicion = obtenerPosicion();
+      motor.stop();
+  };
+
+  var enviarPuntosFinales = function(){
+    //console.log("enviando pintos")
+    mapa.jugador.enviarPuntos();
+  };
+ /* var obtenerPosicion = function(){
+    partidaModulo.getJugadores(function(estadoJuego) {
+      var lista = {}
+      estadoJuego.forEach(function(elementoActual) {
+      });
+    });
+
+
+  }*/
+
   return {
     init: function() {
       vista.buffer.canvas.width = mapa.ancho;
@@ -123,20 +145,7 @@ var main = (function() {
         //Provide fallback for user agents that do not support Pointer Events
         canvas.addEventListener("mousedown", disparar, false);
       }
-      //vista.dibujarMapa(mapa.map,mapa.columnas);
-      //vista.llenarCanvas(mapa.colorFondo);
     },
-    terminarJuego(callback) {
-      motor.stop();
-      callback();
-    }
-    //		renderizar:function(estadoJuego){
-    //			vista.llenarCanvas(mapa.colorFondo);
-    //			vista.dibujarMapa(mapa.map,mapa.columnas);
-    //			estadoJuego.forEach(function(elementoActual){
-    //				vista.dibujarJugador(elementoActual["x"],elementoActual["y"],16,16,"#4287f5");
-    //			});
-    //			vista.renderizar();
-    //		}
+    terminarJuego: terminarJuego 
   };
 })();

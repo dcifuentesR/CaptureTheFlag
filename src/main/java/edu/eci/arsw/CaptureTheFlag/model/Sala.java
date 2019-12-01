@@ -1,6 +1,7 @@
 package edu.eci.arsw.CaptureTheFlag.model;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -35,8 +36,11 @@ public class Sala {
 
     public List<Datos> getDatos() {
         List<Datos> temp = new ArrayList<Datos>(datos.values());
+        Collections.sort(temp, new Comparador()); 
         return temp;
     }
+
+
 
     public void setDatos(ConcurrentHashMap<String, Datos> datos) {
         this.datos = datos;

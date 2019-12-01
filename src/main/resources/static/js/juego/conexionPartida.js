@@ -5,6 +5,7 @@ var partidaModulo = (function() {
   var conexion = false;
   var theObject = undefined;
   var theBalaObjects = undefined;
+  var theObjectSala = undefined;
   var theBanderaObjects = undefined;
   var _callback;
   var salaViva = true;
@@ -47,9 +48,11 @@ var partidaModulo = (function() {
 
       stompClient.subscribe("/topic/finSala." + _nameSala, function(eventbody) {
         //console.log("fin sala " + eventbody);
-        theObject = JSON.parse(eventbody.body);
-        vistahtmlModule.mobalDatos(theObject);
+        theObjectSala = JSON.parse(eventbody.body);
+        vistahtmlModule.mobalDatos(theObjectSala);
         salaViva = false;
+        appModule.addPartida(theObjectSala);
+        
       });
 
       conexion = true;
@@ -79,6 +82,9 @@ var partidaModulo = (function() {
       stompClient.send("/app/salaDatos." + _nameSala, {}, " ");
       stompClient.send("/app/finSala." + _nameSala, {}, " ");
     },
+   /*  getSala: function(){
+      if (theObjectSala !== undefined) return theObjectSala;
+    },*/
     getSalaViva: function() {
       return salaViva;
     },

@@ -252,6 +252,9 @@ Mapa.Jugador = class extends Mapa.ObjetoMovil{
 	cogerBandera(){
 		this.tieneBandera=true;
 	}
+	enviarPuntos(){
+		partidaModulo.addPuntos(this.puntos);
+	}
 	
 	refrescar(){
 		this.xPrevFrame=this.x;
@@ -297,7 +300,7 @@ Mapa.Jugador = class extends Mapa.ObjetoMovil{
 
 	reiniciar(nick){
 		this.tieneBandera = false;
-		partidaModulo.addPuntos(this.puntos);
+		this.enviarPuntos();
 		this.x = 30;
 		this.y = 20;
 		this.vida = 100;

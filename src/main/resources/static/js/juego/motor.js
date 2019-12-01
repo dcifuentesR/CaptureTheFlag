@@ -44,10 +44,7 @@ class Motor {
           this.handleRun
         );
       } else {
-        partidaModulo.finSala();
-        appModule.addPartida();
-
-
+          main.terminarJuego();
       }
     };
 
@@ -61,6 +58,7 @@ class Motor {
     this.time = window.performance.now();
     this.animationFrameRequest = window.requestAnimationFrame(this.handleRun);
   }
+
 
   stop() {
     window.cancelAnimationFrame(this.animationFrameRequest);

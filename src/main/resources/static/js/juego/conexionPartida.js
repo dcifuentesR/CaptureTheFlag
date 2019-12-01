@@ -33,13 +33,6 @@ var partidaModulo = (function() {
         theBalaObjects = JSON.parse(eventbody.body);
       });
 
-      stompClient.subscribe("/topic/eliBalaLocal." + _nameSala, function(
-        eventbody
-      ) {
-        var thebalaEObjects = JSON.parse(eventbody.body);
-        _callback(thebalaEObjects);
-      });
-
       stompClient.subscribe("/topic/salaBandera." + _nameSala, function(
         eventbody
       ) {

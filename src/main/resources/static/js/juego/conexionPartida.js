@@ -46,6 +46,7 @@ var partidaModulo = (function() {
       });
 
       stompClient.subscribe("/topic/finSala." + _nameSala, function(eventbody) {
+        //console.log("fin sala " + eventbody);
         theObject = JSON.parse(eventbody.body);
         vistahtmlModule.mobalDatos(theObject);
         salaViva = false;

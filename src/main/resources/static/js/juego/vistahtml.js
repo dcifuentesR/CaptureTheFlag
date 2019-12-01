@@ -1,7 +1,7 @@
 vistahtmlModule = (function() {
-  var tablaGanador = function(datos) {
+  var tablaGanador = function(sala) {
     //$("#tabla-ganador").empty();
-    datos.map(function(dato) {
+    sala.datos.map(function(dato) {
       console.log("datos ganador nick" + dato.nick);
       console.log("datos ganador puntos" + dato.puntos);
       console.log("datos ganador kills" + dato.kills);
@@ -30,8 +30,8 @@ vistahtmlModule = (function() {
     location.href = "/home.html";
   };
 
-  var mobalDatos = function(datos) {
-    tablaGanador(datos);
+  var mobalDatos = function(sala) {
+    tablaGanador(sala);
   };
   return {
     mobalDatos: mobalDatos,

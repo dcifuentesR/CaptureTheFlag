@@ -38,14 +38,13 @@ public class Sala {
         return temp;
     }
 
-    public List<Cuenta> getMiembrosName() {
-        List<Cuenta> temp = new ArrayList<Cuenta>(miembros.values());
-        return temp;
+    public void setDatos(ConcurrentHashMap<String, Datos> datos) {
+        this.datos = datos;
     }
 
-    @Override
-    public String toString() {
-        return "Sala{miembros=" + miembros + ", nombre=" + nombre + "}";
+    public List<Cuenta> miembrosName() {
+        List<Cuenta> temp = new ArrayList<Cuenta>(miembros.values());
+        return temp;
     }
 
     public String getNombre() {
@@ -83,7 +82,7 @@ public class Sala {
         balas.put(key, bala);
     }
 
-    public List<Bala> getBalas() {
+    public List<Bala> balas() {
         List<Bala> temp = new ArrayList<Bala>(balas.values());
         return temp;
     }
@@ -130,6 +129,11 @@ public class Sala {
 
     public void setFecha(String fecha) {
         this.fecha = fecha;
+    }
+
+    @Override
+    public String toString() {
+        return "Sala [fecha=" + fecha + ", miembros=" + miembros + ", nombre=" + nombre + "]";
     }
 
 }

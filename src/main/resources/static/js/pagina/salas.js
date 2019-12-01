@@ -15,7 +15,7 @@ var salasModule = (function() {
   var _joinSala = function(cuent) {
     var cuenta = _createCuenta(cuent);
     console.log(cuenta);
-    stompClient.send("/app/joinsala." + _nameSala, {}, JSON.stringify(cuenta));
+    stompClient.send("/app/joinsala." + _nameSala, {}, cuenta);
     location.href = "/sala.html";
   };
 
@@ -51,7 +51,7 @@ var salasModule = (function() {
           sala.nombre +
           "</td>" +
           "<td>" +
-          Object.keys(sala.miembrosName).length +
+          Object.keys(sala.datos).length +
           "</td>" +
           "<td>" +
           "<a class='btn btn-primary' onclick='salasModule.joinSala(\"" +

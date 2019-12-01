@@ -44,15 +44,21 @@ public class CaptureFlagSocketController {
     }
 
     @MessageMapping("/joinsala.{nombre}")
-    public void joinSalasEvent(Cuenta cuenta, @DestinationVariable String nombre) {
+    public void joinSalasEvent(String cuentaF, @DestinationVariable String nombre) {
+        String[] datos = cuentaF.split(";");
+        Long id = Long.valueOf(datos[0]);
+        String correo = datos[1];
+        String contrasena = datos[2];
+        String nick = datos[3];
+        Cuenta cuenta = new Cuenta(id, correo, contrasena, nick);
         Sala temp = salas.get(nombre);
         temp.addMiembro(cuenta);
-        msgt.convertAndSend("/topic/joinsala." + nombre, salas.get(nombre).getMiembrosName());
+        msgt.convertAndSend("/topic/joinsala." + nombre, salas.get(nombre).miembrosName());
     }
 
     @MessageMapping("/sala.{nombre}")
     public void joinSalasEvent(@DestinationVariable String nombre) {
-        msgt.convertAndSend("/topic/joinsala." + nombre, salas.get(nombre).getMiembrosName());
+        msgt.convertAndSend("/topic/joinsala." + nombre, salas.get(nombre).miembrosName());
     }
 
     @MessageMapping("/showsala")
@@ -63,7 +69,7 @@ public class CaptureFlagSocketController {
     @MessageMapping("/finSala.{nombre}")
     public void finSala(@DestinationVariable String nombre) {
         if (salas.containsKey(nombre)) {
-            msgt.convertAndSend("/topic/finSala." + nombre, salas.get(nombre).getDatos());
+            msgt.convertAndSend("/topic/finSala." + nombre, salas.get(nombre));
             salas.remove(nombre);
         }
 
@@ -146,7 +152,7 @@ public class CaptureFlagSocketController {
     @MessageMapping("/salaBalas.{nombre}")
     public void getBalas(@DestinationVariable String nombre) {
         if (salas.containsKey(nombre)) {
-            msgt.convertAndSend("/topic/salaBalas." + nombre, salas.get(nombre).getBalas());
+            msgt.convertAndSend("/topic/salaBalas." + nombre, salas.get(nombre).balas());
         }
     }
 

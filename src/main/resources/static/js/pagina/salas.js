@@ -1,13 +1,4 @@
 var salasModule = (function() {
-  class Cuenta {
-    constructor(id, correo, contrasena, nick) {
-      this.correo = correo;
-      this.contrasena = contrasena;
-      this.nick = nick;
-      this.id = id;
-    }
-  }
-
   var _nick;
   var stompClient = null;
   var _nameSala;
@@ -16,11 +7,8 @@ var salasModule = (function() {
   var _salas;
 
   var _createCuenta = function(cuent) {
-    var cuenta = 
-      cuent.id + ";"+
-      cuent.correo + ";"+
-      cuent.contrasena + ";"+
-      cuent.nick;
+    var cuenta =
+      cuent.id + ";" + cuent.correo + ";" + cuent.contrasena + ";" + cuent.nick;
     return cuenta;
   };
 
@@ -37,18 +25,19 @@ var salasModule = (function() {
     stompClient.send(
       "/app/createsala." + _nameSala,
       {},
-      cuenta + ";" + 
+      cuenta +
+        ";" +
         date.getFullYear() +
-          "-" +
-          date.getMonth() +
-          "-" +
-          date.getDate() +
-          "-" +
-          date.getHours() +
-          ":" +
-          date.getMinutes() +
-          ":" +
-          date.getSeconds()
+        "-" +
+        date.getMonth() +
+        "-" +
+        date.getDate() +
+        "-" +
+        date.getHours() +
+        ":" +
+        date.getMinutes() +
+        ":" +
+        date.getSeconds()
     );
     location.href = "/sala.html";
   };

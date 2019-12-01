@@ -14,6 +14,7 @@ public class Sala {
 
     private String nombre;
     private Bandera bandera;
+    private String fecha;
 
     public Sala() {
     }
@@ -121,6 +122,14 @@ public class Sala {
 
     public Bandera getBandera() {
         return bandera;
+    }
+
+    public String getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(String fecha) {
+        this.fecha = fecha;
     }
 
 }

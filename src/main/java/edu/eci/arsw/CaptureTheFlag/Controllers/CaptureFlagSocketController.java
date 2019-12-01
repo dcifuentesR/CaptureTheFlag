@@ -21,11 +21,22 @@ public class CaptureFlagSocketController {
     // ------------------ controladores de la sala----------------------------//
 
     @MessageMapping("/createsala.{nombre}")
-    public void createSalasEvent(Cuenta cuenta, @DestinationVariable String nombre) throws Exception {
+    public void createSalasEvent(String cuentaF, @DestinationVariable String nombre) throws Exception {
         if (!salas.containsKey(nombre)) {
+            String[] datos = cuentaF.split(";");
+            Long id = Long.valueOf(datos[0]);
+            String correo = datos[1];
+            String contrasena = datos[2];
+            String nick = datos[3];
+            String fecha = datos[4];
+            Cuenta cuenta = new Cuenta(id, correo, contrasena, nick);
+
             Sala sala = new Sala(nombre);
             sala.addMiembro(cuenta);
+            sala.setFecha(fecha);
+
             salas.put(nombre, sala);
+
         }
         // System.out.println(salas.values().toString());
         msgt.convertAndSend("/topic/joinsala." + nombre, salas.get(nombre));

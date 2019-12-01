@@ -45,6 +45,9 @@ class Motor {
         );
       } else {
         partidaModulo.finSala();
+        appModule.addPartida();
+
+
       }
     };
 

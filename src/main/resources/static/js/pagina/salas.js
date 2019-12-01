@@ -16,12 +16,11 @@ var salasModule = (function() {
   var _salas;
 
   var _createCuenta = function(cuent) {
-    var cuenta = new Cuenta(
-      cuent.id,
-      cuent.correo,
-      cuent.contrasena,
-      cuent.nick
-    );
+    var cuenta = 
+      cuent.id + ";"+
+      cuent.correo + ";"+
+      cuent.contrasena + ";"+
+      cuent.nick;
     return cuenta;
   };
 
@@ -33,17 +32,23 @@ var salasModule = (function() {
   };
 
   var _createSala = function(cuent) {
-    /*var cuenta = new Cuenta(
-      cuent.id,
-      cuent.correo,
-      cuent.contrasena,
-      cuent.nick
-    );*/
+    var date = new Date();
     var cuenta = _createCuenta(cuent);
     stompClient.send(
       "/app/createsala." + _nameSala,
       {},
-      JSON.stringify(cuenta)
+      cuenta + ";" + 
+        date.getFullYear() +
+          "-" +
+          date.getMonth() +
+          "-" +
+          date.getDate() +
+          "-" +
+          date.getHours() +
+          ":" +
+          date.getMinutes() +
+          ":" +
+          date.getSeconds()
     );
     location.href = "/sala.html";
   };
@@ -107,21 +112,6 @@ var salasModule = (function() {
     var date = new Date();
     _nameSala = nSala;
     document.cookie = "sala=" + encodeURIComponent(_nameSala);
-    document.cookie =
-      "fechaSala=" +
-      encodeURIComponent(
-        date.getFullYear() +
-          "-" +
-          date.getMonth() +
-          "-" +
-          date.getDate() +
-          "-" +
-          date.getHours() +
-          ":" +
-          date.getMinutes() +
-          ":" +
-          date.getSeconds()
-      );
     _nick = verificationModule.readCookie("nickname");
     apiClient.checkPassword(_nick, funcion);
   };

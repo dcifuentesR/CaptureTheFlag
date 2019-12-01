@@ -15,8 +15,8 @@ var appModule = (function() {
   };
 
   var addPartida = function() {
-    var fecha;
-    var nombre;
+    var fecha =  "get fecha del stomp";
+    var nombre = verificationModule.readCookie("sala");
     var partida = { fecha: fecha, nombre: nombre };
     apiClient.savePartida(JSON.stringify(partida));
   };
@@ -77,7 +77,6 @@ var verificationModule = (function() {
   var crear_cookie_sesion = function(usuario) {
     document.cookie = "nickname=" + encodeURIComponent(usuario);
     document.cookie = "sala=";
-    document.cookie = "fechaSala=";
     var ca = document.cookie.split(";");
     //console.log("cookie inicial");
     //console.log(ca);

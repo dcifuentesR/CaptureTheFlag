@@ -266,6 +266,7 @@ Mapa.Jugador = class extends Mapa.ObjetoMovil{
 			this.puntos++;
 			this.time = 0;		
 			$("#puntos").text(this.puntos);
+			this.enviarPuntos(this.puntos);
 		}
 		if(this.xPrevFrame !=this.x || this.yPrevFrame!=this.y-3){
 			partidaModulo.mover(Math.floor(this.x),Math.floor(this.y)-3);

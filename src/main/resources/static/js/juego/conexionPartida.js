@@ -49,10 +49,9 @@ var partidaModulo = (function() {
       stompClient.subscribe("/topic/finSala." + _nameSala, function(eventbody) {
         //console.log("fin sala " + eventbody);
         theObjectSala = JSON.parse(eventbody.body);
+        appModule.addPartida(theObjectSala);
         vistahtmlModule.mobalDatos(theObjectSala);
         salaViva = false;
-        appModule.addPartida(theObjectSala);
-        
       });
 
       conexion = true;
@@ -81,6 +80,7 @@ var partidaModulo = (function() {
     finSala: function() {
       stompClient.send("/app/salaDatos." + _nameSala, {}, " ");
       stompClient.send("/app/finSala." + _nameSala, {}, " ");
+      
     },
    /*  getSala: function(){
       if (theObjectSala !== undefined) return theObjectSala;

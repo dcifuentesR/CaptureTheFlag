@@ -1,5 +1,11 @@
 vistahtmlModule = (function() {
+
+  var partida;
+  var datos;
+
   var tablaGanador = function(sala) {
+    partida = sala; 
+    datos = sala.datos;
     //$("#tabla-ganador").empty();
     sala.datos.map(function(dato) {
       console.log("datos ganador nick" + dato.nick);
@@ -27,7 +33,7 @@ vistahtmlModule = (function() {
   };
 
   var redireccion = function() {
-    location.href = "/home.html";
+    appModule.addJugar(datos, partida);
   };
 
   var mobalDatos = function(sala) {

@@ -1,5 +1,7 @@
 var appModule = (function() {
   var nick;
+  var jugador; 
+
   var checkPassword = function() {
     var nick = $("#nick").val();
     apiClient.checkPassword(nick, _check);
@@ -20,13 +22,39 @@ var appModule = (function() {
     var partida = { fecha: date, nombre: nombre };
     apiClient.savePartida(JSON.stringify(partida));
   };
+  
 
-  var addJugar = function(kills, muertes, posicion, puntos) {
-    var partida = _getPartida(
+  var addJugar = function(json,sala){
+    nick = verificationModule.readCookie("nickname");
+    var posicion = 1;
+    json.forEach(function(dato) {
+      console.log("base nick " + dato.nick);
+      console.log("base nick2 " + nick);
+      if (dato.nick == nick){
+        _getJugador(nick,dato,posicion,sala);
+      }
+      else {
+        posicion++;
+      }
+    });
+  };
+
+  var _getJugador = function(nick,dato,posicion,sala) {
+    apiClient.getJugador(nick,dato,posicion,sala,consultarPartida);
+  };
+
+  var consultarPartida = function(player,dato,posicion,sala){
+    jugador = player;
+    _getPartida(
       verificationModule.readCookie("sala"),
-      verificationModule.readCookie("fechaSala")
+      sala.fecha,dato,posicion
     );
-    var jugador = _getJugador(verificationModule.readCookie("nickname"));
+  }
+  var _getPartida = function(nombre, fecha,dato,posicion) {
+    apiClient.getPartida(nombre, fecha,enviarPartida,dato,posicion);
+  };
+
+  var enviarPartida = function(sala,dato,posicion){
     var jugar = {
       cuenta: {
         id: jugador.id,
@@ -34,24 +62,16 @@ var appModule = (function() {
         contrasena: jugador.contrasena,
         nick: jugador.nick
       },
-      partida: { id: partida.id, fecha: partida.fecha, nombre: partida.nombre },
-      kills: kills,
-      muertes: muertes,
+      partida: { id: sala.id, fecha: sala.fecha, nombre: sala.nombre },
+      kills: dato.kills,
+      muertes: dato.muertes,
       posicion: posicion,
-      puntos: puntos
+      puntos: dato.puntos
     };
     apiClient.saveJugar(JSON.stringify(jugar), jugador.nick);
-  };
+  }
 
-  var _getPartida = function(nombre, fecha) {
-    var partida = apiClient.getPartida(nombre, fecha);
-    return partida;
-  };
-
-  var _getJugador = function(nick) {
-    var jugador = apiClient.getJugador(nick);
-    return jugador;
-  };
+ 
 
   var _check = function(cuenta) {
     var password = $("#password").val();

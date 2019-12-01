@@ -22,32 +22,36 @@ apiClient = (function() {
     },
 
     saveJugar: function(jugar,nick) {
-      //console.log(cuenta);
+      console.log("jugar " + jugar);
       $.ajax({
         url: "cuentas/" + nick + "/partidas",
         type: "post",
         data: jugar,
-        contentType: "application/json"
-      });
-    },
-
-    
-    getPartida: function(nombre, fecha) {
-      $.ajax({
-        url: "cuentas/" + fecha + "/" + nombre,
-        success: function(result) {
-          //console.log(result);
-          return result;
+        contentType: "application/json",
+        success: function(){
+          location.href = "/home.html";
         }
       });
     },
 
-    getJugador: function(nick) {
+    
+    getPartida: function(nombre, fecha,callback,dato,posicion) {
+      console.log("fecha: " + fecha + "nombre: " + nombre);
+      $.ajax({
+        url: "partidas/" + fecha + "/" + nombre,
+        success: function(result) {
+          console.log("partidaaaa " + result);
+          callback(result,dato,posicion); 
+        }
+      });
+    },
+
+    getJugador: function(nick,dato,posicion,sala,callback){
       $.ajax({
         url: "cuentas/" + nick,
         success: function(result) {
-          //console.log(result);
-          return result;
+          console.log("jugador "+ result);
+          callback(result,dato,posicion,sala); 
         }
       });
     },

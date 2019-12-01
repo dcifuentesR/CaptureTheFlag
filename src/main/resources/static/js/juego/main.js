@@ -105,17 +105,13 @@ var main = (function() {
   var motor = new Motor(1000 / 60, refrescar, renderizarJugador);
 
   var terminarJuego = function(){
-      enviarPuntosFinales();
       partidaModulo.finSala();
-
+      
       //var posicion = obtenerPosicion();
       motor.stop();
   };
 
-  var enviarPuntosFinales = function(){
-    //console.log("enviando pintos")
-    mapa.jugador.enviarPuntos();
-  };
+  
  /* var obtenerPosicion = function(){
     partidaModulo.getJugadores(function(estadoJuego) {
       var lista = {}

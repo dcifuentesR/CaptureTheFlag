@@ -80,7 +80,7 @@ public class CaptureFlagApiController {
         }
     }
     
-    @RequestMapping(method = GET, value = "/cuentas/{fecha}/{nombre}")
+    @RequestMapping(method = GET, value = "/partidas/{fecha}/{nombre}")
     public ResponseEntity<?> getPartida(@PathVariable(name = "fecha") String fecha
             ,@PathVariable(name = "nombre") String nombre) {
         try {

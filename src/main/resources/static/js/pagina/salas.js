@@ -5,6 +5,7 @@ var salasModule = (function() {
   var _subscribe;
   var _participantes;
   var _salas;
+  var _imagen;
 
   var _createCuenta = function(cuent) {
     var cuenta =
@@ -129,6 +130,14 @@ var salasModule = (function() {
         stompClient.disconnect();
       }
       console.log("Disconnected");
+    },
+    personaje: function(pj) {
+      $("#personaje").html(
+        "<img id='fantasma' src='img/personaje/" +
+          pj +
+          "' style='height: 50px; width: 50;' >"
+      );
+      document.cookie = "img=" + encodeURIComponent(img);
     }
   };
 })();

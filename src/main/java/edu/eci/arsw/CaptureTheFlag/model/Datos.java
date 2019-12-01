@@ -13,6 +13,7 @@ public class Datos {
     private String nick;
     private boolean bandera = false;
     private Bandera bG;
+    private String img = "verde-der";
 
     public Datos() {
     }
@@ -128,6 +129,14 @@ public class Datos {
 
     public void setbG(Bandera bG) {
         this.bG = bG;
+    }
+
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
     }
 
 }

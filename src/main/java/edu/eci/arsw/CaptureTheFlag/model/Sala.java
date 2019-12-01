@@ -36,11 +36,9 @@ public class Sala {
 
     public List<Datos> getDatos() {
         List<Datos> temp = new ArrayList<Datos>(datos.values());
-        Collections.sort(temp, new Comparador()); 
+        Collections.sort(temp, new Comparador());
         return temp;
     }
-
-
 
     public void setDatos(ConcurrentHashMap<String, Datos> datos) {
         this.datos = datos;
@@ -62,6 +60,10 @@ public class Sala {
     /*-----------------jugador --------------*/
     public void movimientoPJ(String nick, double x, double y) {
         datos.get(nick).setXY(x, y);
+        if (datos.get(nick).isBandera()) {
+            bandera.setXY(x, y);
+        }
+
     }
 
     public void setVidaPJ(String nick, int vida) {
@@ -78,6 +80,10 @@ public class Sala {
 
     public void setMuerte(String nick, int muertes) {
         datos.get(nick).setMuertes(muertes);
+    }
+
+    public void setImgPJ(String nick, String img) {
+        datos.get(nick).setImg(img);
     }
 
     /*-----------------balas --------------*/
@@ -112,9 +118,9 @@ public class Sala {
     }
 
     /*-----------------bandera --------------*/
-    public void movimientoBandera(double x, double y) {
-        bandera.setXY(x, y);
-    }
+    /*
+     * public void movimientoBandera(double x, double y) { bandera.setXY(x, y); }
+     */
 
     public void banderaPersonaje(String nick) {
         if (!bandera.isTomada()) {

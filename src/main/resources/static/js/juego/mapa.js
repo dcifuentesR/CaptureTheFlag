@@ -260,6 +260,7 @@ Mapa.Jugador = class extends Mapa.ObjetoMovil{
 	
 	quitarBandera(){
 		this.tieneBandera=false;
+		this.leerCookieImagen(verificationModule.readCookie("img"));
 	}
 	cogerBandera(){
 		this.tieneBandera=true;
@@ -332,6 +333,7 @@ Mapa.Jugador = class extends Mapa.ObjetoMovil{
 	reiniciar(nick){
 		this.tieneBandera = false;
 		this.enviarPuntos();
+		this.leerCookieImagen(verificationModule.readCookie("img"));
 		this.x = 30;
 		this.y = 20;
 		this.vida = 100;
@@ -341,7 +343,6 @@ Mapa.Jugador = class extends Mapa.ObjetoMovil{
 		partidaModulo.setMuerte(this.muertes);
 		partidaModulo.killPJ(nick);
 		this.time = 0;
-		this.leerCookieImagen(verificationModule.readCookie("img"));
 		//console.log("tieneBandera 1 "+this.tieneBandera);
 	}
 	

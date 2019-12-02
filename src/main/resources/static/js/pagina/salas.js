@@ -104,6 +104,7 @@ var salasModule = (function() {
     document.cookie = "sala=" + encodeURIComponent(_nameSala);
     _nick = verificationModule.readCookie("nickname");
     apiClient.checkPassword(_nick, funcion);
+    document.cookie = "img=" + encodeURIComponent("verde-der");
   };
 
   return {

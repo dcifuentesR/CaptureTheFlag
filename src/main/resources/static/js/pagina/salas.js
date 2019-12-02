@@ -135,9 +135,9 @@ var salasModule = (function() {
       $("#personaje").html(
         "<img id='fantasma' src='img/personaje/" +
           pj +
-          "' style='height: 50px; width: 50;' >"
+          ".webp' style='height: 50px; width: 50;' >"
       );
-      document.cookie = "img=" + encodeURIComponent(img);
+      document.cookie = "img=" + encodeURIComponent(pj);
     }
   };
 })();

@@ -46,7 +46,7 @@ class Vista {
     this.dibujarPoder = function(poder) {
       var poderI = new Image();
       poderI.src = "img/disparo.webp";
-      this.buffer.drawImage(poderI, poder.x, poder.y, 16, 16);
+      this.buffer.drawImage(poderI, poder.x, poder.y, 12, 12);
     };
 
     this.llenarCanvas = function(color) {

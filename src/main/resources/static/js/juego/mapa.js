@@ -224,7 +224,7 @@ Mapa.ObjetoMovil = class extends Mapa.Objeto{
 Mapa.Jugador = class extends Mapa.ObjetoMovil{
 	constructor(x,y,ancho,alto,vida){
 		super(x,y,ancho,alto);
-		this.pasoVelX=0.6;
+		this.pasoVelX=0.5;
 		this.saltando = true;
 		this.piso = false;
 		this.poder = {};	
@@ -290,7 +290,6 @@ Mapa.Jugador = class extends Mapa.ObjetoMovil{
 		this.x += this.velX;
 		this.y += this.velY;
 		if(this.tieneBandera == true && this.time > 60){
-			//console.log("tieneBandera "+this.tieneBandera);
 			this.puntos++;
 			this.time = 0;
 			this.color = "bandera";
@@ -304,14 +303,12 @@ Mapa.Jugador = class extends Mapa.ObjetoMovil{
 		}
 	}
 	manejarColisiones(poder){
-		//console.log("poder "+poder);
 		var lista = poder.key.split(","); 
 		var nick = lista[0];
 		var id = lista[1];
 		if (verificationModule.readCookie("nickname") != nick){
 			if (Math.abs(poder.x - this.x) < 14  && Math.abs(poder.y-this.y) < 14){
 				this.vida = this.vida - parseInt(poder.dano,10)/2;
-				//console.log("vida perro" + this.vida);
 				partidaModulo.setVidaPJ(this.vida);
 				$("#vida").text(this.vida);
 				partidaModulo.colisionBala(poder.key);

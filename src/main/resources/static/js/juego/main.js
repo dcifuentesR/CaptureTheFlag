@@ -18,7 +18,7 @@ var main = (function() {
 
   var activarPoder = function(xf, yf) {
     var e = new Date();
-    //console.log("disparo");
+    console.log("coordenadas: " + xf,yf);
     var key = e.getTime();
     mapa.jugador.poder[key] = new Mapa.Poder.Disparo(
       mapa.jugador.x,
@@ -51,13 +51,14 @@ var main = (function() {
       vista.llenarCanvas(mapa.colorFondo);
       vista.dibujarMapa(mapa.map, mapa.columnas);
       estadoJuego.forEach(function(elementoActual) {
+        
         mapa.checkKills(elementoActual);
         vista.dibujarJugador(
           elementoActual["x"],
           elementoActual["y"],
-          16,
-          16,
-          "#4287f5"
+          20,
+          20,
+          elementoActual.img
         );
       });
       vista.renderizar();
@@ -65,13 +66,16 @@ var main = (function() {
     partidaModulo.getBandera(function(estadoBandera) {
       //console.log("tieneBandera b" + estadoBandera.nick);
       mapa.checkBanderaJugador(estadoBandera);
-      vista.dibujarJugador(
-        estadoBandera["x"],
-        estadoBandera["y"],
-        14,
-        14,
-        "#29ff34"
-      );
+      console.log("banderaa" + estadoBandera.tomada);
+      if (estadoBandera.tomada == false){
+        vista.dibujarBandera(
+          estadoBandera["x"],
+          estadoBandera["y"],
+          20,
+          20,
+          "img/personaje/banderaa-der"
+          );
+      }
       vista.renderizar();
     });
     partidaModulo.getBalas(function(estadoDisparos) {
@@ -106,7 +110,7 @@ var main = (function() {
 
   var terminarJuego = function(){
       partidaModulo.finSala();
-      
+
       //var posicion = obtenerPosicion();
       motor.stop();
   };

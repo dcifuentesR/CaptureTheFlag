@@ -28,8 +28,6 @@ var appModule = (function() {
     nick = verificationModule.readCookie("nickname");
     var posicion = 1;
     json.forEach(function(dato) {
-      console.log("base nick " + dato.nick);
-      console.log("base nick2 " + nick);
       if (dato.nick == nick){
         _getJugador(nick,dato,posicion,sala);
       }

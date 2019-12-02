@@ -31,14 +31,19 @@ class Vista {
       }
     };
 
-    this.dibujarJugador = function(x, y, ancho, alto, color) {
-      this.buffer.fillStyle = color;
-      this.buffer.fillRect(Math.round(x), Math.round(y), ancho, alto);
+    this.dibujarJugador = function(x, y, ancho, alto, imagen) {
+      var aspecto = new Image();
+      aspecto.src = "img/personaje/" + imagen + ".webp";
+      this.buffer.drawImage(aspecto, x, y, ancho, alto);
     };
 
+    this.dibujarBandera = function(x,y,ancho,alto,imagen){
+      var bandera = new Image();
+      bandera.src =  imagen + ".webp";
+      this.buffer.drawImage(bandera, x, y, ancho, alto);
+    }
+
     this.dibujarPoder = function(poder) {
-      //console.log("entra a vista");
-      //console.log(poder.x + " "+ poder.y)
       var poderI = new Image();
       poderI.src = "img/disparo.webp";
       this.buffer.drawImage(poderI, poder.x, poder.y, 16, 16);

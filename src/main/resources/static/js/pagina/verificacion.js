@@ -22,14 +22,14 @@ var verificationModule = (function() {
       return null;
     };
   
-    /*var check_cookie = function() {
+    var check_cookie = function() {
       //console.log(document.cookie)
       var user = readCookie("nickname");
       if (user == null) {
         alert("Permiso denegado, debe logearse primero.");
         location.href = "/index.html";
       }
-    };*/
+    };
   
     var borrar_cookie = function() {
       document.cookie = "nickname=; expires=Thu, 01 Jan 1970 00:00:01 GMT;";

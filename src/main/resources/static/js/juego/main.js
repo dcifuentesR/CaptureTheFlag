@@ -1,10 +1,14 @@
 var main = (function() {
+
+  var date  = new Date();
+  var tiempoDisparo = date;
+
   var estadoTecla = function() {
     controlador.estadoTecla(event.type, event.key);
   };
 
   var disparar = function() {
-    controlador.disparar(event, activarPoder);
+    controlador.disparar(event.key, activarPoder);
   };
 
   var redimensionar = function() {
@@ -16,29 +20,31 @@ var main = (function() {
     vista.renderizar();
   };
 
-  var activarPoder = function(xf, yf) {
-    var e = new Date();
-    console.log("coordenadas: " + xf,yf);
-    var key = e.getTime();
-    mapa.jugador.poder[key] = new Mapa.Poder.Disparo(
-      mapa.jugador.x,
-      mapa.jugador.y,
-      xf,
-      yf,
-      16,
-      16,
-      true,
-      key
-    );
-    //mapa.jugador.poder[last].construirRecta();
-    partidaModulo.crearDisparo(
-      mapa.jugador.poder[key].id,
-      mapa.jugador.poder[key].tipo,
-      mapa.jugador.poder[key].x,
-      mapa.jugador.poder[key].y,
-      mapa.jugador.poder[key].damage
-    );
-    //console.log("crear disparo");
+  var activarPoder = function() {
+    date  = new Date();
+    if (controlador.poder && (date.getTime() - tiempoDisparo.getTime())  > 500){
+        tiempoDisparo = date;
+        var e = new Date();
+        var key = e.getTime();
+        console.log("direccion " + mapa.jugador.direccion);
+        mapa.jugador.poder[key] = new Mapa.Poder.Disparo(
+          mapa.jugador.x,
+          mapa.jugador.y,
+          mapa.jugador.direccion,
+          16,
+          16,
+          true,
+          key
+        );
+        partidaModulo.crearDisparo(
+          mapa.jugador.poder[key].id,
+          mapa.jugador.poder[key].tipo,
+          mapa.jugador.poder[key].x,
+          mapa.jugador.poder[key].y,
+          mapa.jugador.poder[key].damage
+        );
+        controlador.poder = false;
+    }
   };
 
   var renderizarJugador = function(timeStamp) {
@@ -99,7 +105,7 @@ var main = (function() {
       mapa.jugador.saltar();
       controlador.arriba.activa = false;
     }
-
+    activarPoder();
     mapa.refrescar();
   };
 
@@ -139,12 +145,12 @@ var main = (function() {
       window.addEventListener("keydown", estadoTecla);
       window.addEventListener("keyup", estadoTecla);
       window.addEventListener("resize", redimensionar);
-      if (window.PointerEvent) {
+      /*if (window.PointerEvent) {
         canvas.addEventListener("pointerdown", disparar, false);
       } else {
         //Provide fallback for user agents that do not support Pointer Events
         canvas.addEventListener("mousedown", disparar, false);
-      }
+      }*/
     },
     terminarJuego: terminarJuego 
   };

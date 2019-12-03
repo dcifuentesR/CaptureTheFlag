@@ -373,78 +373,35 @@ Mapa.Jugador = class extends Mapa.ObjetoMovil{
 
 
 Mapa.Poder = class extends Mapa.ObjetoMovil{
-	constructor(x,y,xf,yf,ancho,alto,fin,id){
+	constructor(x,y,direccion,ancho,alto,fin,id){
 		super(x,y,ancho,alto)
+		this.direccion = direccion;
 		this.activo = false;
 		this.drecorrida = 0;
 		this.damage = 0; 
-		this.xf = xf;
-		this.yf = yf;
-		this.m = 0; 
-		this.b = 0;
 		this.tipo = "";
 		this.id = id;   
-		this.fin = fin;
-		this.xi = x; 
-		this.yi = y; 
+		this.fin = fin; 
 		this.velX = 2;
-	}
-
-	construirRecta(){
-		this.m = (this.yf-this.y)/(this.xf-this.x); 
-		this.b = (this.x * -1 * this.m) + this.y;
 	}
 }
 
 Mapa.Poder.Disparo = class extends Mapa.Poder{
-	constructor(x,y,xf,yf,ancho,alto,fin,id){
-		super(x,y,xf,yf,ancho,alto,fin,id)
+	constructor(x,y,direccion,ancho,alto,fin,id){
+		super(x,y,direccion,ancho,alto,fin,id)
 		this.damage = 20; 
 		this.tipo = "Disparo";
-		this.construirRecta();
 	}
 
 	refrescar(){
-		var ytemp = this.y; 
-		var xtemp = this.x;
-		var yt = 0; 
-		var catx = 1; 
-		var caty = 0; 
-		var modulo = 0;
-		var xu = 0; 
-		var yu = 0; 
-		if (this.xi > this.xf) {
-			this.x--;
-			yt = this.m*this.x+this.b;
-			caty = Math.abs(ytemp - yt); 
-			modulo = Math.sqrt(catx + Math.pow(caty,2))
-			xu = (catx / modulo) * this.velX; yu = (caty / modulo) * this.velX; 
-			this.x = xtemp - xu; 
-			if (this.yf > this.yi) this.y = ytemp + yu; 
-			else this.y = ytemp - yu;
-			//console.log("unitario " + Math.sqrt(Math.pow(xu,2) + Math.pow(yu,2)))
+		if (this.direccion == "izq"){
+			this.x = this.x - 4;
 			partidaModulo.moverBala(this.id,this.x,this.y);
-			//console.log("x = "+ x + " y = "+ y); e.getTime()
 		}
-		else if (this.xi < this.xf){
-			this.x++;
-			yt = this.m*this.x+this.b;
-			caty = Math.abs(ytemp - yt); 
-			modulo = Math.sqrt(catx + Math.pow(caty,2))
-			xu = (catx / modulo) * this.velX; yu = (caty / modulo) * this.velX; 
-			this.x = xtemp + xu; 
-			if (this.yf > this.yi) this.y = ytemp + yu; 
-			else this.y = ytemp - yu;
-			//console.log("unitario " + Math.sqrt(Math.pow(xu,2) + Math.pow(yu,2)))
+		else {
+			this.x = this.x + 4;
 			partidaModulo.moverBala(this.id,this.x,this.y);
-			//console.log("x = "+ x + " y = "+ y); e.getTime()
-			}
-		else{ 
-			if (this.yi < this.yf) this.y++ ;
-			else this.y = this.y--;
-			partidaModulo.moverBala(this.id,this.x,this.y);
-			//console.log("x = "+ x + " y = "+ y)  e.getTime()
-			} 
+		}
 	}
 }
 

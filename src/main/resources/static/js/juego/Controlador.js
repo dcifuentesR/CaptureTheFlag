@@ -3,8 +3,10 @@ class Controlador {
     this.izq = new EntradaTeclado();
     this.der = new EntradaTeclado();
     this.arriba = new EntradaTeclado();
+    this.poder = false;
     this.estadoTecla = function(tipo, tecla) {
       var presionada = tipo == "keydown" ? true : false;
+      var disparo = tipo == "keyup" ? true : false;
       switch (tecla) {
         case "d":
           this.der.getEntrada(presionada);
@@ -14,24 +16,17 @@ class Controlador {
           break;
         case "w":
           this.arriba.getEntrada(presionada);
-      }
+          break;
+        case "p":
+          if(disparo) this.poder = true;
+          break;
+    }
     };
 
-    this.disparar = function(event, callback) {
-      var canvas = document.getElementById("canvas");
-      var context = canvas.getContext("2d");
-      var offsetleft = parseInt(getOffset(canvas).left, 10);
-      var offsettop = parseInt(getOffset(canvas).top, 10);
-      var rect = canvas.getBoundingClientRect();
-      var x =
-        ((event.clientX - rect.left) / (rect.right - rect.left)) * canvas.width;
-      var y =
-        ((event.clientY - rect.top) / (rect.bottom - rect.top)) * canvas.height;
-      //var x = event.pageX - canvas.getBoundingClientRect().left + 8;
-      //var y = event.pageY - canvas.getBoundingClientRect().top + 8;
-      //console.log("window" + window.scrollY);
-      //console.log("canvas " + x,y);
-      callback(x, y);
+    this.disparar = function(tecla, callback) {
+        if (tecla == "p"){
+          callback();
+        }  
     };
 
     var getOffset = function(obj) {

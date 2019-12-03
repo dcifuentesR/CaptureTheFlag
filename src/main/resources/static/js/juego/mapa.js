@@ -259,7 +259,7 @@ Mapa.Jugador = class extends Mapa.ObjetoMovil{
 		this.tieneBandera = false;
 		this.puntos=0;
 		$("#puntos").text(this.puntos);
-		partidaModulo.getBalaEliminarLocal(this.eliminarBala);
+		//partidaModulo.getBalaEliminarLocal(this.eliminarBala);
 		this.muertes = 0;
 		$("#muertes").text(this.muertes);
 		this.kills = 0;

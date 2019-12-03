@@ -142,9 +142,10 @@ var partidaModulo = (function() {
         stompClient.send("/app/colisionBala." + _nameSala, {}, key);
       }
     },
+    /*
     getBalaEliminarLocal: function(callback) {
       _callback = callback;
-    },
+    },*/
     //-------------------bandera
     /*moverBandera: function(x, y) {
       if (conexion != false) {

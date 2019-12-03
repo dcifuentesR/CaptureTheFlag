@@ -10,7 +10,8 @@ public class Sala {
     // ConcurrentHashMap<Cuenta, Datos> miembros = new ConcurrentHashMap<>();
     // ConcurrentHashMap<String, Tupla> miembros = new ConcurrentHashMap<>();
     private ConcurrentHashMap<String, Datos> datos = new ConcurrentHashMap<>();
-    private ConcurrentHashMap<String, Cuenta> miembros = new ConcurrentHashMap<>();
+    // private ConcurrentHashMap<String, Cuenta> miembros = new
+    // ConcurrentHashMap<>();
     private ConcurrentHashMap<String, Bala> balas = new ConcurrentHashMap<>();
 
     private String nombre;
@@ -25,12 +26,12 @@ public class Sala {
         this.bandera = new Bandera();
     }
 
-    public void addMiembro(Cuenta miembro) {
-        if (!miembros.containsKey(miembro.getNick())) {
-            miembros.put(miembro.getNick(), miembro);
-            Datos temp = new Datos(miembro.getNick());
+    public void addMiembro(String miembro) {
+        if (!datos.containsKey(miembro)) {
+            // miembros.put(miembro.getNick(), miembro);
+            Datos temp = new Datos(miembro);
             temp.setbG(bandera);
-            datos.put(miembro.getNick(), temp);
+            datos.put(miembro, temp);
         }
     }
 
@@ -44,8 +45,8 @@ public class Sala {
         this.datos = datos;
     }
 
-    public List<Cuenta> miembrosName() {
-        List<Cuenta> temp = new ArrayList<Cuenta>(miembros.values());
+    public List<Datos> miembrosName() {
+        List<Datos> temp = new ArrayList<Datos>(datos.values());
         return temp;
     }
 
@@ -139,11 +140,6 @@ public class Sala {
 
     public void setFecha(String fecha) {
         this.fecha = fecha;
-    }
-
-    @Override
-    public String toString() {
-        return "Sala [fecha=" + fecha + ", miembros=" + miembros + ", nombre=" + nombre + "]";
     }
 
 }

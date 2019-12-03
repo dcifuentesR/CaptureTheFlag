@@ -7,26 +7,26 @@ var salasModule = (function() {
   var _salas;
   var _imagen;
 
-  var _createCuenta = function(cuent) {
+  /*var _createCuenta = function(cuent) {
     var cuenta =
       cuent.id + ";" + cuent.correo + ";" + cuent.contrasena + ";" + cuent.nick;
     return cuenta;
   };
-
+  */
   var _joinSala = function(cuent) {
-    var cuenta = _createCuenta(cuent);
-    console.log(cuenta);
-    stompClient.send("/app/joinsala." + _nameSala, {}, cuenta);
+    //var cuenta = _createCuenta(cuent);
+    //console.log(cuenta);
+    stompClient.send("/app/joinsala." + _nameSala, {}, cuent);
     location.href = "/sala.html";
   };
 
   var _createSala = function(cuent) {
     var date = new Date();
-    var cuenta = _createCuenta(cuent);
+    //var cuenta = _createCuenta(cuent);
     stompClient.send(
       "/app/createsala." + _nameSala,
       {},
-      cuenta +
+      cuent +
         ";" +
         date.getFullYear() +
         "-" +
@@ -99,11 +99,11 @@ var salasModule = (function() {
   };
 
   var _createOrJoinSala = function(nSala, funcion) {
-    var date = new Date();
     _nameSala = nSala;
     document.cookie = "sala=" + encodeURIComponent(_nameSala);
     _nick = verificationModule.readCookie("nickname");
-    apiClient.checkPassword(_nick, funcion);
+    funcion(_nick);
+    //apiClient.checkPassword(_nick, funcion);
     document.cookie = "img=" + encodeURIComponent("verde-der");
   };
 

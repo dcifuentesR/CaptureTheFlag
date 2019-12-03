@@ -7,13 +7,13 @@ body {
   background-size: cover;
 }
 
-.nav{
+.nav {
   /*background: rgb(28, 40, 107);*/
   background: rgba(183, 192, 211, 0.753);
 }
 
-.nav .nav-item{
-  color: #FFF;
+.nav .nav-item {
+  color: #fff;
   font-weight: bolder;
   box-shadow: 0px 0px 5px black;
 }
@@ -111,7 +111,23 @@ button {
   clear: both;
 }
 
+.my-custom-scrollbar {
+  position: relative;
+  height: 250px;
+  overflow: auto;
+}
+
+.table-wrapper-scroll-y {
+  display: block;
+}
 /*---------------------- parte salas  -------------------------*/
 #Salas {
+  margin-top: 5%;
   padding: 20px;
+}
+
+.my-custom-scrollbar-sala {
+  position: relative;
+  height: 500px;
+  overflow: auto;
 }

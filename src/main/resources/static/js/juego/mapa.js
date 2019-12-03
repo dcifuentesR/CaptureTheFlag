@@ -269,6 +269,7 @@ Mapa.Jugador = class extends Mapa.ObjetoMovil{
 		this.direccion = ""; 
 		this.color = "";
 		this.leerCookieImagen(verificationModule.readCookie("img"));
+		this.imagenB = "der";
 	}
 	
 	saltar(){
@@ -298,16 +299,16 @@ Mapa.Jugador = class extends Mapa.ObjetoMovil{
 	}	
 	moverseIzq(){
 		this.velX-=this.pasoVelX;
-		if (!this.tieneBandera){
-			this.direccion = "izq";
-		}
+		//if (!this.tieneBandera){
+		this.direccion = "izq";
+		//}
 	}
 	
 	moverseDer(){
 		this.velX+=this.pasoVelX;
-		if (!this.tieneBandera){		
-			this.direccion = "der";
-		}
+		//if (!this.tieneBandera){		
+		this.direccion = "der";
+		//}
 	}
 
 	refrescar(){
@@ -318,14 +319,17 @@ Mapa.Jugador = class extends Mapa.ObjetoMovil{
 		if(this.tieneBandera == true && this.time > 60){
 			this.puntos++;
 			this.time = 0;
+			if (this.puntos % 2 == 0 ) this.imagenB = "der";			
+			else this.imagenB = "izq";
 			this.color = "bandera";
-			if (this.direccion == "izq") this.direccion = "der";			
-			else this.direccion = "izq";
 			$("#puntos").text(this.puntos);
 			this.enviarPuntos(this.puntos);
 		}
 		if(this.xPrevFrame !=this.x || this.yPrevFrame!=this.y-3){
-			partidaModulo.mover(Math.floor(this.x),Math.floor(this.y)-3,this.color + "-" + this.direccion);
+			if (this.tieneBandera){
+				partidaModulo.mover(Math.floor(this.x),Math.floor(this.y)-3,this.color + "-" + this.imagenB);
+			}
+			else partidaModulo.mover(Math.floor(this.x),Math.floor(this.y)-3,this.color + "-" + this.direccion);
 		}
 	}
 	manejarColisiones(poder){

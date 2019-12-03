@@ -75,8 +75,14 @@ var perfilModule = (function() {
   var init = function() {
     document.getElementById("inicio-perfil").click();
   };
+
+  var cerrarSesion = function() {
+    verificationModule.borrar_cookie();
+    location.href = "/index.html";
+  };
   return {
     partidasJugadas: partidasJugadas,
-    init: init
+    init: init,
+    cerrarSesion: cerrarSesion
   };
 })();

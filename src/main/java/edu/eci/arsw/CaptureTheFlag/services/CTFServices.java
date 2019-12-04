@@ -1,6 +1,6 @@
 package edu.eci.arsw.CaptureTheFlag.services;
 
-import java.sql.Time;
+
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,8 +13,7 @@ import edu.eci.arsw.CaptureTheFlag.persistence.exception.CaptureTheFlagException
 import edu.eci.arsw.CaptureTheFlag.persistence.repositorios.RepositorioCuenta;
 import edu.eci.arsw.CaptureTheFlag.persistence.repositorios.RepositorioJugar;
 import edu.eci.arsw.CaptureTheFlag.persistence.repositorios.RepositorioPartida;
-import java.sql.Date;
-import java.time.LocalTime;
+
 
 @Service("services")
 public class CTFServices implements CaptureTheFlagServices {

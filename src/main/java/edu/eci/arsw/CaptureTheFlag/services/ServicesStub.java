@@ -9,12 +9,8 @@ import edu.eci.arsw.CaptureTheFlag.model.Partida;
 import edu.eci.arsw.CaptureTheFlag.model.Cuenta;
 import edu.eci.arsw.CaptureTheFlag.model.Jugar;
 import edu.eci.arsw.CaptureTheFlag.persistence.exception.CaptureTheFlagException;
-import java.sql.Date;
-
-import java.sql.Time;
 import java.util.ArrayList;
 import java.util.HashMap;
-import org.springframework.stereotype.Service;
 
 /**
  *
@@ -99,14 +95,14 @@ public class ServicesStub implements CaptureTheFlagServices {
 
     @Override
     public void registrarPartida(Partida partida) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException("Not supported yet."); // To change body of generated methods, choose
+                                                                       // Tools | Templates.
     }
 
     @Override
     public Partida getPartida(String nombre, String fecha) throws CaptureTheFlagException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException("Not supported yet."); // To change body of generated methods, choose
+                                                                       // Tools | Templates.
     }
-
-  
 
 }

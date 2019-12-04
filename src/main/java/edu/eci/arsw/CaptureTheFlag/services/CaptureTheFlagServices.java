@@ -4,9 +4,7 @@ import edu.eci.arsw.CaptureTheFlag.model.Partida;
 import edu.eci.arsw.CaptureTheFlag.model.Cuenta;
 import edu.eci.arsw.CaptureTheFlag.model.Jugar;
 import edu.eci.arsw.CaptureTheFlag.persistence.exception.CaptureTheFlagException;
-import java.sql.Date;
 
-import java.sql.Time;
 import java.util.ArrayList;
 import org.springframework.stereotype.Service;
 

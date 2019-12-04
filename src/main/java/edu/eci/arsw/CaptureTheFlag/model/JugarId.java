@@ -6,8 +6,6 @@
 package edu.eci.arsw.CaptureTheFlag.model;
 
 import java.io.Serializable;
-import javax.persistence.Column;
-import javax.persistence.Embeddable;
 
 /**
  *
@@ -24,9 +22,9 @@ public class JugarId implements Serializable {
         this.cuenta = cuenta;
         this.partida = partida;
     }
-    
-    public JugarId(){
-    
+
+    public JugarId() {
+
     }
 
     public Long getCuenta() {
@@ -47,18 +45,12 @@ public class JugarId implements Serializable {
 
     @Override
     public boolean equals(Object obj) {
-        return super.equals(obj); //To change body of generated methods, choose Tools | Templates.
+        return super.equals(obj); // To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public int hashCode() {
-        return super.hashCode(); //To change body of generated methods, choose Tools | Templates.
+        return super.hashCode(); // To change body of generated methods, choose Tools | Templates.
     }
-    
+
 }
-
-
-
-
-
-

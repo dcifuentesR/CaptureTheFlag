@@ -46,21 +46,24 @@ var salasModule = (function() {
   var _tablaSalas = function() {
     $("#tabla-salas > tbody").empty();
     _salas.map(function(sala) {
-      $("#tabla-salas > tbody").append(
-        "<tr>" +
-          "<td>" +
-          sala.nombre +
-          "</td>" +
-          "<td>" +
-          Object.keys(sala.datos).length +
-          "</td>" +
-          "<td>" +
-          "<a class='btn btn-primary' onclick='salasModule.joinSala(\"" +
-          sala.nombre +
-          "\")' >Unirse</a>" +
-          "</td>" +
-          "</tr>"
-      );
+      if (Object.keys(sala.datos).length < 5) {
+        $("#tabla-salas > tbody").append(
+          "<tr>" +
+            "<td>" +
+            sala.nombre +
+            "</td>" +
+            "<td>" +
+            Object.keys(sala.datos).length +
+            "/5" +
+            "</td>" +
+            "<td>" +
+            "<a class='btn btn-primary' onclick='salasModule.joinSala(\"" +
+            sala.nombre +
+            "\")' >Unirse</a>" +
+            "</td>" +
+            "</tr>"
+        );
+      }
     });
   };
 

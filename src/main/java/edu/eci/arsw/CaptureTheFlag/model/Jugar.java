@@ -2,9 +2,6 @@ package edu.eci.arsw.CaptureTheFlag.model;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.sql.Time;
-import java.util.Date;
-import java.util.Objects;
 
 @Entity
 @IdClass(JugarId.class)

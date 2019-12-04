@@ -1,7 +1,6 @@
 package edu.eci.arsw.CaptureTheFlag.model;
 
 import java.io.Serializable;
-import java.sql.Time;
 
 
 import javax.persistence.*;

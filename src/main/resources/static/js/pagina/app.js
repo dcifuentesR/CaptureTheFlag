@@ -1,6 +1,6 @@
 var appModule = (function() {
   var nick;
-  var jugador; 
+  var jugador;
 
   var checkPassword = function() {
     var nick = $("#nick").val();
@@ -13,7 +13,7 @@ var appModule = (function() {
     var password = $("#password").val();
     var cuenta = { correo: correo, contrasena: password, nick: nick };
     apiClient.saveCuenta(JSON.stringify(cuenta));
-    location.href = "/index.html";
+    //location.href = "/index.html";
   };
 
   var addPartida = function(sala) {
@@ -22,37 +22,37 @@ var appModule = (function() {
     var partida = { fecha: date, nombre: nombre };
     apiClient.savePartida(JSON.stringify(partida));
   };
-  
 
-  var addJugar = function(json,sala){
+  var addJugar = function(json, sala) {
     nick = verificationModule.readCookie("nickname");
     var posicion = 1;
     json.forEach(function(dato) {
-      if (dato.nick == nick){
-        _getJugador(nick,dato,posicion,sala);
-      }
-      else {
+      if (dato.nick == nick) {
+        _getJugador(nick, dato, posicion, sala);
+      } else {
         posicion++;
       }
     });
   };
 
-  var _getJugador = function(nick,dato,posicion,sala) {
-    apiClient.getJugador(nick,dato,posicion,sala,consultarPartida);
+  var _getJugador = function(nick, dato, posicion, sala) {
+    apiClient.getJugador(nick, dato, posicion, sala, consultarPartida);
   };
 
-  var consultarPartida = function(player,dato,posicion,sala){
+  var consultarPartida = function(player, dato, posicion, sala) {
     jugador = player;
     _getPartida(
       verificationModule.readCookie("sala"),
-      sala.fecha,dato,posicion
+      sala.fecha,
+      dato,
+      posicion
     );
-  }
-  var _getPartida = function(nombre, fecha,dato,posicion) {
-    apiClient.getPartida(nombre, fecha,enviarPartida,dato,posicion);
+  };
+  var _getPartida = function(nombre, fecha, dato, posicion) {
+    apiClient.getPartida(nombre, fecha, enviarPartida, dato, posicion);
   };
 
-  var enviarPartida = function(sala,dato,posicion){
+  var enviarPartida = function(sala, dato, posicion) {
     var jugar = {
       cuenta: {
         id: jugador.id,
@@ -67,19 +67,17 @@ var appModule = (function() {
       puntos: dato.puntos
     };
     apiClient.saveJugar(JSON.stringify(jugar), jugador.nick);
-  }
-
- 
+  };
 
   var _check = function(cuenta) {
     var password = $("#password").val();
-    if (cuenta.contrasena === password) {
-      nick = $("#nick").val();
+    nick = $("#nick").val();
+    if (cuenta.contrasena === password && cuenta.nick == nick) {
       location.href = "/home.html";
       //console.log("appmodule " + nick);
       verificationModule.crear_cookie_sesion(nick);
     } else {
-      alert("Incorrect password");
+      alert("Password o nick incorrecto");
     }
   };
 
@@ -90,4 +88,3 @@ var appModule = (function() {
     addJugar: addJugar
   };
 })();
-

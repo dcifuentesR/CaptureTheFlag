@@ -7,8 +7,6 @@ import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
-
-import edu.eci.arsw.CaptureTheFlag.model.Cuenta;
 import edu.eci.arsw.CaptureTheFlag.model.Sala;
 
 @Controller

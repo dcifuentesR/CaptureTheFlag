@@ -131,3 +131,50 @@ button {
   height: 500px;
   overflow: auto;
 }
+
+/*---------------------- parte Instrucciones  -------------------------*/
+
+.myaccordion {
+  max-width: 70%;
+  margin: 50px auto;
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0.1);
+}
+
+.myaccordion .card,
+.myaccordion .card:last-child .card-header {
+  border: none;
+}
+
+.myaccordion .card-header {
+  border-bottom-color: #6790a5;
+  background: transparent;
+}
+
+.myaccordion .fa-stack {
+  font-size: 18px;
+}
+
+.myaccordion .btn {
+  width: 100%;
+  font-weight: bold;
+  color: #004987;
+  padding: 0;
+}
+
+.myaccordion .btn-link:hover,
+.myaccordion .btn-link:focus {
+  text-decoration: none;
+}
+
+.myaccordion li + li {
+  margin-top: 10px;
+}
+
+.prueba {
+  background: #97b3cee1;
+}
+
+img {
+  display: block;
+  margin: auto;
+}

@@ -154,43 +154,85 @@
               </div>
         </div>
         <div class="tab-pane fade" id="Instrucciones">
-            <center><h1>Instrucciones Capture The Flag</h1>
-               <h3>Objetivo</h3>
-                El objetivo del juego consiste en obtener la mayor cantidad de puntos durante el transcurso de la partida, para obtener puntos se debe tomar la bandera y cada segundo se sumara un punto al score. 
-                Cada jugador cuenta con 100 puntos de vida inicialmente, y cuenta con un poder que disminuye 20 puntos de vida cuando impacta a otro jugador. 
-
-               <h3>Controles</h3>
-                Salto: w <br>
-                Mover izquierda: a <br>
-                Mover derecha: d <br>
-                Disparo: p 
-
-                <h2>Interfaz del juego</h2>
-
-                <h3>Ventana de estadisticas</h3>
-                <img src="img/Manual/estadisticas.PNG" width="700px" height="400px">
-              
-                <br>
-                En esta ventana se muestran todos los datos recoletados de las partidas del jugador, como victorias, derrotas, kills, muertes etc. Tambien nos brinda informacion sobre el desemepeno del jugador 
-                en general, dandonos un porcentaje de victorias sobre el total de muertes. 
-
-                <h3>Ventana de salas</h3>
-                <img src="img/Manual/salas.PNG" width="800px" height="400px">
-              
-                <br>
-                En esta ventana se muestran las salas disponibles a las que el jugador se puede unir. 
-               
-                <h3>Ventana de crear</h3>
-                <img src="img/Manual/partida.PNG" width="700px" height="400px">
-
-                <br>
-                En esta ventana el jugador puede crear una partida, elegiendo el mapa que considere. 
-                <br>
-                <img src="img/Manual/partida2.PNG" width="700px" height="400px">
-
-                <br>
-                Finalmente, se debe elegir un skin o se tendra el color verde por defecto para nuestro personaje
-              </center>
+            <div id="accordion" class="myaccordion">
+                <div class="card prueba">
+                  <div class="card-header" id="headingOne">
+                    <h2 class="mb-0">
+                      <button class="d-flex align-items-center justify-content-between btn btn-link collapsed" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                          Objetivo
+                        <span class="fa-stack fa-sm">
+                          <i class="fas fa-circle fa-stack-2x"></i>
+                          <i class="fas fa-plus fa-stack-1x fa-inverse"></i>
+                        </span>
+                      </button>
+                    </h2>
+                  </div>
+                  <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                    <div class="card-body">
+                        El objetivo del juego consiste en obtener la mayor cantidad de puntos durante el transcurso de la partida, para obtener puntos se debe tomar la bandera y cada segundo se sumara un punto al score. 
+                        Cada jugador cuenta con 100 puntos de vida inicialmente, y cuenta con un poder que disminuye 20 puntos de vida cuando impacta a otro jugador.           
+                    </div>
+                  </div>
+                </div>
+                <div class="card prueba">
+                  <div class="card-header" id="headingTwo">
+                    <h2 class="mb-0">
+                      <button class="d-flex align-items-center justify-content-between btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                          Controles
+                        <span class="fa-stack fa-2x">
+                          <i class="fas fa-circle fa-stack-2x"></i>
+                          <i class="fas fa-plus fa-stack-1x fa-inverse"></i>
+                        </span>
+                      </button>
+                    </h2>
+                  </div>
+                  <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                    <div class="card-body">
+                        <img src="img/controles.png" width="825px" height="422px">
+                    </div>
+                  </div>
+                </div>
+                <div class="card prueba">
+                  <div class="card-header" id="headingThree">
+                    <h2 class="mb-0">
+                      <button class="d-flex align-items-center justify-content-between btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                          Interfaz
+                        <span class="fa-stack fa-2x">
+                          <i class="fas fa-circle fa-stack-2x"></i>
+                          <i class="fas fa-plus fa-stack-1x fa-inverse"></i>
+                        </span>
+                      </button>
+                    </h2>
+                  </div>
+                  <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+                    <div class="card-body">
+                        <h3>Ventana de estadisticas</h3>
+                        <img src="img/Manual/estadisticas.PNG" width="825px" height="422px">
+                      
+                        <br>
+                        En esta ventana se muestran todos los datos recoletados de las partidas del jugador, como victorias, derrotas, kills, muertes etc. Tambien nos brinda informacion sobre el desemepeno del jugador 
+                        en general, dandonos un porcentaje de victorias sobre el total de muertes. 
+        
+                        <h3>Ventana de salas</h3>
+                        <img src="img/Manual/salas.PNG" width="825px" height="422px">
+                      
+                        <br>
+                        En esta ventana se muestran las salas disponibles a las que el jugador se puede unir. 
+                       
+                        <h3>Ventana de crear</h3>
+                        <img src="img/Manual/partida.PNG" width="825px" height="422px">
+        
+                        <br>
+                        En esta ventana el jugador puede crear una partida, elegiendo el mapa que considere. 
+                        <br>
+                        <img src="img/Manual/partida2.PNG" width="825px" height="422px">
+        
+                        <br>
+                        Finalmente, se debe elegir un skin o se tendra el color verde por defecto para nuestro personaje
+                    </div>
+                  </div>
+                </div>
+              </div>
         </div>
 
       </div>

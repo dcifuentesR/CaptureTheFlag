@@ -2,7 +2,6 @@
 
 ## Arquitectura de software 
 
-
 ## Descripcion 
 
 Juego multijugador web, de plataformas,donde cada jugador debe competir por capturar la bandera del mapa. En el mapa se encontraran poderes distribuidos aleatoriamente que cada jugador puede obtener para así afectar el rendimiento de los demás o beneficiarse de estos para así mejorar sus probabilidades de conseguir la bandera, cada jugador tendra 100 puntos de vida donde al morir reaparecerán después de 3 segundos, tambien tendra un contador de puntos que ira aumentando dependiendo de cuanto tiempo dure con la bandera, cada partida contara con maximo 5 jugadores y minimo 2. Este juego se desarrollara en java para el backend, html5 y javascript para el frontend y maven para gestionar el proyecto.
@@ -23,9 +22,9 @@ Juego multijugador web, de plataformas,donde cada jugador debe competir por capt
 
 ## Arquitectura de la aplicacion 
 
-### Diagrama de clases
+### Diagrama de clases - backend 
 
- ![alt text](https://github.com/diego2097/CaptureTheFlag/blob/master/pictures/Diagrama%20de%20clases.PNG)
+![alt text](https://github.com/diego2097/CaptureTheFlag/blob/master/pictures/Diagrama_de_clases.PNG)
 
 ### Diagrama de entidad relacion
 
@@ -42,6 +41,45 @@ Juego multijugador web, de plataformas,donde cada jugador debe competir por capt
 ### Diagrama de componentes
 
 ![alt text](https://github.com/diego2097/CaptureTheFlag/blob/master/pictures/Component-Diagram.png)
+
+## Atributos no funcionales 
+
+### Performance 
+
+#### Primer escenario. Latencia 
+
+Fuente                        Usuarios 
+Estimulo                      Se solicitan y envian datos de la partida
+Artefacto                     Sistema 
+Ambiente                      Durante la ejecucion del juego 
+Respuesta                     Las solicitudes y datos son procesados
+Tiempo de respuesta           Mayor a 150ms con velocidad de descarga menor a 1Mbps
+Tiempo de respuesta           100ms - 130ms con velocidad de descarga 1Mbps - 5Mbps
+Tiempo de respuesta           80ms - 90ms con velocidad de descarga > 5Mbps
+
+Utilizamos el monitor de tareas, el cual tiene funcion donde se puede visualizar la latencia de 
+cada servicio de red que esta consumiendo. 
+
+![alt text](https://github.com/diego2097/CaptureTheFlag/blob/master/pictures/monitor_recursos.PNG)
+
+Ahora iniciamos una partida y verificamos con la ip de nuestro servicio en el monitor de tareas la latencia. 
+
+![alt text](https://github.com/diego2097/CaptureTheFlag/blob/master/pictures/latencia.png)
+
+#### Segundo escenario. Tiempo de carga 
+
+Fuente                         Usuarios 
+Estimulo                       Se hace el request a una pagina
+Artefacto                      Sistema
+Ambiente                       Bajo condiciones normales 
+Respuesta                      Se carga la pagina
+Tiempo de respuesta            En promedio el tiempo de carga es de 3.3s 
+
+Para calcular el tiempo de carga promedio se utilizo la herramienta audits de google, la cual nos permite calcular el tiempo de interaccion de cada pagina. Como se puede observar en la imagen: 
+
+![alt text](https://github.com/diego2097/CaptureTheFlag/blob/master/pictures/timeInteractive.png)
+
+El tiempo de interaccion es el tiempo en que la página parece estar lo suficientemente lista para que un usuario pueda interactuar con ella.
 
 ### Indicaciones básicas de uso de la aplicación
 
@@ -79,6 +117,3 @@ Cuando el usuario este listo, podra clickear jugar y la partida empezara.
 Finalmente se tiene la ventana de instrucciones donde se especifica de manera clara el objetivo del juego y su jugabilidad. 
 
 ![alt text](https://github.com/diego2097/CaptureTheFlag/blob/master/pictures/instrucciones.PNG)
-
-
-

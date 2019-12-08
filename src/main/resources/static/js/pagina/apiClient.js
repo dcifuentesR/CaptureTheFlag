@@ -36,6 +36,10 @@ apiClient = (function() {
         contentType: "application/json",
         success: function() {
           location.href = "/home.html";
+        },
+        error: function() {
+          alert("Problemas con el servidor, la partida no pudo ser guardada");
+          location.href = "/home.html";
         }
       });
     },

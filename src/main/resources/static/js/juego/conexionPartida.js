@@ -60,7 +60,13 @@ var partidaModulo = (function() {
       _nick = verificationModule.readCookie("nickname");
       //_subscribe = "/topic/salaDatos.";
       connectAndSubscribe();
+       window.addEventListener('beforeunload', function (e) {     
+        var confirmationMessage = "\o/"; 
+        e.returnValue = confirmationMessage;
+        return confirmationMessage;
+       });
       main.init();
+      
     },
     disconnect: function() {
       conexion = false;
@@ -165,5 +171,7 @@ var partidaModulo = (function() {
       }
       if (theBanderaObjects !== undefined) callback(theBanderaObjects);
     }
+
+
   };
 })();

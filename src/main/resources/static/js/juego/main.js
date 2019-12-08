@@ -48,11 +48,6 @@ var main = (function() {
   };
 
   var renderizarJugador = function(timeStamp) {
-    //		vista.llenarCanvas(mapa.colorFondo);
-    //		vista.dibujarMapa(mapa.map,mapa.columnas);
-    //		vista.dibujarJugador(mapa.jugador.x,mapa.jugador.y,mapa.jugador.ancho,mapa.jugador.alto,mapa.jugador.color);
-    //		vista.dibujarJugador(mapa.bandera.x,mapa.bandera.y,mapa.bandera.ancho,mapa.bandera.alto,"#4287f5");
-    //		vista.renderizar();
     partidaModulo.getJugadores(function(estadoJuego) {
       vista.llenarCanvas(mapa.colorFondo);
       vista.dibujarMapa(mapa.map, mapa.columnas);
@@ -70,7 +65,6 @@ var main = (function() {
       vista.renderizar();
     });
     partidaModulo.getBandera(function(estadoBandera) {
-      //console.log("tieneBandera b" + estadoBandera.nick);
       mapa.checkBanderaJugador(estadoBandera);
       console.log("banderaa" + estadoBandera.tomada);
       if (estadoBandera.tomada == false){
@@ -116,21 +110,8 @@ var main = (function() {
 
   var terminarJuego = function(){
       partidaModulo.finSala();
-
-      //var posicion = obtenerPosicion();
       motor.stop();
   };
-
-  
- /* var obtenerPosicion = function(){
-    partidaModulo.getJugadores(function(estadoJuego) {
-      var lista = {}
-      estadoJuego.forEach(function(elementoActual) {
-      });
-    });
-
-
-  }*/
 
   return {
     init: function() {
@@ -145,12 +126,6 @@ var main = (function() {
       window.addEventListener("keydown", estadoTecla);
       window.addEventListener("keyup", estadoTecla);
       window.addEventListener("resize", redimensionar);
-      /*if (window.PointerEvent) {
-        canvas.addEventListener("pointerdown", disparar, false);
-      } else {
-        //Provide fallback for user agents that do not support Pointer Events
-        canvas.addEventListener("mousedown", disparar, false);
-      }*/
     },
     terminarJuego: terminarJuego 
   };

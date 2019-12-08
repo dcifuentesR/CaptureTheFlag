@@ -48,14 +48,16 @@ Juego multijugador web, de plataformas,donde cada jugador debe competir por capt
 
 #### Primer escenario. Latencia 
 
-Fuente                        Usuarios 
-Estimulo                      Se solicitan y envian datos de la partida
-Artefacto                     Sistema 
-Ambiente                      Durante la ejecucion del juego 
-Respuesta                     Las solicitudes y datos son procesados
-Tiempo de respuesta           Mayor a 150ms con velocidad de descarga menor a 1Mbps
-Tiempo de respuesta           100ms - 130ms con velocidad de descarga 1Mbps - 5Mbps
-Tiempo de respuesta           80ms - 90ms con velocidad de descarga > 5Mbps
+Caracteristica | Valor 
+-- | --
+Fuente                |   Usuarios 
+Estimulo              |   Se solicitan y envian datos de la partida
+Artefacto             |   Sistema 
+Ambiente              |   Durante la ejecucion del juego 
+Respuesta             |   Las solicitudes y datos son procesados
+Tiempo de respuesta   |   Mayor a 150ms con velocidad de descarga menor a 1Mbps
+Tiempo de respuesta   |   100ms - 130ms con velocidad de descarga 1Mbps - 5Mbps
+Tiempo de respuesta   |   80ms - 90ms con velocidad de descarga > 5Mbps
 
 Utilizamos el monitor de tareas, el cual tiene funcion donde se puede visualizar la latencia de 
 cada servicio de red que esta consumiendo. 
@@ -68,12 +70,14 @@ Ahora iniciamos una partida y verificamos con la ip de nuestro servicio en el mo
 
 #### Segundo escenario. Tiempo de carga 
 
-Fuente                         Usuarios 
-Estimulo                       Se hace el request a una pagina
-Artefacto                      Sistema
-Ambiente                       Bajo condiciones normales 
-Respuesta                      Se carga la pagina
-Tiempo de respuesta            En promedio el tiempo de carga es de 3.3s 
+Caracteristica | Valor 
+-- | --
+Fuente               |  Usuarios 
+Estimulo             |  Se hace el request a una pagina
+Artefacto            |  Sistema
+Ambiente             |  Bajo condiciones normales 
+Respuesta            |  Se carga la pagina
+Tiempo de respuesta  |  En promedio el tiempo de carga es de 3.3s 
 
 Para calcular el tiempo de carga promedio se utilizo la herramienta audits de google, la cual nos permite calcular el tiempo de interaccion de cada pagina. Como se puede observar en la imagen: 
 

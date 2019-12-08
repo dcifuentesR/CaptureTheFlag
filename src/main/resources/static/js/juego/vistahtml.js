@@ -1,10 +1,9 @@
 vistahtmlModule = (function() {
-
   var partida;
   var datos;
 
   var tablaGanador = function(sala) {
-    partida = sala; 
+    partida = sala;
     datos = sala.datos;
     //$("#tabla-ganador").empty();
     sala.datos.map(function(dato) {
@@ -29,6 +28,7 @@ vistahtmlModule = (function() {
           "</tr>"
       );
     });
+    $("#exampleModalCenter").modal({ backdrop: "static", keyboard: false });
     $("#exampleModalCenter").modal("show");
   };
 

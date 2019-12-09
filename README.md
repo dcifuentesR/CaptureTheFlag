@@ -4,24 +4,7 @@
 
 ## Descripcion 
 
-Juego multijugador web, de plataformas,donde cada jugador debe competir por capturar la bandera del mapa. En el mapa se encontraran poderes distribuidos aleatoriamente que cada jugador puede obtener para así afectar el rendimiento de los demás o beneficiarse de estos para así mejorar sus probabilidades de conseguir la bandera, cada jugador tendra 100 puntos de vida donde al morir reaparecerán después de 3 segundos, tambien tendra un contador de puntos que ira aumentando dependiendo de cuanto tiempo dure con la bandera, cada partida contara con maximo 5 jugadores y minimo 2. Este juego se desarrollara en java para el backend, html5 y javascript para el frontend y maven para gestionar el proyecto.
- 
-
-## Autores 
-
-- Diego Alejandro Corredor Tolosa -  [diego2097](https://github.com/diego2097)
-- Cristian David Lopez Arevalo -  [cdavidd](https://github.com/cdavidd)
-- Daniel Mauricio Cifuentes Ramirez - [dcifuentesR](https://github.com/dcifuentesR) 
-
-## Heroku 
-
-[heroku](https://capturetheflag-arsw.herokuapp.com/)
-
-## Taiga
-[taiga](https://tree.taiga.io/project/dcifuentesr-capture-the-flag-arsw-2019-2/backlog)
-
-# Analisis estatico de codigo con codacy 
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/fb0b361734014f6c9e5aa86f93babe7c)](https://www.codacy.com/manual/diego2097/CaptureTheFlag?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=diego2097/CaptureTheFlag&amp;utm_campaign=Badge_Grade)
+Juego multijugador web, de plataformas,donde cada jugador debe competir por capturar la bandera del mapa. El jugador contar con un poder horizontal de disparo, el cual realiza un daño entre 10 y 30 puntos, para así mejorar sus probabilidades de conseguir la bandera, cada jugador tendra 100 puntos de vida donde al morir reaparecerán inmediatamente, tambien tendra un contador de puntos que ira aumentando dependiendo de cuanto tiempo dure con la bandera, cada partida contara con maximo 5 jugadores y minimo 2. Este juego se desarrollara en java para el backend, html5 y javascript para el frontend y gradle para gestionar el proyecto.
 
 ## Arquitectura de la aplicacion 
 
@@ -175,3 +158,17 @@ Cuando el usuario este listo, podra clickear jugar y la partida empezara.
 Finalmente se tiene la ventana de instrucciones donde se especifica de manera clara el objetivo del juego y su jugabilidad. 
 
 ![alt text](https://github.com/diego2097/CaptureTheFlag/blob/master/pictures/instrucciones.PNG)
+
+## Autores 
+- Diego Alejandro Corredor Tolosa -  [diego2097](https://github.com/diego2097)
+- Cristian David Lopez Arevalo -  [cdavidd](https://github.com/cdavidd)
+- Daniel Mauricio Cifuentes Ramirez - [dcifuentesR](https://github.com/dcifuentesR) 
+
+## Heroku 
+[Capture The Flag](https://capturetheflag-arsw.herokuapp.com/)
+
+## Taiga
+[taiga](https://tree.taiga.io/project/dcifuentesr-capture-the-flag-arsw-2019-2/backlog)
+
+# Analisis estatico de codigo con codacy 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/fb0b361734014f6c9e5aa86f93babe7c)](https://www.codacy.com/manual/diego2097/CaptureTheFlag?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=diego2097/CaptureTheFlag&amp;utm_campaign=Badge_Grade)

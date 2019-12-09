@@ -85,6 +85,54 @@ Para calcular el tiempo de carga promedio se utilizo la herramienta audits de go
 
 El tiempo de interaccion es el tiempo en que la página parece estar lo suficientemente lista para que un usuario pueda interactuar con ella.
 
+### Usablidad
+#### Primer escenario. Instrucciones
+Caracteristica | Valor 
+-- | --
+Fuente               |  Usuarios 
+Estimulo             |  Se hace el request a una pagina
+Artefacto            |  Sistema
+Ambiente             |  Bajo condiciones normales 
+Respuesta            |  Se carga la pagina
+Tiempo de respuesta  |  En promedio el tiempo de carga es de 0.5s
+![alt text](/pictures/instrucciones.PNG)
+
+#### Segundo escenario. Fallo de servidor durante partida
+Caracteristica | Valor 
+-- | --
+Fuente               |  Usuarios 
+Estimulo             |  Se hace el request al juego
+Artefacto            |  Servidor
+Ambiente             |  Bajo condiciones normales  
+Respuesta            |  -
+Tiempo de respuesta  |  - 
+
+![alt text](/pictures/diagrama_usabilidad.JPG)
+
+### Disponibilidad
+#### Primer escenario. 
+Caracteristica | Valor 
+-- | --
+Fuente               |  Usuarios 
+Estimulo             |  -
+Artefacto            |  -
+Ambiente             |  Bajo condiciones normales  
+Respuesta            |  -
+Tiempo de respuesta  |  - 
+
+#### Segundo escenario. 
+Caracteristica | Valor 
+-- | --
+Fuente               |  Usuarios 
+Estimulo             |  -
+Artefacto            |  -
+Ambiente             |  Bajo condiciones normales  
+Respuesta            |  -
+Tiempo de respuesta  |  - 
+
+### Escalabilidad
+
+
 ### Indicaciones básicas de uso de la aplicación
 
 Para registarse en la aplicacion, clickear **sign up**, alli se encontrara un formulario para poder registrarse, se debe ingresar **correo**, **nick** y **password**

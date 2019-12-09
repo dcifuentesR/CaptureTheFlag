@@ -109,18 +109,18 @@ Tiempo de respuesta  |  -
 
 ![alt text](/pictures/disponibilidad-cache.gif)
 
-#### SEGUNDO ESCENARIO. 
+### Seguridad
+#### PRIMER ESCENARIO.
 Caracteristica | Valor 
 -- | --
 Fuente               |  Usuarios 
-Estimulo             |  -
-Artefacto            |  -
-Ambiente             |  Bajo condiciones normales  
-Respuesta            |  -
+Estimulo             |  Ingresar a las paginas sin autenticarse
+Artefacto            |  Sistema
+Ambiente             |  Condiciones normales
+Respuesta            |  Solicitud denegada
 Tiempo de respuesta  |  - 
 
-### Escalabilidad
-
+![alt text](/pictures/seguridad.gif)
 
 ### Indicaciones básicas de uso de la aplicación
 

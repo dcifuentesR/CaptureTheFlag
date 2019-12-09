@@ -46,7 +46,7 @@ Juego multijugador web, de plataformas,donde cada jugador debe competir por capt
 
 ### Performance 
 
-#### Primer escenario. Latencia 
+#### PRIMER ESCENARIO. Latencia 
 
 Caracteristica | Valor 
 -- | --
@@ -68,7 +68,7 @@ Ahora iniciamos una partida y verificamos con la ip de nuestro servicio en el mo
 
 ![alt text](https://github.com/diego2097/CaptureTheFlag/blob/master/pictures/latencia.png)
 
-#### Segundo escenario. Tiempo de carga 
+#### SEGUNDO ESCENARIO. Tiempo de carga 
 
 Caracteristica | Valor 
 -- | --
@@ -86,7 +86,7 @@ Para calcular el tiempo de carga promedio se utilizo la herramienta audits de go
 El tiempo de interaccion es el tiempo en que la página parece estar lo suficientemente lista para que un usuario pueda interactuar con ella.
 
 ### Usablidad
-#### Primer escenario. Instrucciones
+#### PRIMER ESCENARIO. Instrucciones
 Caracteristica | Valor 
 -- | --
 Fuente               |  Usuarios 
@@ -98,7 +98,7 @@ Tiempo de respuesta  |  En promedio el tiempo de carga es de 0.5s
 
 ![alt text](/pictures/usabilidad-2.gif)
 
-#### Segundo escenario. Fallo de servidor durante partida
+#### SEGUNDO ESCENARIO. Fallo de servidor durante partida
 Caracteristica | Valor 
 -- | --
 Fuente               |  Usuarios 
@@ -111,7 +111,7 @@ Tiempo de respuesta  |  -
 ![alt text](/pictures/diagrama_usabilidad.JPG)
 
 ### Disponibilidad
-#### Primer escenario. Cache de perfil
+#### PRIMER ESCENARIO. Cache de perfil
 Caracteristica | Valor 
 -- | --
 Fuente               |  Usuarios 
@@ -123,7 +123,7 @@ Tiempo de respuesta  |  -
 
 ![alt text](/pictures/disponibilidad-cache.gif)
 
-#### Segundo escenario. 
+#### SEGUNDO ESCENARIO. 
 Caracteristica | Valor 
 -- | --
 Fuente               |  Usuarios 

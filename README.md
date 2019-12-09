@@ -104,8 +104,8 @@ Caracteristica | Valor
 Fuente               |  Usuarios 
 Estimulo             |  Se hace el request al juego
 Artefacto            |  Servidor
-Ambiente             |  Bajo condiciones normales  
-Respuesta            |  -
+Ambiente             |  Fallo de servidor
+Respuesta            |  No se guarda la partida
 Tiempo de respuesta  |  - 
 
 ![alt text](/pictures/diagrama_usabilidad.JPG)

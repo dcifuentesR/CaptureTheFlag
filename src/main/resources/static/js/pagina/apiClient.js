@@ -1,4 +1,5 @@
 const apiUri = "capturetheflag-arsw.herokuapp.com/";
+var cont =0 ;
 apiClient = (function() {
   return {
     saveCuenta: function(cuenta) {
@@ -66,12 +67,20 @@ apiClient = (function() {
     },
 
     getPartidasUser: function(nick, callback) {
+      var string
+      if (cont === 0){
+        string= "cuentas/" + nick + "/partidas";
+        cont++;
+      }else{
+        string= "cuentas/" + nick + "/partidass";
+      }
       $.ajax({
-        url: "cuentas/" + nick + "/partidas",
+        url: string, 
         success: function(result) {
-          callback(result);
+            callback(result);
         },
         error: function() {
+          callback("");
           alert("Error al consultar el perfil intente mas tarde");
         }
       });

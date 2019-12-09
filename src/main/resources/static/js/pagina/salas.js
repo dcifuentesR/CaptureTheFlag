@@ -5,14 +5,7 @@ var salasModule = (function() {
   var _subscribe;
   var _participantes;
   var _salas;
-  var _imagen;
 
-  /*var _createCuenta = function(cuent) {
-    var cuenta =
-      cuent.id + ";" + cuent.correo + ";" + cuent.contrasena + ";" + cuent.nick;
-    return cuenta;
-  };
-  */
   var _joinSala = function(cuent) {
     //var cuenta = _createCuenta(cuent);
     //console.log(cuenta);
@@ -46,7 +39,7 @@ var salasModule = (function() {
   var _tablaSalas = function() {
     $("#tabla-salas > tbody").empty();
     _salas.map(function(sala) {
-      if (Object.keys(sala.datos).length < 5) {
+      if (Object.keys(sala.datos).length < 5 && sala.lista == false) {
         $("#tabla-salas > tbody").append(
           "<tr>" +
             "<td>" +
@@ -70,8 +63,21 @@ var salasModule = (function() {
   var _tablaParticipantes = function(participantes) {
     $("#tabla-participantes > tbody").empty();
     participantes.map(function(participante) {
+      var listo;
+      if (participante.listo == true) {
+        listo = "listo";
+      } else {
+        listo = "En espera";
+      }
       $("#tabla-participantes > tbody").append(
-        "<tr>" + "<td>" + participante.nick + "</td>" + "</tr>"
+        "<tr>" +
+          "<td>" +
+          participante.nick +
+          "</td>" +
+          "<td>" +
+          listo +
+          "</td>" +
+          "</tr>"
       );
     });
   };
@@ -83,9 +89,13 @@ var salasModule = (function() {
       console.log("Connected: " + frame);
       if (_subscribe == "/topic/joinsala.") {
         stompClient.subscribe(_subscribe + _nameSala, function(eventbody) {
-          var theObject = JSON.parse(eventbody.body);
-          _participantes = theObject;
-          _tablaParticipantes(_participantes);
+          if (eventbody.body != "lista") {
+            var theObject = JSON.parse(eventbody.body);
+            _participantes = theObject;
+            _tablaParticipantes(_participantes);
+          } else {
+            location.href = "/juego.html";
+          }
         });
         if (_nameSala) {
           stompClient.send("/app/sala." + _nameSala, {}, " ");
@@ -125,6 +135,10 @@ var salasModule = (function() {
     },
     joinSala: function(nSala) {
       _createOrJoinSala(nSala, _joinSala);
+    },
+    listoPJ: function() {
+      _nick = verificationModule.readCookie("nickname");
+      stompClient.send("/app/listoPj." + _nameSala, {}, _nick);
     },
     createSalas: function(nSala) {
       _createOrJoinSala(nSala, _createSala);

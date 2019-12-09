@@ -3,17 +3,18 @@ package edu.eci.arsw.CaptureTheFlag.model;
 //import java.sql.Time;
 
 public class Datos {
+
     private int kills = 0;
     private int muertes = 0;
     private int vida = 100;
     private int puntos = 0;
-    // private Time tbandera;
     private double x;
     private double y;
     private String nick;
     private boolean bandera = false;
     private Bandera bG;
     private String img = "verde-der";
+    private boolean listo = false;
 
     public Datos() {
     }
@@ -137,6 +138,14 @@ public class Datos {
 
     public void setImg(String img) {
         this.img = img;
+    }
+
+    public boolean isListo() {
+        return listo;
+    }
+
+    public void setListo(boolean listo) {
+        this.listo = listo;
     }
 
 }

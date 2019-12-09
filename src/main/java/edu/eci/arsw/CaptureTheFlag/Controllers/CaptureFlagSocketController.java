@@ -76,6 +76,18 @@ public class CaptureFlagSocketController {
     // ------------------ controladores de la partida-----------------------------//
 
     // jugador
+    @MessageMapping("/listoPj.{nombre}")
+    public void listoPj(String nick, @DestinationVariable String nombre) {
+        if (salas.containsKey(nombre)) {
+            salas.get(nombre).listoPj(nick);
+            msgt.convertAndSend("/topic/joinsala." + nombre, salas.get(nombre).miembrosName());
+            if (salas.get(nombre).isLista()) {
+                msgt.convertAndSend("/topic/joinsala." + nombre, "lista");
+            }
+        }
+
+    }
+
     @MessageMapping("/salaMovimiento.{nombre}")
     public void movimientos(String val, @DestinationVariable String nombre) {
         if (salas.containsKey(nombre)) {
@@ -178,20 +190,6 @@ public class CaptureFlagSocketController {
 
     }
 
-    // bandera
-    /*
-     * @MessageMapping("/movimientoBandera.{nombre}") public void
-     * movimientoBandera(String valor, @DestinationVariable String nombre) { if
-     * (salas.containsKey(nombre)) { String[] valores = valor.split(";"); String
-     * nick = valores[0]; double x = Double.parseDouble(valores[1]); double y =
-     * Double.parseDouble(valores[2]); if (nick ==
-     * salas.get(nombre).getBandera().getNick()) {
-     * salas.get(nombre).movimientoBandera(x, y);
-     * msgt.convertAndSend("/topic/salaBandera." + nombre,
-     * salas.get(nombre).getBandera()); }
-     * 
-     * } }
-     */
     @MessageMapping("/salaBandera.{nombre}")
     public void getBandera(@DestinationVariable String nombre) {
         if (salas.containsKey(nombre)) {

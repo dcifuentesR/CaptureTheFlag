@@ -7,16 +7,15 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class Sala {
 
-    // ConcurrentHashMap<Cuenta, Datos> miembros = new ConcurrentHashMap<>();
-    // ConcurrentHashMap<String, Tupla> miembros = new ConcurrentHashMap<>();
     private ConcurrentHashMap<String, Datos> datos = new ConcurrentHashMap<>();
-    // private ConcurrentHashMap<String, Cuenta> miembros = new
-    // ConcurrentHashMap<>();
     private ConcurrentHashMap<String, Bala> balas = new ConcurrentHashMap<>();
 
     private String nombre;
     private Bandera bandera;
     private String fecha;
+
+    private boolean lista = false;
+    private int listos = 0;
 
     public Sala() {
     }
@@ -59,6 +58,16 @@ public class Sala {
     }
 
     /*-----------------jugador --------------*/
+    public void listoPj(String nick) {
+        if (!datos.get(nick).isListo()) {
+            datos.get(nick).setListo(true);
+            listos += 1;
+            if (listos == datos.size()) {
+                lista = true;
+            }
+        }
+    }
+
     public void movimientoPJ(String nick, double x, double y) {
         datos.get(nick).setXY(x, y);
         if (datos.get(nick).isBandera()) {
@@ -140,6 +149,14 @@ public class Sala {
 
     public void setFecha(String fecha) {
         this.fecha = fecha;
+    }
+
+    public boolean isLista() {
+        return lista;
+    }
+
+    public void setLista(boolean lista) {
+        this.lista = lista;
     }
 
 }

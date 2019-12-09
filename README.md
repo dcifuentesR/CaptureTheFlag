@@ -96,7 +96,7 @@ Ambiente             |  Bajo condiciones normales
 Respuesta            |  Se carga la pagina
 Tiempo de respuesta  |  En promedio el tiempo de carga es de 0.5s
 
-![alt text](/pictures/instrucciones.PNG)
+![alt text](/pictures/usabilidad-2.gif)
 
 #### Segundo escenario. Fallo de servidor durante partida
 Caracteristica | Valor 
@@ -115,10 +115,10 @@ Tiempo de respuesta  |  -
 Caracteristica | Valor 
 -- | --
 Fuente               |  Usuarios 
-Estimulo             |  -
-Artefacto            |  -
-Ambiente             |  Bajo condiciones normales  
-Respuesta            |  -
+Estimulo             |  Realiza una conuslta a las estadisticas y partidas
+Artefacto            |  Sistema
+Ambiente             |  Error provocado en la consulta
+Respuesta            |  Respuesta del cache
 Tiempo de respuesta  |  - 
 
 ![alt text](/pictures/disponibilidad-cache.gif)

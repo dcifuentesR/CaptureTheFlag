@@ -17,6 +17,9 @@ Juego multijugador web, de plataformas,donde cada jugador debe competir por capt
 
 [heroku](https://capturetheflag-arsw.herokuapp.com/)
 
+## Taiga
+[taiga](https://tree.taiga.io/project/dcifuentesr-capture-the-flag-arsw-2019-2/backlog)
+
 # Analisis estatico de codigo con codacy 
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/fb0b361734014f6c9e5aa86f93babe7c)](https://www.codacy.com/manual/diego2097/CaptureTheFlag?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=diego2097/CaptureTheFlag&amp;utm_campaign=Badge_Grade)
 

@@ -95,6 +95,7 @@ Artefacto            |  Sistema
 Ambiente             |  Bajo condiciones normales 
 Respuesta            |  Se carga la pagina
 Tiempo de respuesta  |  En promedio el tiempo de carga es de 0.5s
+
 ![alt text](/pictures/instrucciones.PNG)
 
 #### Segundo escenario. Fallo de servidor durante partida

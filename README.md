@@ -111,7 +111,7 @@ Tiempo de respuesta  |  -
 ![alt text](/pictures/diagrama_usabilidad.JPG)
 
 ### Disponibilidad
-#### Primer escenario. 
+#### Primer escenario. Cache de perfil
 Caracteristica | Valor 
 -- | --
 Fuente               |  Usuarios 
@@ -120,6 +120,8 @@ Artefacto            |  -
 Ambiente             |  Bajo condiciones normales  
 Respuesta            |  -
 Tiempo de respuesta  |  - 
+
+![alt text](/pictures/disponibilidad-cache.gif)
 
 #### Segundo escenario. 
 Caracteristica | Valor 

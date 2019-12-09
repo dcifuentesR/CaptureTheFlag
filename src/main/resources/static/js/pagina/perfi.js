@@ -31,7 +31,10 @@ var perfilModule = (function() {
   var _genTable = function(partidasJugadas) {
     if (partidasJugadas != "" || _partidasJugadas == null) {
       _partidasJugadas = partidasJugadas;
+    }else if (partidasJugadas == ""){
+      alert("Error al actualizar el perfil intente mas tarde");
     }
+    
     _kills = 0;
     _muertes = 0;
     _total = 0;

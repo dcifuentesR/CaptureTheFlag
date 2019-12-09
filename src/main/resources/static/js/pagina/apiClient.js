@@ -67,21 +67,14 @@ apiClient = (function() {
     },
 
     getPartidasUser: function(nick, callback) {
-      var string
-      if (cont === 0){
-        string= "cuentas/" + nick + "/partidas";
-        cont++;
-      }else{
-        string= "cuentas/" + nick + "/partidass";
-      }
       $.ajax({
-        url: string, 
+        url: string= "cuentas/" + nick + "/partidas", 
         success: function(result) {
             callback(result);
         },
         error: function() {
           callback("");
-          alert("Error al consultar el perfil intente mas tarde");
+          
         }
       });
     },
